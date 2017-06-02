@@ -1,8 +1,7 @@
 <?xml version="1.0"?>
 
 <model-hints>
-	<model name="com.demo.empservice.model.Employee">
-		<field name="uuid" type="String" />
+	<model name="com.daffo.employeeservice.model.employee">
 		<field name="eid" type="int" />
 		<field name="ename" type="String" />
 	</model>

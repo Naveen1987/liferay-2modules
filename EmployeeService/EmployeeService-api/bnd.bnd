@@ -1,9 +1,9 @@
-Bundle-Name: EmployeeService-api
-Bundle-SymbolicName: com.demo.empservice.api
+Bundle-Name: employeeservice-api
+Bundle-SymbolicName: com.daffo.employeeservice.api
 Bundle-Version: 1.0.0
 Export-Package:\
-	com.demo.empservice.exception,\
-	com.demo.empservice.model,\
-	com.demo.empservice.service,\
-	com.demo.empservice.service.persistence
--includeresource: META-INF/service.xml=../EmployeeService-service/service.xml
+	com.daffo.employeeservice.exception,\
+	com.daffo.employeeservice.model,\
+	com.daffo.employeeservice.service,\
+	com.daffo.employeeservice.service.persistence
+-includeresource: META-INF/service.xml=../employeeservice-service/service.xml

@@ -93,8 +93,10 @@ YUI().use(
 		    );
 		  }
 		);
+		
+
 </script> 
-<aui:form action="${formSubmit}">  
+<aui:form name="fm" action="${formSubmit}" >  
 <div class="container"> 
 <!-- First Row --> 
 <div class="row"> 
@@ -671,7 +673,10 @@ gli indirizzi dei responsabili possono essere recuperati nel sito dellâ??AIFA: w
  <div class="col-md-12" style="background-color:#4f81bd;padding:10px 10px 10px 10px; "> 
  <table cellpadding="10px" cellspacing="0" height="100%" style="background-color:#4f81bd;float:right;"><tbody>
  <tr> <td><input type="reset" value="Reset" style="width:200px;background-color:#e60000 ;color:white; height:40px">
-  <input type="submit" value="Submit" style="width:200px;background-color:#006622;color:white; height:40px"></td>
+ <!-- <input type="submit" value="Submit" style="width:200px;background-color:#006622;color:white; height:40px">-->
+ 
+ <aui:button value="Save" key="save"  onClick="javascript:showAddNoteDialog();"/>
+ </td>
 </tr>
 </tbody>
 </table>
@@ -679,3 +684,48 @@ gli indirizzi dei responsabili possono essere recuperati nel sito dellâ??AIFA: w
 </div>
 </div> 
 </aui:form>
+<div class="yui3-skin-sam">
+  <div id="modal"></div>
+</div> 
+
+<script>
+
+function showAddNoteDialog(){
+
+  
+   YUI().use('aui-modal', function(Y) {
+       var modal = new Y.Modal(
+         {
+           bodyContent: '<label for="feedback/suggestions" ><liferay-ui:message key="Are you want to submit form"/></label>',
+           centered: true,
+           headerContent: '<h3><label for="formsofinteraction"><liferay-ui:message key="confirmationBox"/></label></h3>',
+           modal: true,
+           render: '#modal',
+           width: 500
+         }
+       ).render();
+        modal.addToolbar(
+              [
+                {
+                  label: '<liferay-ui:message key="Cancel"/>',
+                  on: {
+                    click: function() {
+                     modal.hide();
+                    }
+                  }
+                },
+                {
+                   label: '<liferay-ui:message key="Submit"/>',
+                   on: {
+                     click: function() {
+                      modal.hide();
+                      document.getElementById("<portlet:namespace/>fm").submit();
+                     }
+                   }
+                 },
+                ]
+       );
+     }
+   );
+    }
+</script>

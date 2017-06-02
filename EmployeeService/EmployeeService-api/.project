@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>EmployeeService-api</name>
-	<comment>Project EmployeeService-api created by Buildship.</comment>
+	<name>employeeservice-api</name>
+	<comment>Project employeeservice-api created by Buildship.</comment>
 	<projects>
 	</projects>
 	<buildSpec>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>EmployeeService-service</name>
-	<comment>Project EmployeeService-service created by Buildship.</comment>
+	<name>employeeservice-service</name>
+	<comment>Project employeeservice-service created by Buildship.</comment>
 	<projects>
 	</projects>
 	<buildSpec>

@@ -1,1 +1,0 @@
-create index IX_F7B84C95 on form_di_segnalazione (uuid_[$COLUMN_LENGTH:75$]);
