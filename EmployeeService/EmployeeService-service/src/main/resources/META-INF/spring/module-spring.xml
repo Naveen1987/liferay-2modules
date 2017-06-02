@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" default-destroy-method="destroy" default-init-method="afterPropertiesSet" xsi:schemaLocation=" http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	<bean class="com.demo.empservice.service.impl.EmployeeLocalServiceImpl" id="com.demo.empservice.service.EmployeeLocalService" />
+	<bean class="com.demo.empservice.service.impl.EmployeeServiceImpl" id="com.demo.empservice.service.EmployeeService" />
+	<bean class="com.demo.empservice.service.persistence.impl.EmployeePersistenceImpl" id="com.demo.empservice.service.persistence.EmployeePersistence" parent="basePersistence" />
+</beans>

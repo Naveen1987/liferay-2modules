@@ -1,0 +1,5 @@
+Bundle-Name: Form_di_segnalService-service
+Bundle-SymbolicName: com.daffo.Form_di_segnalService.service
+Bundle-Version: 1.0.0
+Liferay-Require-SchemaVersion: 1.0.0
+Liferay-Service: true

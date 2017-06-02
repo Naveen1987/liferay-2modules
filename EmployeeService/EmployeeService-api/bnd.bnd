@@ -1,0 +1,9 @@
+Bundle-Name: EmployeeService-api
+Bundle-SymbolicName: com.demo.empservice.api
+Bundle-Version: 1.0.0
+Export-Package:\
+	com.demo.empservice.exception,\
+	com.demo.empservice.model,\
+	com.demo.empservice.service,\
+	com.demo.empservice.service.persistence
+-includeresource: META-INF/service.xml=../EmployeeService-service/service.xml

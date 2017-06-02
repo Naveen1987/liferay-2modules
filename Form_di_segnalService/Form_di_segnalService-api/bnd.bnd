@@ -1,0 +1,9 @@
+Bundle-Name: Form_di_segnalService-api
+Bundle-SymbolicName: com.daffo.Form_di_segnalService.api
+Bundle-Version: 1.0.0
+Export-Package:\
+	com.daffo.Form_di_segnalService.exception,\
+	com.daffo.Form_di_segnalService.model,\
+	com.daffo.Form_di_segnalService.service,\
+	com.daffo.Form_di_segnalService.service.persistence
+-includeresource: META-INF/service.xml=../Form_di_segnalService-service/service.xml

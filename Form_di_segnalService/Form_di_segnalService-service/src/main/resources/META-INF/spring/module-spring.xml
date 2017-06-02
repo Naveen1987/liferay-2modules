@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" default-destroy-method="destroy" default-init-method="afterPropertiesSet" xsi:schemaLocation=" http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	<bean class="com.daffo.Form_di_segnalService.service.impl.Form_di_segnalazione_serviceLocalServiceImpl" id="com.daffo.Form_di_segnalService.service.Form_di_segnalazione_serviceLocalService" />
+	<bean class="com.daffo.Form_di_segnalService.service.persistence.impl.Form_di_segnalazione_servicePersistenceImpl" id="com.daffo.Form_di_segnalService.service.persistence.Form_di_segnalazione_servicePersistence" parent="basePersistence" />
+</beans>
