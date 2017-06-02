@@ -94,9 +94,11 @@ YUI().use(
 		  }
 		);
 		
-
+function show(){
+	alert("Hello");
+}
 </script> 
-<aui:form name="fm" action="${formSubmit}" >  
+<aui:form name="fm" id="fm" action="${formSubmit}" onSumbit="<portlet:namespace/>show()" >  
 <div class="container"> 
 <!-- First Row --> 
 <div class="row"> 
@@ -672,10 +674,11 @@ gli indirizzi dei responsabili possono essere recuperati nel sito dellâ??AIFA: w
  <br> 
  <div class="col-md-12" style="background-color:#4f81bd;padding:10px 10px 10px 10px; "> 
  <table cellpadding="10px" cellspacing="0" height="100%" style="background-color:#4f81bd;float:right;"><tbody>
- <tr> <td><input type="reset" value="Reset" style="width:200px;background-color:#e60000 ;color:white; height:40px">
- <!-- <input type="submit" value="Submit" style="width:200px;background-color:#006622;color:white; height:40px">-->
- 
- <aui:button value="Save" key="save"  onClick="javascript:showAddNoteDialog();"/>
+ <tr> <td>
+<!-- <input type="reset" value="Reset" style="width:200px;background-color:#e60000 ;color:white; height:40px">
+<input type="submit" value="Submit" style="width:200px;background-color:#006622;color:white; height:40px">-->
+ <aui:button  style="width:200px;background-color:#e60000;color:white; height:40px" value="cancel" onclick="this.form.reset()" />
+ <aui:button value="Save" key="save"  style="width:200px;background-color:#006622;color:white; height:40px" onClick="javascript:showAddNoteDialog();"/>
  </td>
 </tr>
 </tbody>
@@ -690,6 +693,10 @@ gli indirizzi dei responsabili possono essere recuperati nel sito dellâ??AIFA: w
 
 <script>
 
+$("#fm").submit(function(e) {
+    e.preventDefault();
+});
+
 function showAddNoteDialog(){
 
   
@@ -698,7 +705,7 @@ function showAddNoteDialog(){
          {
            bodyContent: '<label for="feedback/suggestions" ><liferay-ui:message key="Are you want to submit form"/></label>',
            centered: true,
-           headerContent: '<h3><label for="formsofinteraction"><liferay-ui:message key="confirmationBox"/></label></h3>',
+           headerContent: '<h3><label for="formsofinteraction"><liferay-ui:message key="Confirmation Box"/></label></h3>',
            modal: true,
            render: '#modal',
            width: 500
@@ -728,4 +735,10 @@ function showAddNoteDialog(){
      }
    );
     }
+    
+function <portlet:namespace />savePolicySettings() {
+	submitForm(document.<portlet:namespace />fm);
+}
 </script>
+
+
