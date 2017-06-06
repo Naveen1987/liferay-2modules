@@ -6,6 +6,7 @@ import com.daffo.form_di_segnalazione.service.form_di_segnalazioneLocalServiceUt
 import com.liferay.counter.kernel.service.CounterLocalServiceUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCPortlet;
+import com.liferay.portal.kernel.servlet.SessionMessages;
 import com.liferay.portal.kernel.util.ParamUtil;
 
 import java.io.IOException;
@@ -27,6 +28,7 @@ import org.osgi.service.component.annotations.Component;
 	immediate = true,
 	property = {
 		"com.liferay.portlet.display-category=Naveen Apps-UnitaOperative",
+		"javax.portlet.init-param.add-process-action-success-action=false",
 		"com.liferay.portlet.instanceable=true",
 		"javax.portlet.display-name=Form_di_segnalazione Portlet",
 		"javax.portlet.init-param.template-path=/",
@@ -45,8 +47,14 @@ public class Form_di_segnalazionePortlet extends MVCPortlet {
 	@ProcessAction(name="formSubmit")
 	 public void formSubmit(ActionRequest actionRequest, ActionResponse actionResponse)
 	   throws IOException, PortletException, PortalException {
-		System.out.println(form_di_segnalazioneLocalServiceUtil.getform_di_segnalazionesCount());
-		System.out.println(form_di_segnalazioneLocalServiceUtil.getform_di_segnalazione(2));
+		
+		//System.out.println(form_di_segnalazioneLocalServiceUtil.getform_di_segnalazionesCount());
+		/*try{
+			System.out.println(form_di_segnalazioneLocalServiceUtil.getform_di_segnalazione(2));
+		}catch(Exception e){
+			System.out.println(e.getMessage());
+		}*/
+		if(!(ParamUtil.getString(actionRequest, "CODICE").equalsIgnoreCase("")) && !(ParamUtil.getString(actionRequest, "INIZIALI_1").equalsIgnoreCase(""))){
 		form_di_segnalazione e=form_di_segnalazioneLocalServiceUtil.createform_di_segnalazione(CounterLocalServiceUtil.increment());
 		e.setCODICE(ParamUtil.getString(actionRequest, "CODICE"));
 		e.setINIZIALI_1(ParamUtil.getString(actionRequest, "INIZIALI_1"));
@@ -170,11 +178,15 @@ public class Form_di_segnalazionePortlet extends MVCPortlet {
 		e.setDATA_40(ParamUtil.getString(actionRequest, "DATA_40"));
 		e.setFIRMA_41(ParamUtil.getString(actionRequest, "FIRMA_41"));
 		form_di_segnalazioneLocalServiceUtil.addform_di_segnalazione(e);
+		//For success Fully Messaage
+		SessionMessages.add(actionRequest, "success");
 		System.out.println(e);
-		/*System.out.println("I got It");
-	    System.out.println("I am "+ParamUtil.getString(actionRequest, "DATA_2"));
-        System.out.println("I am "+ParamUtil.getString(actionRequest, "SESSO_3"));
-        System.out.println("I am "+ParamUtil.getString(actionRequest, "DATA_4"));
+		}
+/*
+		System.out.println("I got It");
+System.out.println("I am "+ParamUtil.getString(actionRequest, "DATA_2"));
+System.out.println("I am "+ParamUtil.getString(actionRequest, "SESSO_3"));
+System.out.println("I am "+ParamUtil.getString(actionRequest, "DATA_4"));
 System.out.println("I am "+ParamUtil.getString(actionRequest, "ORIGINE_5"));
 System.out.println("I am "+ParamUtil.getString(actionRequest, "DESCRIZIONE_6"));
 System.out.println("I am "+ParamUtil.getString(actionRequest, "INDICARE_7_1"));
@@ -259,6 +271,6 @@ System.out.println("I am "+ParamUtil.getString(actionRequest, "FARMACO_22_b_29")
 System.out.println("I am "+ParamUtil.getString(actionRequest, "FARMACO_22_b_30"));
 System.out.println("I am "+ParamUtil.getString(actionRequest, "INDICAZIONI_31_a"));
 System.out.println("I am "+ParamUtil.getString(actionRequest, "INDICAZIONI_31_b"));
-		*/
+*/
 }
 }
