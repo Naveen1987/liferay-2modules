@@ -98,6 +98,7 @@ $(document).ready(function() {
 <td><%=fds.getSESSO_3()%></td>
 <td><%=fds.getDATA_4()%></td>
 <td> <button class="btn btn-primary" onclick="getRowId('<%=fds.getForm_di_segnalazione_id()+""%>')">View Info</button>
+&nbsp;&nbsp;&nbsp;<button class="btn btn-warning" onclick="getRowIdEdit('<%=fds.getForm_di_segnalazione_id()+""%>')">Edit Info</button>
 </td>
 </tr>
  <%  
@@ -134,5 +135,27 @@ function getRowId(userData)
 			});
 }
 
+function getRowIdEdit(userData)
+{
+	    var portletURL = Liferay.PortletURL.createRenderURL();
+	 	portletURL.setWindowState('<%=LiferayWindowState.POP_UP.toString() %>');
+	    portletURL.setParameter('formID', userData);    
+	    portletURL.setPortletId("<%=themeDisplay.getPortletDisplay().getId() %>");
+	    portletURL.setParameter('mvcPath', '/Form_di_segnalazione_Edit.jsp');
+	    // Now we can use the URL
+	  // alert(portletURL.toString());
+	   Liferay.Util.openWindow({
+			dialog: {
+			centered: true,
+			cssClass: 'my-liferay-popup',
+			constrain2view: true,
+			modal: true,
+			width: 1600
+			},
+			id: '<portlet:namespace/>editdialog',
+			title: 'Edit Information' ,
+			uri:  portletURL.toString()
+			});
+}
 </aui:script>
 

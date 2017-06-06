@@ -50,6 +50,13 @@ public class Reazioni_avverse_sectionsPortlet extends MVCPortlet {
 		actionRequest.setAttribute("pageTOShow", "Archivio_delle_segnalazioni.jsp");
 	
 	}
+	@ProcessAction(name="Archivio_delle_segnalazioni_edit")
+	 public void Archivio_delle_segnalazioni_edit(ActionRequest actionRequest, ActionResponse actionResponse)
+	   throws IOException, PortletException, PortalException {
+		actionRequest.setAttribute("pageTOShow", "Archivio_delle_segnalazioni_edit.jsp");
+	
+	}
+	
 	@ProcessAction(name="Form_di_segnalazione")
 	 public void Form_di_segnalazione(ActionRequest actionRequest, ActionResponse actionResponse)
 	   throws IOException, PortletException, PortalException {
