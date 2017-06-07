@@ -206,7 +206,7 @@ public class Reazioni_avverse_sectionsPortlet extends MVCPortlet {
 			SessionMessages.add(actionRequest, "success");
 			// actionRequest.setAttribute it will access as parameter
 		    actionRequest.setAttribute("formID",actionRequest.getParameter("formID"));
-			System.out.println(e);
+		//	System.out.println(e);
 			}
 	/*
 			System.out.println("I got It");
@@ -440,7 +440,7 @@ public class Reazioni_avverse_sectionsPortlet extends MVCPortlet {
 		//For success Fully Messaage
 		SessionMessages.add(actionRequest, "success");
 		actionRequest.setAttribute("pageTOShow", "Form_di_segnalazione.jsp");
-		System.out.println(e);
+	//	System.out.println(e);
 		}
 /*
 		System.out.println("I got It");

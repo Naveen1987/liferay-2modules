@@ -64,7 +64,7 @@ $(document).ready(function() {
 </div>
  <%
  	List<form_di_segnalazione> el=(List<form_di_segnalazione>)form_di_segnalazioneLocalServiceUtil.getform_di_segnalaziones(0, form_di_segnalazioneLocalServiceUtil.getform_di_segnalazionesCount());
- 	System.out.println("value:"+el);
+ 	//System.out.println("value:"+el);
 %>
 <span class="counter pull-right"></span>
 <table class="table table-hover table-bordered results">
