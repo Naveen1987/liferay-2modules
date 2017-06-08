@@ -19,12 +19,17 @@ font-family: Arial, Helvetica, Sans-serif;
 <%=istruzioni_per_la_compilazioneLocalServiceUtil.getistruzioni_per_la_compilazione(1) %>
 <%=istruzioni_per_la_compilazione_childLocalServiceUtil.getistruzioni_per_la_compilazione_childsCount()%>
 --%>
+<portlet:actionURL name="Istruzioni_per_la_compilazione_edit" var="Istruzioni_per_la_compilazione">
+</portlet:actionURL>
 
 <div class="container"> 
 <div class="row">
 <div class="col-md-12">
 <br/>
 <button class="btn btn-warning" onclick="getRowIdinEdit()"> Add/Edit Instruction</button>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="${Istruzioni_per_la_compilazione}">
+          <span class="glyphicon glyphicon-refresh"></span>
+        </a> 
 </div>
 </div>
 <!-- Heading -->
@@ -84,7 +89,6 @@ for(istruzioni_per_la_compilazione_child child:childs)
 <aui:script>
 function getRowIdinEdit()
 {
-	alert("Hello");
 	 var portletURL = Liferay.PortletURL.createRenderURL();
 	 	portletURL.setWindowState('<%=LiferayWindowState.POP_UP.toString() %>');    
 	    portletURL.setPortletId("<%=themeDisplay.getPortletDisplay().getId() %>");

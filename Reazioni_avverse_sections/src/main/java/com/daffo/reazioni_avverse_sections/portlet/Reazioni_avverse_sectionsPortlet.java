@@ -14,6 +14,12 @@ import com.liferay.portal.kernel.service.UserLocalServiceUtil;
 import com.liferay.portal.kernel.servlet.SessionMessages;
 import com.liferay.portal.kernel.util.ParamUtil;
 
+import istruzioni_per_la_compilazioneservice.model.istruzioni_per_la_compilazione;
+import istruzioni_per_la_compilazioneservice.model.istruzioni_per_la_compilazioneModel;
+import istruzioni_per_la_compilazioneservice.model.istruzioni_per_la_compilazione_child;
+import istruzioni_per_la_compilazioneservice.service.istruzioni_per_la_compilazioneLocalServiceUtil;
+import istruzioni_per_la_compilazioneservice.service.istruzioni_per_la_compilazione_childLocalServiceUtil;
+
 import java.io.IOException;
 import java.util.List;
 
@@ -26,21 +32,8 @@ import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 import javax.portlet.ResourceRequest;
 import javax.portlet.ResourceResponse;
-
 import org.osgi.service.component.annotations.Component;
 
-
-//Start
-
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.List;
-import javax.portlet.PortletException;
-import javax.portlet.ResourceRequest;
-import javax.portlet.ResourceResponse;
-import com.liferay.portal.kernel.json.JSONArray;
-import com.liferay.portal.kernel.json.JSONFactoryUtil;
-import com.liferay.portal.kernel.json.JSONObject;
 
 /**
  * @author Administrator
@@ -67,14 +60,81 @@ public class Reazioni_avverse_sectionsPortlet extends MVCPortlet {
 	public void serveResource(ResourceRequest resourceRequest,
 			ResourceResponse resourceResponse)
 		throws  IOException, PortletException {
-		System.out.println("Action for"+ParamUtil.getString(resourceRequest, "action-for"));
-		System.out.println("Parent ID"+resourceRequest.getParameter("parentId"));
-		System.out.println("Chile ID"+ParamUtil.getString(resourceRequest, "childId"));
-		System.out.println("data-value"+ParamUtil.getString(resourceRequest, "data-value"));
+		
+		if(ParamUtil.getString(resourceRequest, "action-for").equalsIgnoreCase("")){
+			System.out.println("Parent ID"+resourceRequest.getParameter("parentId"));
+			System.out.println("Chile ID"+ParamUtil.getString(resourceRequest, "childId"));
+			System.out.println("data-value"+ParamUtil.getString(resourceRequest, "data-value"));
+		   try {
+			   istruzioni_per_la_compilazione_child ch=istruzioni_per_la_compilazione_childLocalServiceUtil.getistruzioni_per_la_compilazione_child(new Long(ParamUtil.getString(resourceRequest, "childId")).longValue());
+			   ch.setInstruction(ParamUtil.getString(resourceRequest, "data-value"));
+			   istruzioni_per_la_compilazione_childLocalServiceUtil.updateistruzioni_per_la_compilazione_child(ch);
+			   SessionMessages.add(resourceRequest, "success");
+			   logger.info("Updated child");
+		} catch (NumberFormatException | PortalException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		}
+		else 
+		{
+			System.out.println("Action for"+ParamUtil.getString(resourceRequest, "action-for"));
+			System.out.println("Parent ID"+resourceRequest.getParameter("parentId"));
+			System.out.println("data-value"+ParamUtil.getString(resourceRequest, "data-value"));
+			
+			//Delete Task
+			try {
+			istruzioni_per_la_compilazione_childLocalServiceUtil.deleteistruzioni_per_la_compilazione_child(new Long(ParamUtil.getString(resourceRequest, "childId")).longValue());
+			SessionMessages.add(resourceRequest, "delete");
+			logger.info("Deleted-"+ParamUtil.getString(resourceRequest, "childId"));
+			return;
+			} catch (NumberFormatException | PortalException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			try {
+				istruzioni_per_la_compilazione li=istruzioni_per_la_compilazioneLocalServiceUtil.getistruzioni_per_la_compilazione(new Long(resourceRequest.getParameter("parentId")).longValue());
+			if(ParamUtil.getString(resourceRequest, "action-for").equalsIgnoreCase("mainTitle"))
+			{
+			li.setMainTitle(ParamUtil.getString(resourceRequest, "data-value"));
+			}else if(ParamUtil.getString(resourceRequest, "action-for").equalsIgnoreCase("Title"))
+			{
+			li.setTilte(ParamUtil.getString(resourceRequest, "data-value"));
+			}
+			else if(ParamUtil.getString(resourceRequest, "action-for").equalsIgnoreCase("purpose"))
+			{
+			li.setPurpose(ParamUtil.getString(resourceRequest, "data-value"));
+			}
+			else if(ParamUtil.getString(resourceRequest, "action-for").equalsIgnoreCase("subTitle"))
+			{
+			li.setSubTitle(ParamUtil.getString(resourceRequest, "data-value"));	
+			}
+			istruzioni_per_la_compilazioneLocalServiceUtil.updateistruzioni_per_la_compilazione(li);
+			SessionMessages.add(resourceRequest, "success");
+			logger.info("Updated");
+			System.out.println(li);
+			} catch (NumberFormatException | PortalException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}	
 		
 	}
 	//End
-
+	
+	
+	@ProcessAction(name="NewInstruction")
+	 public void NewInstruction(ActionRequest actionRequest, ActionResponse actionResponse)
+	   throws IOException, PortletException, PortalException {
+		System.out.println("Data:-"+ParamUtil.getString(actionRequest, "NewInstruction"));
+		istruzioni_per_la_compilazione_child ch=	istruzioni_per_la_compilazione_childLocalServiceUtil.createistruzioni_per_la_compilazione_child(CounterLocalServiceUtil.increment());
+		ch.setInstruction(ParamUtil.getString(actionRequest, "NewInstruction"));
+		ch.setIstruzioni_per_id(1);
+		istruzioni_per_la_compilazione_childLocalServiceUtil.addistruzioni_per_la_compilazione_child(ch);
+		logger.info("New Instruction add"+ch);
+		SessionMessages.add(actionRequest, "success");
+	}
+	
 	@Override
 	public void doView(RenderRequest renderRequest, RenderResponse renderResponse)
 			throws IOException, PortletException {

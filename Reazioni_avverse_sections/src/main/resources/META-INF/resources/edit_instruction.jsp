@@ -20,7 +20,23 @@
 </style>
 
 <liferay-ui:success key="success" message="Record Updated successfully!"/>
+<liferay-ui:success key="delete" message="Record Deleted successfully!"/>
 <div class="container" style="margin-left:20px;margin-right:20px;">
+<div class="row">
+<br/>
+<div class="col-md-12">
+<table width="100%">
+<tr>
+<td><span class="table-newInstruction btn btn-warning" style="color:white">Add New Instruction</span> 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#">
+          <span class="glyphicon glyphicon-refresh"></span>
+        </a> 
+</td>
+</tr>
+</table> 
+<br/>
+</div>
+</div>
 <div class="row">
 <br/>
 <div class="col-md-12">
@@ -122,26 +138,19 @@ for(istruzioni_per_la_compilazione_child child:childs)
 }
 %>
 </div>
-<div class="row">
-<br/>
-<div class="col-md-12">
-<table width="100%">
-<tr>
-<aui:form action="">
-<td><aui:button type="submit" value="Add New"/> </td>
-</aui:form> 
-</tr>
-</table> 
-<br/>
-</div>
-</div>
+
 <portlet:resourceURL var="updaContentURL">
 </portlet:resourceURL>
+
+<portlet:renderURL var="addURL" windowState="<%=LiferayWindowState.POP_UP.toString()%>">
+<portlet:param name="mvcPath" value="/add_instruction.jsp" />
+</portlet:renderURL>
+
 <script>
 
 $('.table-maintitle').click(function(){
 	var data=$('.txt-maintitle').val();
-	alert('Hello I am main mainTilte'+data);
+	//alert('Hello I am main mainTilte'+data);
 	//Start of Ajax
 	AUI().use('aui-base','aui-io-request', function(A){
 		//main Ajax Request Body
@@ -152,7 +161,7 @@ $('.table-maintitle').click(function(){
   		on: {
    			 success: function() {
    			//	alert('OK');
-	     	//	location.reload();
+	     		location.reload();
     		}
   		}
 		});
@@ -163,7 +172,7 @@ $('.table-maintitle').click(function(){
 
 $('.table-title').click(function(){
 	var data=$('.txt-title').val();
-		alert('Hello I am main Tilte'+data);
+		//alert('Hello I am main Tilte'+data);
 		//Start of Ajax
 		AUI().use('aui-base','aui-io-request', function(A){
 			//main Ajax Request Body
@@ -174,7 +183,7 @@ $('.table-title').click(function(){
 	  		on: {
 	   			 success: function() {
 	   			//	alert('OK');
-		     	//	location.reload();
+		     		location.reload();
 	    		}
 	  		}
 			});
@@ -186,7 +195,7 @@ $('.table-title').click(function(){
 	
 $('.table-Purpose').click(function(){
 	var data=$('.txt-Purpose').val(); 
-	alert('Hello I am main puspose'+data);
+	//alert('Hello I am main puspose'+data);
 	//Start of Ajax
 	AUI().use('aui-base','aui-io-request', function(A){
 		//main Ajax Request Body
@@ -197,7 +206,7 @@ $('.table-Purpose').click(function(){
   		on: {
    			 success: function() {
    			//	alert('OK');
-	     	//	location.reload();
+	     	location.reload();
     		}
   		}
 		});
@@ -209,7 +218,7 @@ $('.table-Purpose').click(function(){
 		
 $('.table-SubTitle').click(function(){
 	var data=$('.txt-SubTitle').val();	
-	alert('Hello I am main subtitle'+data);
+	//alert('Hello I am main subtitle'+data);
 	//Start of Ajax
 	AUI().use('aui-base','aui-io-request', function(A){
 		//main Ajax Request Body
@@ -219,8 +228,7 @@ $('.table-SubTitle').click(function(){
   		data: { '<portlet:namespace />parentId': '1','<portlet:namespace />action-for':'subTitle' ,'<portlet:namespace />data-value': data},
   		on: {
    			 success: function() {
-   			//	alert('OK');
-	     	//	location.reload();
+	     		location.reload();
     		}
   		}
 		});
@@ -232,6 +240,23 @@ $('.table-SubTitle').click(function(){
 <!--I am calling on base of class name use(.) and -->
 $('.table-remove').click(function(){
 	alert('Hello I am remove'+$(this).attr("data-stateName"));
+	//Ajax
+	var data=	$(this).attr("data-stateName");
+	AUI().use('aui-base','aui-io-request', function(A){
+		//aui ajax call to get updated content
+		A.io.request('<%=updaContentURL%>',{
+  		dataType: 'json',
+  		method: 'GET',
+  		data: { '<portlet:namespace />childId':data,'<portlet:namespace />action-for':'delete'},
+  		on: {
+   			 success: function() {
+   			//	alert('OK');
+	     		location.reload();
+    		}
+  		}
+		});
+		});
+	//Ajax End
 });
 
 $('.table-edit').click(function(){
@@ -250,7 +275,7 @@ $('.table-edit').click(function(){
 		  		on: {
 		   			 success: function() {
 		   			//	alert('OK');
-			     	//	location.reload();
+			     		location.reload();
 		    		}
 		  		}
 				});
@@ -258,11 +283,27 @@ $('.table-edit').click(function(){
 			
 			
 			//Ajax End
-			 alert("text area value"+$(this).val()+" not "+$(this).attr("data-id")+" Ok "+id)		 
-			
-			 	 
+			// alert("text area value"+$(this).val()+" not "+$(this).attr("data-id")+" Ok "+id)		 
 			 }
 		 });
 	 // alert('Hello I am edit'+$(this).attr("data-childid"));
 });
+
+$('.table-newInstruction').click(function(){
+	Liferay.Util.openWindow({
+		dialog: {
+		centered: true,
+		cssClass: 'my-liferay-popup',
+		constrain2view: true,
+		modal: true,
+		width: 1400,
+		height:400
+		},
+		id: '<portlet:namespace/>addDialog',
+		title: 'Add Instruction' ,
+		uri:  '<%=addURL%>'
+		});
+});
 </script>
+
+
