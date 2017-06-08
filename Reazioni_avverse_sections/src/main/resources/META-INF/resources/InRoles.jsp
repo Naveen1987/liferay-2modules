@@ -33,7 +33,7 @@
 <portlet:actionURL name="Form_di_segnalazione" var="Form_di_segnalazione">
 <%--<portlet:param name="mvcPath" value="/views/selEmployee.jsp"/> --%>
 </portlet:actionURL>
-<portlet:actionURL name="Istruzioni_per_la_compilazione" var="Istruzioni_per_la_compilazione">
+<portlet:actionURL name="Istruzioni_per_la_compilazione_edit" var="Istruzioni_per_la_compilazione">
 <%--<portlet:param name="mvcPath" value="/views/selEmployee.jsp"/> --%>
 </portlet:actionURL>
 <portlet:actionURL name="I_farmaci_da_sottoporre_al_monitoraggio_intensivo" var="I_farmaci_da_sottoporre_al_monitoraggio_intensivo">

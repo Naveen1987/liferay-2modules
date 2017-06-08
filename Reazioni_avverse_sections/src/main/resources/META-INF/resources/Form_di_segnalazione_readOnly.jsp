@@ -10,6 +10,7 @@ System.out.println(frm);
 tr{ //text-align:center; font-family: Arial Unicode MS, Lucida Sans Unicode, sans-serif; font-weight:bold; font-size:13px; } .row{ margin-bottom: 4px; } .border_cols{ border: 1px solid; } 
 
 </style> 
+<div class="container">
 <!-- First Row --> 
 <div class="row"> 
 <div class="col-md-12"> 
@@ -576,5 +577,5 @@ tr{ //text-align:center; font-family: Arial Unicode MS, Lucida Sans Unicode, san
  </tbody></table> 
  </div> 
  </div> 
- 
+ </div>
 

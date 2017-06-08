@@ -4,11 +4,18 @@ import com.daffo.form_di_segnalazione.model.form_di_segnalazione;
 import com.daffo.form_di_segnalazione.service.form_di_segnalazioneLocalServiceUtil;
 import com.liferay.counter.kernel.service.CounterLocalServiceUtil;
 import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.json.JSONFactoryUtil;
+import com.liferay.portal.kernel.json.JSONObject;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCPortlet;
+import com.liferay.portal.kernel.service.UserLocalServiceUtil;
 import com.liferay.portal.kernel.servlet.SessionMessages;
 import com.liferay.portal.kernel.util.ParamUtil;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
@@ -17,8 +24,23 @@ import javax.portlet.PortletException;
 import javax.portlet.ProcessAction;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
+import javax.portlet.ResourceRequest;
+import javax.portlet.ResourceResponse;
 
 import org.osgi.service.component.annotations.Component;
+
+
+//Start
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.List;
+import javax.portlet.PortletException;
+import javax.portlet.ResourceRequest;
+import javax.portlet.ResourceResponse;
+import com.liferay.portal.kernel.json.JSONArray;
+import com.liferay.portal.kernel.json.JSONFactoryUtil;
+import com.liferay.portal.kernel.json.JSONObject;
 
 /**
  * @author Administrator
@@ -38,6 +60,21 @@ import org.osgi.service.component.annotations.Component;
 	service = Portlet.class
 )
 public class Reazioni_avverse_sectionsPortlet extends MVCPortlet {
+	private static Log logger = LogFactoryUtil.getLog(Reazioni_avverse_sectionsPortlet.class);
+	
+	//Start
+	@Override
+	public void serveResource(ResourceRequest resourceRequest,
+			ResourceResponse resourceResponse)
+		throws  IOException, PortletException {
+		System.out.println("Action for"+ParamUtil.getString(resourceRequest, "action-for"));
+		System.out.println("Parent ID"+resourceRequest.getParameter("parentId"));
+		System.out.println("Chile ID"+ParamUtil.getString(resourceRequest, "childId"));
+		System.out.println("data-value"+ParamUtil.getString(resourceRequest, "data-value"));
+		
+	}
+	//End
+
 	@Override
 	public void doView(RenderRequest renderRequest, RenderResponse renderResponse)
 			throws IOException, PortletException {
@@ -67,11 +104,19 @@ public class Reazioni_avverse_sectionsPortlet extends MVCPortlet {
 	   throws IOException, PortletException, PortalException {
 		actionRequest.setAttribute("pageTOShow", "Istruzioni_per_la_compilazione.jsp");
 	}
+	
+	@ProcessAction(name="Istruzioni_per_la_compilazione_edit")
+	 public void Istruzioni_per_la_compilazione_edit(ActionRequest actionRequest, ActionResponse actionResponse)
+	   throws IOException, PortletException, PortalException {
+		actionRequest.setAttribute("pageTOShow", "Istruzioni_per_la_compilazione_edit.jsp");
+	}
+	
 	@ProcessAction(name="I_farmaci_da_sottoporre_al_monitoraggio_intensivo")
 	 public void I_farmaci_da_sottoporre_al_monitoraggio_intensivo(ActionRequest actionRequest, ActionResponse actionResponse)
 	   throws IOException, PortletException, PortalException {
 		actionRequest.setAttribute("pageTOShow", "I_farmaci_da_sottoporre_al_monitoraggio_intensivo.jsp");
 	}
+		
 	
 	@ProcessAction(name="updateRecord")
 	 public void updateRecord(ActionRequest actionRequest, ActionResponse actionResponse)
@@ -206,101 +251,8 @@ public class Reazioni_avverse_sectionsPortlet extends MVCPortlet {
 			SessionMessages.add(actionRequest, "success");
 			// actionRequest.setAttribute it will access as parameter
 		    actionRequest.setAttribute("formID",actionRequest.getParameter("formID"));
-		//	System.out.println(e);
-			}
-	/*
-			System.out.println("I got It");
-	System.out.println("I am "+ParamUtil.getString(actionRequest, "DATA_2"));
-	System.out.println("I am "+ParamUtil.getString(actionRequest, "SESSO_3"));
-	System.out.println("I am "+ParamUtil.getString(actionRequest, "DATA_4"));
-	System.out.println("I am "+ParamUtil.getString(actionRequest, "ORIGINE_5"));
-	System.out.println("I am "+ParamUtil.getString(actionRequest, "DESCRIZIONE_6"));
-	System.out.println("I am "+ParamUtil.getString(actionRequest, "INDICARE_7_1"));
-	System.out.println("I am "+ParamUtil.getString(actionRequest, "INDICARE_7_2"));
-	System.out.println("I am "+ParamUtil.getString(actionRequest, "INDICARE_7_3"));
-	System.out.println("I am "+ParamUtil.getString(actionRequest, "INDICARE_7_4"));
-	System.out.println("I am "+ParamUtil.getString(actionRequest, "INDICARE_7_5"));
-	System.out.println("I am "+ParamUtil.getString(actionRequest, "INDICARE_7_6"));
-	System.out.println("I am "+ParamUtil.getString(actionRequest, "INDICARE_7_7"));
-	System.out.println("I am "+ParamUtil.getString(actionRequest, "GRAVITA_8_1"));
-	System.out.println("I am "+ParamUtil.getString(actionRequest, "GRAVITA_8_2"));
-	System.out.println("I am "+ParamUtil.getString(actionRequest, "GRAVITA_8_3"));
-	System.out.println("I am "+ParamUtil.getString(actionRequest, "GRAVITA_8_4"));
-	System.out.println("I am "+ParamUtil.getString(actionRequest, "GRAVITA_8_5"));
-	System.out.println("I am "+ParamUtil.getString(actionRequest, "GRAVITA_8_6"));
-	System.out.println("I am "+ParamUtil.getString(actionRequest, "GRAVITA_8_7"));
-	System.out.println("I am "+ParamUtil.getString(actionRequest, "EVENTUALI_9"));
-	System.out.println("I am "+ParamUtil.getString(actionRequest, "ESITO_10"));
-	System.out.println("I am "+ParamUtil.getString(actionRequest, "ESITO_10_1"));
-	System.out.println("I am "+ParamUtil.getString(actionRequest, "ESITO_10_2"));
-	System.out.println("I am "+ParamUtil.getString(actionRequest, "ESITO_10_3"));
-	System.out.println("I am "+ParamUtil.getString(actionRequest, "ESITO_10_4"));
-	System.out.println("I am "+ParamUtil.getString(actionRequest, "ESITO_10_5"));
-	System.out.println("I am "+ParamUtil.getString(actionRequest, "ESITO_10_6"));
-	System.out.println("I am "+ParamUtil.getString(actionRequest, "ESITO_10_7"));
-	System.out.println("I am "+ParamUtil.getString(actionRequest, "ESITO_10_8"));
-	System.out.println("I am "+ParamUtil.getString(actionRequest, "ESITO_10_9"));
-	System.out.println("I am "+ParamUtil.getString(actionRequest, "ESITO_10_10"));
-	System.out.println("I am "+ParamUtil.getString(actionRequest, "AZIONI_11"));
-	System.out.println("I am "+ParamUtil.getString(actionRequest, "FARMACO_12_a"));
-	System.out.println("I am "+ParamUtil.getString(actionRequest, "FARMACO_12_a_13"));
-	System.out.println("I am "+ParamUtil.getString(actionRequest, "FARMACO_12_a_14"));
-	System.out.println("I am "+ParamUtil.getString(actionRequest, "FARMACO_12_a_15"));
-	System.out.println("I am "+ParamUtil.getString(actionRequest, "FARMACO_12_a_16_1"));
-	System.out.println("I am "+ParamUtil.getString(actionRequest, "FARMACO_12_a_16_2"));
-	System.out.println("I am "+ParamUtil.getString(actionRequest, "FARMACO_12_a_17"));
-	System.out.println("I am "+ParamUtil.getString(actionRequest, "FARMACO_12_a_18"));
-	System.out.println("I am "+ParamUtil.getString(actionRequest, "FARMACO_12_a_19"));
-	System.out.println("I am "+ParamUtil.getString(actionRequest, "FARMACO_12_a_20"));
-	System.out.println("I am "+ParamUtil.getString(actionRequest, "FARMACO_12_b"));
-	System.out.println("I am "+ParamUtil.getString(actionRequest, "FARMACO_12_b_13"));
-	System.out.println("I am "+ParamUtil.getString(actionRequest, "FARMACO_12_b_14"));
-	System.out.println("I am "+ParamUtil.getString(actionRequest, "FARMACO_12_b_15"));
-	System.out.println("I am "+ParamUtil.getString(actionRequest, "FARMACO_12_b_16_1"));
-	System.out.println("I am "+ParamUtil.getString(actionRequest, "FARMACO_12_b_16_2"));
-	System.out.println("I am "+ParamUtil.getString(actionRequest, "FARMACO_12_b_17"));
-	System.out.println("I am "+ParamUtil.getString(actionRequest, "FARMACO_12_b_18"));
-	System.out.println("I am "+ParamUtil.getString(actionRequest, "FARMACO_12_b_19"));
-	System.out.println("I am "+ParamUtil.getString(actionRequest, "FARMACO_12_b_20"));
-	System.out.println("I am "+ParamUtil.getString(actionRequest, "FARMACO_12_c"));
-	System.out.println("I am "+ParamUtil.getString(actionRequest, "FARMACO_12_c_13"));
-	System.out.println("I am "+ParamUtil.getString(actionRequest, "FARMACO_12_c_14"));
-	System.out.println("I am "+ParamUtil.getString(actionRequest, "FARMACO_12_c_15"));
-	System.out.println("I am "+ParamUtil.getString(actionRequest, "FARMACO_12_c_16_1"));
-	System.out.println("I am "+ParamUtil.getString(actionRequest, "FARMACO_12_c_16_2"));
-	System.out.println("I am "+ParamUtil.getString(actionRequest, "FARMACO_12_c_17"));
-	System.out.println("I am "+ParamUtil.getString(actionRequest, "FARMACO_12_c_18"));
-	System.out.println("I am "+ParamUtil.getString(actionRequest, "FARMACO_12_c_19"));
-	System.out.println("I am "+ParamUtil.getString(actionRequest, "FARMACO_12_c_20"));
-	System.out.println("I am "+ParamUtil.getString(actionRequest, "INDICAZIONI_21_a"));
-	System.out.println("I am "+ParamUtil.getString(actionRequest, "INDICAZIONI_21_b"));
-	System.out.println("I am "+ParamUtil.getString(actionRequest, "INDICAZIONI_21_c"));
-	System.out.println("I am "+ParamUtil.getString(actionRequest, "FARMACO_22_a"));
-	System.out.println("I am "+ParamUtil.getString(actionRequest, "FARMACO_22_a_23"));
-	System.out.println("I am "+ParamUtil.getString(actionRequest, "FARMACO_22_a_24"));
-	System.out.println("I am "+ParamUtil.getString(actionRequest, "FARMACO_22_a_25"));
-	System.out.println("I am "+ParamUtil.getString(actionRequest, "FARMACO_22_a_26_1"));
-	System.out.println("I am "+ParamUtil.getString(actionRequest, "FARMACO_22_a_26_2"));
-	System.out.println("I am "+ParamUtil.getString(actionRequest, "FARMACO_22_a_27"));
-	System.out.println("I am "+ParamUtil.getString(actionRequest, "FARMACO_22_a_28"));
-	System.out.println("I am "+ParamUtil.getString(actionRequest, "FARMACO_22_a_29"));
-	System.out.println("I am "+ParamUtil.getString(actionRequest, "FARMACO_22_a_30"));
-	System.out.println("I am "+ParamUtil.getString(actionRequest, "FARMACO_22_b"));
-	System.out.println("I am "+ParamUtil.getString(actionRequest, "FARMACO_22_b_23"));
-	System.out.println("I am "+ParamUtil.getString(actionRequest, "FARMACO_22_b_24"));
-	System.out.println("I am "+ParamUtil.getString(actionRequest, "FARMACO_22_b_25"));
-	System.out.println("I am "+ParamUtil.getString(actionRequest, "FARMACO_22_b_26_1"));
-	System.out.println("I am "+ParamUtil.getString(actionRequest, "FARMACO_22_b_26_2"));
-	System.out.println("I am "+ParamUtil.getString(actionRequest, "FARMACO_22_b_27"));
-	System.out.println("I am "+ParamUtil.getString(actionRequest, "FARMACO_22_b_28"));
-	System.out.println("I am "+ParamUtil.getString(actionRequest, "FARMACO_22_b_29"));
-	System.out.println("I am "+ParamUtil.getString(actionRequest, "FARMACO_22_b_30"));
-	System.out.println("I am "+ParamUtil.getString(actionRequest, "INDICAZIONI_31_a"));
-	System.out.println("I am "+ParamUtil.getString(actionRequest, "INDICAZIONI_31_b"));
-	*/
-	    
-	    
-	   
+		    logger.info("Data:-"+e);
+	    }
 	}
 	
 	@ProcessAction(name="formSubmit")
@@ -440,104 +392,21 @@ public class Reazioni_avverse_sectionsPortlet extends MVCPortlet {
 		//For success Fully Messaage
 		SessionMessages.add(actionRequest, "success");
 		actionRequest.setAttribute("pageTOShow", "Form_di_segnalazione.jsp");
-	//	System.out.println(e);
+		logger.info("Data:-"+e);
 		}
-/*
-		System.out.println("I got It");
-System.out.println("I am "+ParamUtil.getString(actionRequest, "DATA_2"));
-System.out.println("I am "+ParamUtil.getString(actionRequest, "SESSO_3"));
-System.out.println("I am "+ParamUtil.getString(actionRequest, "DATA_4"));
-System.out.println("I am "+ParamUtil.getString(actionRequest, "ORIGINE_5"));
-System.out.println("I am "+ParamUtil.getString(actionRequest, "DESCRIZIONE_6"));
-System.out.println("I am "+ParamUtil.getString(actionRequest, "INDICARE_7_1"));
-System.out.println("I am "+ParamUtil.getString(actionRequest, "INDICARE_7_2"));
-System.out.println("I am "+ParamUtil.getString(actionRequest, "INDICARE_7_3"));
-System.out.println("I am "+ParamUtil.getString(actionRequest, "INDICARE_7_4"));
-System.out.println("I am "+ParamUtil.getString(actionRequest, "INDICARE_7_5"));
-System.out.println("I am "+ParamUtil.getString(actionRequest, "INDICARE_7_6"));
-System.out.println("I am "+ParamUtil.getString(actionRequest, "INDICARE_7_7"));
-System.out.println("I am "+ParamUtil.getString(actionRequest, "GRAVITA_8_1"));
-System.out.println("I am "+ParamUtil.getString(actionRequest, "GRAVITA_8_2"));
-System.out.println("I am "+ParamUtil.getString(actionRequest, "GRAVITA_8_3"));
-System.out.println("I am "+ParamUtil.getString(actionRequest, "GRAVITA_8_4"));
-System.out.println("I am "+ParamUtil.getString(actionRequest, "GRAVITA_8_5"));
-System.out.println("I am "+ParamUtil.getString(actionRequest, "GRAVITA_8_6"));
-System.out.println("I am "+ParamUtil.getString(actionRequest, "GRAVITA_8_7"));
-System.out.println("I am "+ParamUtil.getString(actionRequest, "EVENTUALI_9"));
-System.out.println("I am "+ParamUtil.getString(actionRequest, "ESITO_10"));
-System.out.println("I am "+ParamUtil.getString(actionRequest, "ESITO_10_1"));
-System.out.println("I am "+ParamUtil.getString(actionRequest, "ESITO_10_2"));
-System.out.println("I am "+ParamUtil.getString(actionRequest, "ESITO_10_3"));
-System.out.println("I am "+ParamUtil.getString(actionRequest, "ESITO_10_4"));
-System.out.println("I am "+ParamUtil.getString(actionRequest, "ESITO_10_5"));
-System.out.println("I am "+ParamUtil.getString(actionRequest, "ESITO_10_6"));
-System.out.println("I am "+ParamUtil.getString(actionRequest, "ESITO_10_7"));
-System.out.println("I am "+ParamUtil.getString(actionRequest, "ESITO_10_8"));
-System.out.println("I am "+ParamUtil.getString(actionRequest, "ESITO_10_9"));
-System.out.println("I am "+ParamUtil.getString(actionRequest, "ESITO_10_10"));
-System.out.println("I am "+ParamUtil.getString(actionRequest, "AZIONI_11"));
-System.out.println("I am "+ParamUtil.getString(actionRequest, "FARMACO_12_a"));
-System.out.println("I am "+ParamUtil.getString(actionRequest, "FARMACO_12_a_13"));
-System.out.println("I am "+ParamUtil.getString(actionRequest, "FARMACO_12_a_14"));
-System.out.println("I am "+ParamUtil.getString(actionRequest, "FARMACO_12_a_15"));
-System.out.println("I am "+ParamUtil.getString(actionRequest, "FARMACO_12_a_16_1"));
-System.out.println("I am "+ParamUtil.getString(actionRequest, "FARMACO_12_a_16_2"));
-System.out.println("I am "+ParamUtil.getString(actionRequest, "FARMACO_12_a_17"));
-System.out.println("I am "+ParamUtil.getString(actionRequest, "FARMACO_12_a_18"));
-System.out.println("I am "+ParamUtil.getString(actionRequest, "FARMACO_12_a_19"));
-System.out.println("I am "+ParamUtil.getString(actionRequest, "FARMACO_12_a_20"));
-System.out.println("I am "+ParamUtil.getString(actionRequest, "FARMACO_12_b"));
-System.out.println("I am "+ParamUtil.getString(actionRequest, "FARMACO_12_b_13"));
-System.out.println("I am "+ParamUtil.getString(actionRequest, "FARMACO_12_b_14"));
-System.out.println("I am "+ParamUtil.getString(actionRequest, "FARMACO_12_b_15"));
-System.out.println("I am "+ParamUtil.getString(actionRequest, "FARMACO_12_b_16_1"));
-System.out.println("I am "+ParamUtil.getString(actionRequest, "FARMACO_12_b_16_2"));
-System.out.println("I am "+ParamUtil.getString(actionRequest, "FARMACO_12_b_17"));
-System.out.println("I am "+ParamUtil.getString(actionRequest, "FARMACO_12_b_18"));
-System.out.println("I am "+ParamUtil.getString(actionRequest, "FARMACO_12_b_19"));
-System.out.println("I am "+ParamUtil.getString(actionRequest, "FARMACO_12_b_20"));
-System.out.println("I am "+ParamUtil.getString(actionRequest, "FARMACO_12_c"));
-System.out.println("I am "+ParamUtil.getString(actionRequest, "FARMACO_12_c_13"));
-System.out.println("I am "+ParamUtil.getString(actionRequest, "FARMACO_12_c_14"));
-System.out.println("I am "+ParamUtil.getString(actionRequest, "FARMACO_12_c_15"));
-System.out.println("I am "+ParamUtil.getString(actionRequest, "FARMACO_12_c_16_1"));
-System.out.println("I am "+ParamUtil.getString(actionRequest, "FARMACO_12_c_16_2"));
-System.out.println("I am "+ParamUtil.getString(actionRequest, "FARMACO_12_c_17"));
-System.out.println("I am "+ParamUtil.getString(actionRequest, "FARMACO_12_c_18"));
-System.out.println("I am "+ParamUtil.getString(actionRequest, "FARMACO_12_c_19"));
-System.out.println("I am "+ParamUtil.getString(actionRequest, "FARMACO_12_c_20"));
-System.out.println("I am "+ParamUtil.getString(actionRequest, "INDICAZIONI_21_a"));
-System.out.println("I am "+ParamUtil.getString(actionRequest, "INDICAZIONI_21_b"));
-System.out.println("I am "+ParamUtil.getString(actionRequest, "INDICAZIONI_21_c"));
-System.out.println("I am "+ParamUtil.getString(actionRequest, "FARMACO_22_a"));
-System.out.println("I am "+ParamUtil.getString(actionRequest, "FARMACO_22_a_23"));
-System.out.println("I am "+ParamUtil.getString(actionRequest, "FARMACO_22_a_24"));
-System.out.println("I am "+ParamUtil.getString(actionRequest, "FARMACO_22_a_25"));
-System.out.println("I am "+ParamUtil.getString(actionRequest, "FARMACO_22_a_26_1"));
-System.out.println("I am "+ParamUtil.getString(actionRequest, "FARMACO_22_a_26_2"));
-System.out.println("I am "+ParamUtil.getString(actionRequest, "FARMACO_22_a_27"));
-System.out.println("I am "+ParamUtil.getString(actionRequest, "FARMACO_22_a_28"));
-System.out.println("I am "+ParamUtil.getString(actionRequest, "FARMACO_22_a_29"));
-System.out.println("I am "+ParamUtil.getString(actionRequest, "FARMACO_22_a_30"));
-System.out.println("I am "+ParamUtil.getString(actionRequest, "FARMACO_22_b"));
-System.out.println("I am "+ParamUtil.getString(actionRequest, "FARMACO_22_b_23"));
-System.out.println("I am "+ParamUtil.getString(actionRequest, "FARMACO_22_b_24"));
-System.out.println("I am "+ParamUtil.getString(actionRequest, "FARMACO_22_b_25"));
-System.out.println("I am "+ParamUtil.getString(actionRequest, "FARMACO_22_b_26_1"));
-System.out.println("I am "+ParamUtil.getString(actionRequest, "FARMACO_22_b_26_2"));
-System.out.println("I am "+ParamUtil.getString(actionRequest, "FARMACO_22_b_27"));
-System.out.println("I am "+ParamUtil.getString(actionRequest, "FARMACO_22_b_28"));
-System.out.println("I am "+ParamUtil.getString(actionRequest, "FARMACO_22_b_29"));
-System.out.println("I am "+ParamUtil.getString(actionRequest, "FARMACO_22_b_30"));
-System.out.println("I am "+ParamUtil.getString(actionRequest, "INDICAZIONI_31_a"));
-System.out.println("I am "+ParamUtil.getString(actionRequest, "INDICAZIONI_31_b"));
-*/
 }
 	
 	@ProcessAction(name="form_di_segnalazione_fetch_from")
 	 public void form_di_segnalazione_fetch_from(ActionRequest actionRequest, ActionResponse actionResponse)
 	   throws IOException, PortletException, PortalException {
-		System.out.println("I am here :"+ParamUtil.getString(actionRequest, "form_id"));
+		logger.info("I am here :"+ParamUtil.getString(actionRequest, "form_id"));
+	}
+	
+	
+	@ProcessAction(name="formSubmit_drug")
+	 public void formSubmit_drug(ActionRequest actionRequest, ActionResponse actionResponse)
+	   throws IOException, PortletException, PortalException {
+		logger.info("I am here :"+ParamUtil.getString(actionRequest, "form_id"));
 	}
 	
 }
