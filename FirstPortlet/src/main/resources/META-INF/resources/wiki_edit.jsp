@@ -334,8 +334,15 @@ Liferay.provide(window,'<portlet:namespace/>closeYourPopUp', function(data, dial
 Liferay.provide(window,'<portlet:namespace/>closeYourPopUp_wikipage', function(data, dialogId) 
 		{ 
 	var A = AUI(); 
-	var dialog = Liferay.Util.Window.getById(dialogId); 
-	dialog.destroy();
+	//var dialog = Liferay.Util.Window.getById(dialogId); 
+	//dialog.destroy();	
+	Liferay.fire(
+	         'closeWindow',
+	         { 
+	        	 id:dialogId
+	         }
+	        );
+	
 	//Start
 	$("#select-wikipage").empty();
 	window.<portlet:namespace />pageData.setHTML('');
