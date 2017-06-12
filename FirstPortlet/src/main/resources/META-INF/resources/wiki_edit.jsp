@@ -217,7 +217,7 @@ $("#table-wikiPreview").click(function(){
 	}
 	var portletURL = Liferay.PortletURL.createRenderURL();
  	portletURL.setWindowState('<%=LiferayWindowState.POP_UP.toString() %>');
-    portletURL.setParameter('data', pagedata);    
+    //portletURL.setParameter('data', pagedata);    
     portletURL.setPortletId("<%=themeDisplay.getPortletDisplay().getId() %>");
     portletURL.setParameter('mvcPath', '/preview.jsp');
     // Now we can use the URL
