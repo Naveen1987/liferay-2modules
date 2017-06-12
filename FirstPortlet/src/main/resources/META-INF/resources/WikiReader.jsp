@@ -66,13 +66,6 @@ for(wiki_node_table wn:wnt){
 <div class="col-md-9">
 <div class="row">
 <div class="col-md-12">
-<div style="text-align:right">
-<span class="btn btn-warning" id="edit_page">Edit Page</span>&nbsp;&nbsp;&nbsp;&nbsp;<span id="manage_wiki" class="btn btn-warning">Manage Complete Wiki</span>
-</div>
-</div>
-</div>
-<div class="row">
-<div class="col-md-12">
 <input type="hidden" id="nodeID"/>
 <input type="hidden" id="pageID"/>
 <input type="hidden" id="pageVersion"/>
@@ -146,81 +139,4 @@ $('.inner-page').click(function(){
 		//Ajax End
 	});
 	
-	
-$("#edit_page").click(function(){
-var btn_data=$("#edit_page")[0].innerHTML;
-if(btn_data==='Edit Page'){
-$("#edit_page")[0].innerHTML='Save Page';
-$("#edit-data").show();
-$("#data-show").hide();
-$("#Page_List").hide();
-window.<portlet:namespace />edit_page_Data.setHTML($("#data-show")[0].innerHTML);
-
-}
-else if(btn_data==='Save Page')
-{
-var version=$("#pageVersion").val();
-	if( version.length === 0 ) {
-    version="1";
- }
-	else{
-		version=(parseInt(version)+1);
-	}
- var pageID=$("#pageID").val();
- var nodeID=$("#nodeID").val();
- var pageData=window.<portlet:namespace />edit_page_Data.getHTML();
- 
- //alert(version+" "+pageID+" "+nodeID+" "+pageData);
-//Ajax
-	AUI().use('aui-base','aui-io-request', function(A){
-		//aui ajax call to get updated content
-		A.io.request('<%=save_data%>',{
-		dataType: 'json',
-		method: 'POST',
-		data: { '<portlet:namespace />version': version,
-			'<portlet:namespace />node': nodeID,
-			'<portlet:namespace />selectpage':pageID,
-			'<portlet:namespace />data-value':pageData },
-		on: {
-			 success: function() {
-				var data=this.get('responseData');
-				A.Array.each(data, function(obj, idx){
-					$("#pageVersion").val(obj.version);
-					$("#data-show")[0].innerHTML=obj.data;
-				});
- 		}
-		}
-		});
-		});
-	//Ajax End
- $("#edit_page")[0].innerHTML='Edit Page'; 
- $("#edit-data").hide();
- $("#data-show").show();
- $("#Page_List").show();
- alert("Edit Successfully.")
-}
-});
-
-$("#manage_wiki").click(function(){
-	 var portletURL = Liferay.PortletURL.createRenderURL();
-	 	portletURL.setWindowState('<%=LiferayWindowState.POP_UP.toString() %>');    
-	    portletURL.setPortletId("<%=themeDisplay.getPortletDisplay().getId() %>");
-	    portletURL.setParameter('mvcPath', '/wiki_edit.jsp');
-	    // Now we can use the URL
-	  // alert(portletURL.toString());
-	   Liferay.Util.openWindow({
-			dialog: {
-			centered: true,
-			cssClass: 'my-liferay-popup',
-			constrain2view: true,
-			modal: true,
-			width: 1600
-			},
-			id: '<portlet:namespace/>wiki_editDailog',
-			title: 'Manage Wiki' ,
-			uri:  portletURL.toString()
-			});
-});
-
-
 </script>
