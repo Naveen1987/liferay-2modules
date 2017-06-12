@@ -37,7 +37,7 @@ List<wiki_pagedata_table>wdt=wiki_pagedata_tableLocalServiceUtil.getwiki_pagedat
 </tr>
 <tr>
 <td>
-<ul class="list-display">
+<ul class="list-display" id="Page_List">
 <%
 for(wiki_node_table wn:wnt){
 	%>
@@ -77,11 +77,23 @@ for(wiki_node_table wn:wnt){
 <input type="hidden" id="pageID"/>
 <input type="hidden" id="pageVersion"/>
 <div style="background-color:#8EB7FD; height:35px;
-    box-shadow: 10px 10px 5px #888888;"><h1 style="margin-left:5px">Wiki Page - <span style="font-size:20px;"  id="wiki-id"></span></h1></div>
+    box-shadow: 10px 10px 5px #888888;"><h1 style="margin-left:5px">Wiki - <span style="font-size:20px;"  id="wiki-id"></span></h1></div>
 </div>
 </div>
 <div class="row">
-<br/>
+<div class="col-md-12" style="text-align:right">
+<%--<form class="navbar-form" role="search">
+    <div class="input-group add-on">
+      <input class="form-control" placeholder="Search" name="srch-term" id="srch-term" type="text">
+      <div class="input-group-btn">
+        <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+      </div>
+    </div>
+  </form> --%>
+  <br/>
+</div>
+</div> 
+<div class="row">
 <div class="col-md-12">
 <div id="data-show"></div>
 <div id="edit-data" style="display:none">
@@ -105,7 +117,7 @@ for(wiki_node_table wn:wnt){
 <script>
 $('.outer-node').click(function(){
 	   var data_nodeid = $(this).attr('data-nodeid');
-	   alert(data_nodeid);
+	 //  alert(data_nodeid);
 	});
 $('.inner-page').click(function(){
 	   var data_pageid = $(this).attr('data-pageid');
@@ -115,7 +127,7 @@ $('.inner-page').click(function(){
 			//aui ajax call to get updated content
 			A.io.request('<%=select_wikiPageData%>',{
 	  		dataType: 'json',
-	  		method: 'GET',
+	  		method: 'POST',
 	  		data: { '<portlet:namespace />data-pageid':data_pageid,'<portlet:namespace />data-node_page_id':data_node_pageid},
 	  		on: {
 	   			 success: function() {
@@ -141,7 +153,9 @@ if(btn_data==='Edit Page'){
 $("#edit_page")[0].innerHTML='Save Page';
 $("#edit-data").show();
 $("#data-show").hide();
+$("#Page_List").hide();
 window.<portlet:namespace />edit_page_Data.setHTML($("#data-show")[0].innerHTML);
+
 }
 else if(btn_data==='Save Page')
 {
@@ -162,7 +176,7 @@ var version=$("#pageVersion").val();
 		//aui ajax call to get updated content
 		A.io.request('<%=save_data%>',{
 		dataType: 'json',
-		method: 'GET',
+		method: 'POST',
 		data: { '<portlet:namespace />version': version,
 			'<portlet:namespace />node': nodeID,
 			'<portlet:namespace />selectpage':pageID,
@@ -182,6 +196,7 @@ var version=$("#pageVersion").val();
  $("#edit_page")[0].innerHTML='Edit Page'; 
  $("#edit-data").hide();
  $("#data-show").show();
+ $("#Page_List").show();
  alert("Edit Successfully.")
 }
 });
@@ -209,6 +224,3 @@ $("#manage_wiki").click(function(){
 
 
 </script>
-<%
-
-%>

@@ -189,7 +189,7 @@ $("#table-wikiSubmit").click(function(){
 		//aui ajax call to get updated content
 		A.io.request('<%=save_data%>',{
   		dataType: 'json',
-  		method: 'GET',
+  		method: 'POST',
   		data: { '<portlet:namespace />version': version,
   			'<portlet:namespace />node': node,
   			'<portlet:namespace />selectpage': selectpage,
@@ -209,7 +209,7 @@ $("#table-wikiSubmit").click(function(){
 	
 });
 
-$(".table-wikiPreview").click(function(){
+$("#table-wikiPreview").click(function(){
 	var pagedata =window.<portlet:namespace />pageData.getHTML();
 	if(pagedata.length===0){
 		alert("please input data");
@@ -230,10 +230,11 @@ $(".table-wikiPreview").click(function(){
 		modal: true,
 		width: 950
 		},
-		id: '<portlet:namespace/>editdialog',
+		id: '<portlet:namespace/>previewdialog',
 		title: 'Wiki Preview' ,
 		uri:  portletURL.toString()
 		});
+	
 });
 
 $("#select-wikipage").change(function(){
@@ -255,7 +256,7 @@ $("#select-wikinode").change(function(){
 		//aui ajax call to get updated content
 		A.io.request('<%=select_wikipage%>',{
   		dataType: 'json',
-  		method: 'GET',
+  		method: 'POST',
   		data: { '<portlet:namespace />data-value': data},
   		on: {
    			 success: function() {
@@ -286,7 +287,7 @@ $("#table-wikiload").click(function(){
 		//aui ajax call to get updated content
 		A.io.request('<%=load_data%>',{
   		dataType: 'json',
-  		method: 'GET',
+  		method: 'POST',
   		data: { '<portlet:namespace />nodeID': node,'<portlet:namespace />pageID':selectpage},
   		on: {
    			 success: function() {
@@ -335,7 +336,8 @@ Liferay.provide(window,'<portlet:namespace/>closeYourPopUp_wikipage', function(d
 		{ 
 	var A = AUI(); 
 	//var dialog = Liferay.Util.Window.getById(dialogId); 
-	//dialog.destroy();	
+	//dialog.destroy();
+	
 	Liferay.fire(
 	         'closeWindow',
 	         { 
@@ -351,13 +353,12 @@ Liferay.provide(window,'<portlet:namespace/>closeYourPopUp_wikipage', function(d
 		alert("There is NO page please Add new page");
 		return;
 	}
-	
 	//Ajax
 	AUI().use('aui-base','aui-io-request', function(A){
 		//aui ajax call to get updated content
 		A.io.request('<%=select_wikipage%>',{
   		dataType: 'json',
-  		method: 'GET',
+  		method: 'POST',
   		data: { '<portlet:namespace />data-value': data},
   		on: {
    			 success: function() {
