@@ -1,3 +1,6 @@
+<%@ page contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+
 <%@ include file="/init.jsp" %>
 <%@page import="com.daffo.form_di_segnalazione.model.form_di_segnalazione"%>
 <%@page import="com.daffo.form_di_segnalazione.service.form_di_segnalazioneLocalServiceUtil"%>
@@ -28,8 +31,8 @@ tr{ //text-align:center; font-family: Arial Unicode MS, Lucida Sans Unicode, san
 </td></tr></tbody></table> 
 </div> 
 <div class="col-md-2"> 
-<table><tbody><tr><td>2. DATA di NASCITA o ETÃ?</td></tr>
-<tr><td> <input class="form-control" style="background-color:#FFFACD;color:black" name="<portlet:namespace/>DATA_2" id="DATA_2" placeholder="dd/mm/yyyy" readonly="readonly" value="<%=frm.getDATA_2()%>"> </td></tr></tbody></table> 
+<table><tbody><tr><td>2. DATA di NASCITA o ETÃ€</td></tr>
+<tr><td><br/> <input class="form-control" style="background-color:#FFFACD;color:black" name="<portlet:namespace/>DATA_2" id="DATA_2" placeholder="dd/mm/yyyy" readonly="readonly" value="<%=frm.getDATA_2()%>"> </td></tr></tbody></table> 
 </div> 
 <div class="col-md-2">  
 <table width="100%"><tbody><tr><td>3. SESSO <br>&nbsp;</td></tr><tr><td><table><tbody><tr><td> <input type="radio" name="<portlet:namespace/>SESSO_3" value="M" style="outline:<%=frm.getSESSO_3().contains("M")?"2px solid red;":""%>" <%=frm.getSESSO_3().contains("M")?"checked":""%> disabled > M</td> <td>&nbsp;<input type="radio"  name="<portlet:namespace/>SESSO_3" value="F" style="outline:<%=frm.getSESSO_3().contains("F")?"2px solid red;":""%>" <%=frm.getSESSO_3().contains("F")?"checked":""%> disabled > F </td></tr></tbody></table> </td></tr></tbody></table>
@@ -81,7 +84,7 @@ tr{ //text-align:center; font-family: Arial Unicode MS, Lucida Sans Unicode, san
 <br> 
 <div class="col-md-12"> 
 <table width="100%"> <tbody>
-<tr><td>6. DESCRIZIONE DELLA REAZIONE ED EVENTUALE DIAGNOSI (*se il segnalatore Ã¨ un medico)</td></tr> 
+<tr><td>6. DESCRIZIONE DELLA REAZIONE ED EVENTUALE DIAGNOSI   (*se il segnalatore Ã¨ un medico)</td></tr> 
 <tr> <td> <textarea style="background-color:#FFFACD;color:black" class="form-control" rows="5" name="<portlet:namespace/>DESCRIZIONE_6"  readonly="readonly"><%=frm.getDESCRIZIONE_6()%></textarea> </td> </tr> </tbody>
 </table> 
 </div> 
@@ -102,7 +105,7 @@ tr{ //text-align:center; font-family: Arial Unicode MS, Lucida Sans Unicode, san
 </div> 
 <div class="col-md-8"> 
 <table width="100%"> <tbody>
-<tr><td>8. GRAVITA' DELLA REAZIONE</td></tr> 
+<tr><td>8. GRAVITA' DELLA REAZIONE:</td></tr> 
 <tr> <td> <br> 
 <table width="100%"> <tbody>
 <tr><td colspan="3">GRAVE</td></tr> 
@@ -120,7 +123,7 @@ tr{ //text-align:center; font-family: Arial Unicode MS, Lucida Sans Unicode, san
 <table width="100%"> <tbody>
 <tr> <td> 
 <table width="100%"> <tbody>
-<tr><td>9. EVENTUALI ESAMI DI LABORATORIO RILEVANTI PER ADR (riportare risultati e date in cui gli accertamenti sono stati eseguiti)</td></tr> 
+<tr><td>9. EVENTUALI ESAMI DI LABORATORIO RILEVANTI PER ADR (riportare risultati e date in cui gli  accertamenti sono stati eseguiti):</td></tr> 
 <tr> <td> <textarea style="background-color:#FFFACD;color:black" class="form-control" rows="5" name="<portlet:namespace/>EVENTUALI_9" readonly="readonly"><%=frm.getEVENTUALI_9()%></textarea> </td> </tr> </tbody>
 </table> 
 </td> </tr> 
@@ -130,7 +133,7 @@ tr{ //text-align:center; font-family: Arial Unicode MS, Lucida Sans Unicode, san
 <tr> 
 <td style="text-align:right"> 
 <textarea style="background-color:#FFFACD;color:black" class="form-control" rows="4" name="<portlet:namespace/>AZIONI_11" readonly="readonly"><%=frm.getAZIONI_11()%></textarea> 
-<br> In caso di sospensione compilare i campi da </td> </tr> </tbody>
+<br> In caso di sospensione compilare i campi da 17 a 20 </td> </tr> </tbody>
 </table> 
 </td> </tr> </tbody>
 </table> 
@@ -167,7 +170,7 @@ tr{ //text-align:center; font-family: Arial Unicode MS, Lucida Sans Unicode, san
 <div class="row border_cols"> 
 <br> 
 <div class="col-md-12"> 
-<table><tbody><tr><td>12. FARMACO/I SOSPETTO/I (indicare il nome della specialitÃ&nbsp; medicinale o del generico*). Riportare il numero di lotto per vaccini e medicinali biologici</td></tr>
+<table><tbody><tr><td>12. FARMACO/I SOSPETTO/I (indicare il nome della specialitÃ  medicinale o del generico*). Riportare il numero di lotto per vaccini e medicinali biologici</td></tr>
 </tbody></table> 
 <!-- A --> 
 <div class="col-md-12"> 
@@ -203,7 +206,7 @@ tr{ //text-align:center; font-family: Arial Unicode MS, Lucida Sans Unicode, san
 <br> 
 <div class="col-md-5"> 
 <table><tbody>
-<tr><td>17. IL FARMACO Eâ?? STATO SOSPESO?&nbsp;&nbsp;&nbsp; </td><td> <input type="radio" name="<portlet:namespace/>FARMACO_12_a_17" value="SI" style="outline:<%=frm.getFARMACO_12_a_17().contains("SI")?"2px solid red;":""%>" <%=frm.getFARMACO_12_a_17().contains("SI")?"checked":""%> disabled="disabled">&nbsp;SI&nbsp;<input type="radio" name="<portlet:namespace/>FARMACO_12_a_17" value="NO"  style="outline:<%=frm.getFARMACO_12_a_17().contains("NO")?"2px solid red;":""%>" <%=frm.getFARMACO_12_a_17().contains("NO")?"checked":""%> disabled="disabled">&nbsp;NO&nbsp;
+<tr><td>17. IL FARMACO Eâ€™ STATO SOSPESO?&nbsp;&nbsp;&nbsp; </td><td> <input type="radio" name="<portlet:namespace/>FARMACO_12_a_17" value="SI" style="outline:<%=frm.getFARMACO_12_a_17().contains("SI")?"2px solid red;":""%>" <%=frm.getFARMACO_12_a_17().contains("SI")?"checked":""%> disabled="disabled">&nbsp;SI&nbsp;<input type="radio" name="<portlet:namespace/>FARMACO_12_a_17" value="NO"  style="outline:<%=frm.getFARMACO_12_a_17().contains("NO")?"2px solid red;":""%>" <%=frm.getFARMACO_12_a_17().contains("NO")?"checked":""%> disabled="disabled">&nbsp;NO&nbsp;
 </td></tr></tbody></table> </div>  
 <div class="col-md-7"> 
 <table><tbody><tr><td> 18. LA REAZIONE E' MIGLIORATA DOPO LA SOSPENSIONE? &nbsp;&nbsp;&nbsp; </td><td> <input type="radio" name="<portlet:namespace/>FARMACO_12_a_18" value="SI"  style="outline:<%=frm.getFARMACO_12_a_18().contains("SI")?"2px solid red;":""%>" <%=frm.getFARMACO_12_a_18().contains("SI")?"checked":""%> disabled="disabled">&nbsp;SI&nbsp;<input type="radio" name="<portlet:namespace/>FARMACO_12_a_18" value="NO"  style="outline:<%=frm.getFARMACO_12_a_18().contains("NO")?"2px solid red;":""%>" <%=frm.getFARMACO_12_a_18().contains("NO")?"checked":""%> disabled="disabled">&nbsp;NO&nbsp;
@@ -211,7 +214,7 @@ tr{ //text-align:center; font-family: Arial Unicode MS, Lucida Sans Unicode, san
 </div> 
 <div class="col-md-12"> <br> 
 <div class="col-md-5"> 
-<table><tbody><tr><td>19. IL FARMACO Eâ?? STATO RIPRESO?&nbsp;&nbsp;&nbsp; </td><td> <input type="radio" name="<portlet:namespace/>FARMACO_12_a_19" value="SI"  style="outline:<%=frm.getFARMACO_12_a_19().contains("SI")?"2px solid red;":""%>" <%=frm.getFARMACO_12_a_19().contains("SI")?"checked":""%> disabled="disabled">&nbsp;SI&nbsp;<input type="radio" name="<portlet:namespace/>FARMACO_12_a_19" value="NO"  style="outline:<%=frm.getFARMACO_12_a_19().contains("NO")?"2px solid red;":""%>" <%=frm.getFARMACO_12_a_19().contains("NO")?"checked":""%> disabled="disabled">&nbsp;NO&nbsp; </td></tr>
+<table><tbody><tr><td>19. IL FARMACO Eâ€™ STATO RIPRESO??&nbsp;&nbsp;&nbsp; </td><td> <input type="radio" name="<portlet:namespace/>FARMACO_12_a_19" value="SI"  style="outline:<%=frm.getFARMACO_12_a_19().contains("SI")?"2px solid red;":""%>" <%=frm.getFARMACO_12_a_19().contains("SI")?"checked":""%> disabled="disabled">&nbsp;SI&nbsp;<input type="radio" name="<portlet:namespace/>FARMACO_12_a_19" value="NO"  style="outline:<%=frm.getFARMACO_12_a_19().contains("NO")?"2px solid red;":""%>" <%=frm.getFARMACO_12_a_19().contains("NO")?"checked":""%> disabled="disabled">&nbsp;NO&nbsp; </td></tr>
 </tbody></table> 
 </div> 
 <div class="col-md-7"> 
@@ -252,7 +255,7 @@ tr{ //text-align:center; font-family: Arial Unicode MS, Lucida Sans Unicode, san
 <div class="col-md-12">
  <br> 
 <div class="col-md-5"> 
-<table><tbody><tr><td>17. IL FARMACO Eâ?? STATO SOSPESO?&nbsp;&nbsp;&nbsp; </td><td> <input type="radio" name="<portlet:namespace/>FARMACO_12_b_17" value="SI"  style="outline:<%=frm.getFARMACO_12_b_17().contains("SI")?"2px solid red;":""%>" <%=frm.getFARMACO_12_b_17().contains("SI")?"checked":""%> disabled="disabled"/>&nbsp;SI&nbsp;<input type="radio" name="<portlet:namespace/>FARMACO_12_b_17" value="NO"  style="outline:<%=frm.getFARMACO_12_b_17().contains("NO")?"2px solid red;":""%>"  <%=frm.getFARMACO_12_b_17().contains("NO")?"checked":""%> disabled="disabled"/>&nbsp;NO&nbsp;</td></tr>
+<table><tbody><tr><td>17. IL FARMACO Eâ€™ STATO SOSPESO?&nbsp;&nbsp;&nbsp; </td><td> <input type="radio" name="<portlet:namespace/>FARMACO_12_b_17" value="SI"  style="outline:<%=frm.getFARMACO_12_b_17().contains("SI")?"2px solid red;":""%>" <%=frm.getFARMACO_12_b_17().contains("SI")?"checked":""%> disabled="disabled"/>&nbsp;SI&nbsp;<input type="radio" name="<portlet:namespace/>FARMACO_12_b_17" value="NO"  style="outline:<%=frm.getFARMACO_12_b_17().contains("NO")?"2px solid red;":""%>"  <%=frm.getFARMACO_12_b_17().contains("NO")?"checked":""%> disabled="disabled"/>&nbsp;NO&nbsp;</td></tr>
 </tbody></table> 
 </div> 
 <div class="col-md-7"> 
@@ -263,7 +266,7 @@ tr{ //text-align:center; font-family: Arial Unicode MS, Lucida Sans Unicode, san
 <div class="col-md-12"> 
 <br> 
 <div class="col-md-5"> 
-<table><tbody><tr><td>19. IL FARMACO Eâ?? STATO RIPRESO?&nbsp;&nbsp;&nbsp; </td><td> <input type="radio" name="<portlet:namespace/>FARMACO_12_b_19" value="SI"  style="outline:<%=frm.getFARMACO_12_b_19().contains("SI")?"2px solid red;":""%>"  <%=frm.getFARMACO_12_b_19().contains("SI")?"checked":""%> disabled="disabled">&nbsp;SI&nbsp;<input type="radio" name="<portlet:namespace/>FARMACO_12_b_19" value="NO"  <%=frm.getFARMACO_12_b_19().contains("NO")?"checked":""%> disabled="disabled"  style="outline:<%=frm.getFARMACO_12_b_19().contains("NO")?"2px solid red;":""%>">&nbsp;NO&nbsp; </td></tr>
+<table><tbody><tr><td>19. IL FARMACO Eâ€™ STATO RIPRESO?&nbsp;&nbsp;&nbsp; </td><td> <input type="radio" name="<portlet:namespace/>FARMACO_12_b_19" value="SI"  style="outline:<%=frm.getFARMACO_12_b_19().contains("SI")?"2px solid red;":""%>"  <%=frm.getFARMACO_12_b_19().contains("SI")?"checked":""%> disabled="disabled">&nbsp;SI&nbsp;<input type="radio" name="<portlet:namespace/>FARMACO_12_b_19" value="NO"  <%=frm.getFARMACO_12_b_19().contains("NO")?"checked":""%> disabled="disabled"  style="outline:<%=frm.getFARMACO_12_b_19().contains("NO")?"2px solid red;":""%>">&nbsp;NO&nbsp; </td></tr>
 </tbody></table>
 </div> 
 <div class="col-md-7"> 
@@ -307,7 +310,7 @@ tr{ //text-align:center; font-family: Arial Unicode MS, Lucida Sans Unicode, san
  <div class="col-md-12"> 
  <br> 
  <div class="col-md-5">
- <table><tbody><tr><td>17. IL FARMACO Eâ?? STATO SOSPESO?&nbsp;&nbsp;&nbsp; </td><td> <input type="radio" name="<portlet:namespace/>FARMACO_12_c_17" value="SI" <%=frm.getFARMACO_12_c_17().contains("SI")?"checked":""%> disabled="disabled"  style="outline:<%=frm.getFARMACO_12_c_17().contains("SI")?"2px solid red;":""%>">&nbsp;SI&nbsp;<input type="radio" name="<portlet:namespace/>FARMACO_12_c_17" value="NO" <%=frm.getFARMACO_12_c_17().contains("NO")?"checked":""%>  disabled="disabled"  style="outline:<%=frm.getFARMACO_12_c_17().contains("NO")?"2px solid red;":""%>">&nbsp;NO&nbsp; </td></tr>
+ <table><tbody><tr><td>17. IL FARMACO Eâ€™ STATO SOSPESO?&nbsp;&nbsp;&nbsp; </td><td> <input type="radio" name="<portlet:namespace/>FARMACO_12_c_17" value="SI" <%=frm.getFARMACO_12_c_17().contains("SI")?"checked":""%> disabled="disabled"  style="outline:<%=frm.getFARMACO_12_c_17().contains("SI")?"2px solid red;":""%>">&nbsp;SI&nbsp;<input type="radio" name="<portlet:namespace/>FARMACO_12_c_17" value="NO" <%=frm.getFARMACO_12_c_17().contains("NO")?"checked":""%>  disabled="disabled"  style="outline:<%=frm.getFARMACO_12_c_17().contains("NO")?"2px solid red;":""%>">&nbsp;NO&nbsp; </td></tr>
  </tbody></table> 
  </div> 
  <div class="col-md-7"> 
@@ -318,7 +321,7 @@ tr{ //text-align:center; font-family: Arial Unicode MS, Lucida Sans Unicode, san
  <div class="col-md-12">
   <br> 
   <div class="col-md-5"> 
- <table><tbody><tr><td>19. IL FARMACO Eâ?? STATO RIPRESO?&nbsp;&nbsp;&nbsp; </td><td> <input type="radio" name="<portlet:namespace/>FARMACO_12_c_19" value="SI" <%=frm.getFARMACO_12_c_19().contains("SI")?"checked":""%>  disabled="disabled"  style="outline:<%=frm.getFARMACO_12_c_19().contains("SI")?"2px solid red;":""%>">&nbsp;SI&nbsp;<input type="radio" name="<portlet:namespace/>FARMACO_12_c_19" value="NO" <%=frm.getFARMACO_12_c_19().contains("NO")?"checked":""%>  disabled="disabled"  style="outline:<%=frm.getFARMACO_12_c_19().contains("NO")?"2px solid red;":""%>">&nbsp;NO&nbsp; </td></tr>
+ <table><tbody><tr><td>19. IL FARMACO Eâ€™ STATO RIPRESO?&nbsp;&nbsp;&nbsp; </td><td> <input type="radio" name="<portlet:namespace/>FARMACO_12_c_19" value="SI" <%=frm.getFARMACO_12_c_19().contains("SI")?"checked":""%>  disabled="disabled"  style="outline:<%=frm.getFARMACO_12_c_19().contains("SI")?"2px solid red;":""%>">&nbsp;SI&nbsp;<input type="radio" name="<portlet:namespace/>FARMACO_12_c_19" value="NO" <%=frm.getFARMACO_12_c_19().contains("NO")?"checked":""%>  disabled="disabled"  style="outline:<%=frm.getFARMACO_12_c_19().contains("NO")?"2px solid red;":""%>">&nbsp;NO&nbsp; </td></tr>
  </tbody></table> 
  </div> 
  <div class="col-md-7"> 
@@ -326,7 +329,7 @@ tr{ //text-align:center; font-family: Arial Unicode MS, Lucida Sans Unicode, san
   </tbody></table> 
   </div> 
   </div> 
- <table><tbody><tr> <td>* Nel caso di vaccini specificare anche il numero di dosi e/o di richiamo, lâ??ora e il sito della somministrazione</td> </tr></tbody></table> </div> </div> 
+ <table><tbody><tr> <td>* Nel caso di vaccini specificare anche il numero di dosi e/o di richiamo, lâ€™ora e il sito della somministrazione</td> </tr></tbody></table> </div> </div> 
 
 
 <!-- eight --> 
@@ -334,7 +337,7 @@ tr{ //text-align:center; font-family: Arial Unicode MS, Lucida Sans Unicode, san
 <div class="col-md-12">
 <br> 
 <table width="100%"> <tbody>
-<tr> <td>21. INDICAZIONI O ALTRO MOTIVO PER CUI IL FARMACO Ã? STATO USATO (le lettere fanno riferimento ai farmaci indicati precedentemente)</td> </tr> <tr> <td> 
+<tr> <td>21. INDICAZIONI O ALTRO MOTIVO PER CUI IL FARMACO Ãˆ STATO USATO (le lettere fanno riferimento ai farmaci indicati precedentemente):</td> </tr> <tr> <td> 
 <table width="300px"> <tbody>
 <tr><td>A.</td><td><input class="form-control" style="background-color:#FFFACD;color:black" name="<portlet:namespace/>INDICAZIONI_21_a" readonly="readonly" value="<%=frm.getINDICAZIONI_21_a()%>"></td></tr> 
 <tr><td>B.</td><td><input class="form-control" style="background-color:#FFFACD;color:black" name="<portlet:namespace/>INDICAZIONI_21_b" readonly="readonly" value="<%=frm.getINDICAZIONI_21_b()%>"></td></tr> 
@@ -348,7 +351,7 @@ tr{ //text-align:center; font-family: Arial Unicode MS, Lucida Sans Unicode, san
 <div class="row border_cols "> 
 <div class="col-md-12"> 
 <br> 
-<table><tbody><tr><td>22. FARMACO/I SOSPETTO/I (indicare il nome della specialitÃ&nbsp; medicinale o del generico*). Riportare il numero di lotto per vaccini e medicinali biologici</td></tr></tbody></table>
+<table><tbody><tr><td>22. FARMACO/I CONCOMITANTE/I (indicare il nome della specialitÃ  medicinale o del generico*). Riportare il numero di lotto per vaccini e medicinali biologici</td></tr></tbody></table>
  <!-- A -->
  <div class="col-md-12"> 
  <br> 
@@ -385,7 +388,7 @@ tr{ //text-align:center; font-family: Arial Unicode MS, Lucida Sans Unicode, san
  <div class="col-md-12"> 
  <br> 
  <div class="col-md-5"> 
- <table><tbody><tr><td>27. IL FARMACO Eâ?? STATO SOSPESO?&nbsp;&nbsp;&nbsp; </td><td> <input type="radio" name="<portlet:namespace/>FARMACO_22_a_27" value="SI"  disabled="disabled"  style="outline:<%=frm.getFARMACO_22_a_27().contains("SI")?"2px solid red;":""%>" <%=frm.getFARMACO_22_a_27().contains("SI")?"checked":""%>>&nbsp;SI&nbsp;<input type="radio" name="<portlet:namespace/>FARMACO_22_a_27" value="NO" <%=frm.getFARMACO_22_a_27().contains("NO")?"checked":""%>  disabled="disabled"  style="outline:<%=frm.getFARMACO_22_a_27().contains("NO")?"2px solid red;":""%>">&nbsp;NO&nbsp;
+ <table><tbody><tr><td>27. IL FARMACO Eâ€™ STATO SOSPESO?&nbsp;&nbsp;&nbsp; </td><td> <input type="radio" name="<portlet:namespace/>FARMACO_22_a_27" value="SI"  disabled="disabled"  style="outline:<%=frm.getFARMACO_22_a_27().contains("SI")?"2px solid red;":""%>" <%=frm.getFARMACO_22_a_27().contains("SI")?"checked":""%>>&nbsp;SI&nbsp;<input type="radio" name="<portlet:namespace/>FARMACO_22_a_27" value="NO" <%=frm.getFARMACO_22_a_27().contains("NO")?"checked":""%>  disabled="disabled"  style="outline:<%=frm.getFARMACO_22_a_27().contains("NO")?"2px solid red;":""%>">&nbsp;NO&nbsp;
  <table><tbody><tr> <td></td><td> </td><td></td><td> </td></tr></tbody></table> </td></tr>
  </tbody></table> 
  </div> 
@@ -398,7 +401,7 @@ tr{ //text-align:center; font-family: Arial Unicode MS, Lucida Sans Unicode, san
  <div class="col-md-12"> 
  <br> 
  <div class="col-md-5"> 
- <table><tbody><tr><td>29. IL FARMACO Eâ?? STATO RIPRESO?&nbsp;&nbsp;&nbsp; </td><td> <input type="radio" name="<portlet:namespace/>FARMACO_22_a_29" value="SI"  disabled="disabled"  style="outline:<%=frm.getFARMACO_22_a_29().contains("SI")?"2px solid red;":""%>" <%=frm.getFARMACO_22_a_29().contains("SI")?"checked":""%>>&nbsp;SI&nbsp;<input type="radio" name="<portlet:namespace/>FARMACO_22_a_29" value="NO" <%=frm.getFARMACO_22_a_29().contains("NO")?"checked":""%>   disabled="disabled"  style="outline:<%=frm.getFARMACO_22_a_29().contains("NO")?"2px solid red;":""%>">&nbsp;NO&nbsp; </td></tr>
+ <table><tbody><tr><td>29. IL FARMACO Eâ€™ STATO RIPRESO?&nbsp;&nbsp;&nbsp; </td><td> <input type="radio" name="<portlet:namespace/>FARMACO_22_a_29" value="SI"  disabled="disabled"  style="outline:<%=frm.getFARMACO_22_a_29().contains("SI")?"2px solid red;":""%>" <%=frm.getFARMACO_22_a_29().contains("SI")?"checked":""%>>&nbsp;SI&nbsp;<input type="radio" name="<portlet:namespace/>FARMACO_22_a_29" value="NO" <%=frm.getFARMACO_22_a_29().contains("NO")?"checked":""%>   disabled="disabled"  style="outline:<%=frm.getFARMACO_22_a_29().contains("NO")?"2px solid red;":""%>">&nbsp;NO&nbsp; </td></tr>
  </tbody></table> 
  </div> 
  <div class="col-md-7"> 
@@ -437,7 +440,7 @@ tr{ //text-align:center; font-family: Arial Unicode MS, Lucida Sans Unicode, san
  <div class="col-md-12"> 
  <br> 
  <div class="col-md-5"> 
- <table><tbody><tr><td>27. IL FARMACO Eâ?? STATO SOSPESO?&nbsp;&nbsp;&nbsp; </td><td> <input type="radio" name="<portlet:namespace/>FARMACO_22_b_27" value="SI"   disabled="disabled"  style="outline:<%=frm.getFARMACO_22_b_27().contains("SI")?"2px solid red;":""%>" <%=frm.getFARMACO_22_b_27().contains("SI")?"checked":""%>>&nbsp;SI&nbsp;<input type="radio" name="<portlet:namespace/>FARMACO_22_b_27" value="NO" <%=frm.getFARMACO_22_b_27().contains("NO")?"checked":""%>    disabled="disabled"  style="outline:<%=frm.getFARMACO_22_b_27().contains("NO")?"2px solid red;":""%>" >&nbsp;NO&nbsp;
+ <table><tbody><tr><td>27. IL FARMACO Eâ€™ STATO SOSPESO?&nbsp;&nbsp;&nbsp; </td><td> <input type="radio" name="<portlet:namespace/>FARMACO_22_b_27" value="SI"   disabled="disabled"  style="outline:<%=frm.getFARMACO_22_b_27().contains("SI")?"2px solid red;":""%>" <%=frm.getFARMACO_22_b_27().contains("SI")?"checked":""%>>&nbsp;SI&nbsp;<input type="radio" name="<portlet:namespace/>FARMACO_22_b_27" value="NO" <%=frm.getFARMACO_22_b_27().contains("NO")?"checked":""%>    disabled="disabled"  style="outline:<%=frm.getFARMACO_22_b_27().contains("NO")?"2px solid red;":""%>" >&nbsp;NO&nbsp;
  <table><tbody><tr> <td></td><td> </td><td></td><td> </td></tr></tbody></table> </td></tr>
  </tbody></table> 
  </div> 
@@ -449,7 +452,7 @@ tr{ //text-align:center; font-family: Arial Unicode MS, Lucida Sans Unicode, san
   <div class="col-md-12"> 
   <br> 
   <div class="col-md-5"> 
- <table><tbody><tr><td>29. IL FARMACO Eâ?? STATO RIPRESO?&nbsp;&nbsp;&nbsp; </td><td> <input type="radio" name="<portlet:namespace/>FARMACO_22_b_29" value="SI" <%=frm.getFARMACO_22_b_29().contains("SI")?"checked":""%>    disabled="disabled"  style="outline:<%=frm.getFARMACO_22_b_29().contains("SI")?"2px solid red;":""%>" >&nbsp;SI&nbsp;<input type="radio" name="<portlet:namespace/>FARMACO_22_b_29" value="NO"   <%=frm.getFARMACO_22_b_29().contains("NO")?"checked":""%>  disabled="disabled"  style="outline:<%=frm.getFARMACO_22_b_29().contains("NO")?"2px solid red;":""%>">&nbsp;NO&nbsp;</td></tr>
+ <table><tbody><tr><td>29. IL FARMACO Eâ€™ STATO RIPRESO?&nbsp;&nbsp;&nbsp; </td><td> <input type="radio" name="<portlet:namespace/>FARMACO_22_b_29" value="SI" <%=frm.getFARMACO_22_b_29().contains("SI")?"checked":""%>    disabled="disabled"  style="outline:<%=frm.getFARMACO_22_b_29().contains("SI")?"2px solid red;":""%>" >&nbsp;SI&nbsp;<input type="radio" name="<portlet:namespace/>FARMACO_22_b_29" value="NO"   <%=frm.getFARMACO_22_b_29().contains("NO")?"checked":""%>  disabled="disabled"  style="outline:<%=frm.getFARMACO_22_b_29().contains("NO")?"2px solid red;":""%>">&nbsp;NO&nbsp;</td></tr>
  </tbody></table> 
  </div> 
  <div class="col-md-7"> 
@@ -457,7 +460,7 @@ tr{ //text-align:center; font-family: Arial Unicode MS, Lucida Sans Unicode, san
  </tbody></table> 
  </div> 
  </div> 
- <table><tbody><tr> <td>* Nel caso di vaccini specificare anche il numero di dosi e/o di richiamo, lâ??ora e il sito della somministrazione</td> </tr></tbody></table> 
+ <table><tbody><tr> <td>* Nel caso di vaccini specificare anche il numero di dosi e/o di richiamo, lâ€™ora e il sito della somministrazione</td> </tr></tbody></table> 
  </div> 
  </div> 
  
@@ -465,7 +468,7 @@ tr{ //text-align:center; font-family: Arial Unicode MS, Lucida Sans Unicode, san
  <div class="row border_cols"> 
  <div class="col-md-12"> 
  <br> 
- <table> <tbody><tr><td colspan="5">31. INDICAZIONI O ALTRO MOTIVO PER CUI IL FARMACO Ã? STATO USATO (le lettere fanno riferimento ai farmaci indicati qui sopra)</td></tr> <tr><td> A:</td><td><input class="form-control" style="background-color:#FFFACD;color:black" name="<portlet:namespace/>INDICAZIONI_31_a" readonly="readonly" value="<%=frm.getINDICAZIONI_31_a()%>"></td><td> B:</td><td><input class="form-control" style="background-color:#FFFACD;color:black" name="<portlet:namespace/>INDICAZIONI_31_b" readonly="readonly" value="<%=frm.getINDICAZIONI_31_b()%>"></td></tr>
+ <table> <tbody><tr><td colspan="5">31. INDICAZIONI O ALTRO MOTIVO PER CUI IL FARMACO Ãˆ STATO USATO (le lettere fanno riferimento ai farmaci indicati qui sopra):</td></tr> <tr><td> A:</td><td><input class="form-control" style="background-color:#FFFACD;color:black" name="<portlet:namespace/>INDICAZIONI_31_a" readonly="readonly" value="<%=frm.getINDICAZIONI_31_a()%>"></td><td> B:</td><td><input class="form-control" style="background-color:#FFFACD;color:black" name="<portlet:namespace/>INDICAZIONI_31_b" readonly="readonly" value="<%=frm.getINDICAZIONI_31_b()%>"></td></tr>
 </tbody></table>
  </div> 
  </div> 
@@ -474,7 +477,7 @@ tr{ //text-align:center; font-family: Arial Unicode MS, Lucida Sans Unicode, san
  <div class="col-md-12"> 
  <br> 
  <table width="100%"> 
- <tbody><tr><td>32. USO CONCOMITANTE DI ALTRI PRODOTTI A BASE DI PIANTE OFFICINALI, INTEGRATORI ALIMENTARI, ecc. (specificare)</td></tr> 
+ <tbody><tr><td>32. USO CONCOMITANTE DI ALTRI PRODOTTI A BASE DI PIANTE OFFICINALI, INTEGRATORI ALIMENTARI, ecc. (specificare):</td></tr> 
  <tr> <td> <textarea style="background-color:#FFFACD;color:black" class="form-control" rows="5" name="<portlet:namespace/>USO_32" readonly="readonly"><%=frm.getUSO_32() %></textarea> </td> </tr> 
  </tbody></table> 
  </div> 
@@ -513,7 +516,7 @@ tr{ //text-align:center; font-family: Arial Unicode MS, Lucida Sans Unicode, san
  <div class="row border_cols"> 
  <div class="col-md-12"> 
  <table width="100%"> 
- <tbody><tr> <td>35. INDICARE SE LA REAZIONE E' STATA OSSERVATA NELL'AMBITO DI</td> <td><input type="checkbox" name="<portlet:namespace/>INDICARE_35_1" value="Progetto di Farmacovigilanza Attiva" <%=frm.getINDICARE_35_1().equalsIgnoreCase("")?"":"checked"%> disabled="disabled"  style="outline:<%=frm.getINDICARE_35_1().equalsIgnoreCase("")?"":"2px solid red;"%>" >Progetto di Farmacovigilanza Attiva</td> <td><input type="checkbox" name="<portlet:namespace/>INDICARE_35_2" value="Registro Farmaci" <%=frm.getINDICARE_35_2().equalsIgnoreCase("")?"":"checked"%>  disabled="disabled"  style="outline:<%=frm.getINDICARE_35_2().equalsIgnoreCase("")?"":"2px solid red;"%>">Registro Farmaci</td> </tr> 
+ <tbody><tr> <td>35. INDICARE SE LA REAZIONE E' STATA OSSERVATA NELL'AMBITO DI:</td> <td><input type="checkbox" name="<portlet:namespace/>INDICARE_35_1" value="Progetto di Farmacovigilanza Attiva" <%=frm.getINDICARE_35_1().equalsIgnoreCase("")?"":"checked"%> disabled="disabled"  style="outline:<%=frm.getINDICARE_35_1().equalsIgnoreCase("")?"":"2px solid red;"%>" >Progetto di Farmacovigilanza Attiva</td> <td><input type="checkbox" name="<portlet:namespace/>INDICARE_35_2" value="Registro Farmaci" <%=frm.getINDICARE_35_2().equalsIgnoreCase("")?"":"checked"%>  disabled="disabled"  style="outline:<%=frm.getINDICARE_35_2().equalsIgnoreCase("")?"":"2px solid red;"%>">Registro Farmaci</td> </tr> 
  <tr> <td> <table><tbody><tr><td><input type="checkbox" name="<portlet:namespace/>INDICARE_35_3" value="Studio Osservazionale" <%=frm.getINDICARE_35_3().equalsIgnoreCase("")?"":"checked"%>  disabled="disabled"  style="outline:<%=frm.getINDICARE_35_3().equalsIgnoreCase("")?"":"2px solid red;"%>"> Studio Osservazionale, specificare: titolo studio&nbsp;&nbsp;&nbsp;</td><td><input class="form-control" style="background-color:#FFFACD;color:black" name="<portlet:namespace/>INDICARE_35_4" readonly="readonly" value="<%=frm.getINDICARE_35_4()%>"></td></tr>
  </tbody></table>
  </td><td>

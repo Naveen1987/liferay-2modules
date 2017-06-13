@@ -1,10 +1,13 @@
 <%@page import="com.daffo.prontuario_drugservice.service.prontuario_drugLocalServiceUtil"%>
 <%@ include file="/init.jsp" %>
+<%--Message area --%>
+<liferay-ui:success key="success" message="Successfully Submitted"/>
+
 <portlet:actionURL name="formSubmit_drug" var="formSubmit">
-<%--<portlet:param name="mvcPath" value="/views/selEmployee.jsp"/> --%>
+<portlet:param name="mvcPath" value="/drug_add.jsp"/> 
 </portlet:actionURL>
 <aui:form name="fm" id="fm" action="${formSubmit}">  
-<div class="container">
+<div class="container-fluid-1280">
 <!-- First Row --> 
 <div class="row">
 <div class="col-md-12 ">
@@ -77,7 +80,8 @@ function showAddNoteDialog(){
            headerContent: '<h3><label for="formsofinteraction"><liferay-ui:message key="Confirmation Box"/></label></h3>',
            modal: true,
            render: '#modal',
-           width: 500
+           width:300,
+           height:200
          }
        ).render();
         modal.addToolbar(
@@ -98,18 +102,17 @@ function showAddNoteDialog(){
                       var flag=true;
                       var all_select = document.getElementsByTagName("select");
                       for (i = 0; i < all_select.length; i++) {
-                    	  if(all_select[i].value=='-Select Item-')
+                    	  if(all_select[i].value=='-1')
                     		  {
-                    		  all_select[i].style.backgroundColor = "red";
+                    		  all_select[i].style.backgroundColor = "yellow";
                     		  flag=false;
                     		  }
                       }
                       var inputs = document.getElementsByTagName('input');
-                    
                       for(var i = 0; i < inputs.length; i++) {
                           if(inputs[i].type.toLowerCase() == 'text') {
                         	  if(inputs[i].value==''){
-                        		  inputs[i].style.backgroundColor = "red";
+                        		  inputs[i].style.backgroundColor = "yellow";
                             	  inputs[i].placeholder="Input me";
                             	  inputs[i].focus();
                             	  flag=false;
@@ -147,6 +150,7 @@ function showAddNoteDialog(){
 						
                       if(flag==true){
                     	document.getElementById("<portlet:namespace/>fm").submit();
+                    	//Liferay.Util.getOpener().<portlet:namespace/>windowRefresh();
 						}
                      }
                    }
@@ -155,6 +159,5 @@ function showAddNoteDialog(){
        );
      }
    );
-    }
-    
+ }
 </script>

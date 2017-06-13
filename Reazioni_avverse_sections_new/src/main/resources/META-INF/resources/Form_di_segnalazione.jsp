@@ -1,3 +1,6 @@
+<%@ page contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+
 <%@ include file="/init.jsp" %>
 
 <portlet:actionURL name="formSubmit" var="formSubmit">
@@ -107,7 +110,7 @@ function show(){
 <tr><td></td><
 <td> SCHEDA UNICA DI SEGNALAZIONE DI SOSPETTA REAZIONE AVVERSA (ADR)<br/> 
 <span style="font-size:11px"> A cura dei medici e degli altri operatori sanitari. Inviare al responsabile di farmacovigilanza della struttura di appartenenza<br> (
-gli indirizzi dei responsabili possono essere recuperati nel sito dellâ??AIFA: www.agenziafarmaco.it/it/responsabili) </span> </td><td></td></tr></table> --> 
+gli indirizzi dei responsabili possono essere recuperati nel sito dellÃ¢??AIFA: www.agenziafarmaco.it/it/responsabili) </span> </td><td></td></tr></table> --> 
 <img src="<%=request.getContextPath() %>/images/formImg_2_1500x.png" width="100%"> 
 </div> 
 </div> 
@@ -122,8 +125,8 @@ gli indirizzi dei responsabili possono essere recuperati nel sito dellâ??AIFA: w
 </td></tr></tbody></table> 
 </div> 
 <div class="col-md-2"> 
-<table><tbody><tr><td>2. DATA di NASCITA o ETÃ?</td></tr>
-<tr><td> <input class="form-control" style="background-color: #eee" name="<portlet:namespace/>DATA_2" id="DATA_2" placeholder="dd/mm/yyyy"> </td></tr></tbody></table> 
+<table><tbody><tr><td>2. DATA di NASCITA o ETÃ€</td></tr>
+<tr><td><br/> <input class="form-control" style="background-color: #eee" name="<portlet:namespace/>DATA_2" id="DATA_2" placeholder="dd/mm/yyyy"> </td></tr></tbody></table> 
 </div> 
 <div class="col-md-2"> 
 <table width="100%"><tbody><tr><td>3. SESSO <br>&nbsp;</td></tr><tr><td><table><tbody><tr><td> <input type="radio" name="<portlet:namespace/>SESSO_3" value="M"> M</td> <td>&nbsp;<input type="radio" name="<portlet:namespace/>SESSO_3" value="F"> F </td></tr></tbody></table> </td></tr></tbody></table> 
@@ -155,7 +158,7 @@ gli indirizzi dei responsabili possono essere recuperati nel sito dellâ??AIFA: w
 <input type="radio" name="<portlet:namespace/>INIZIALI_1_d" value="sconosciuta">sconosciuta </td> </tr>
 <tr><td colspan="3"> 
 <table><tbody><tr><td> 
-<input type="radio" name="<portlet:namespace/>INIZIALI_1_d" value="1Â° trimestre"> 1Â° trimestre </td><td> &nbsp;<input type="radio" name="<portlet:namespace/>INIZIALI_1_d" value="2Â° trimestre"> 2Â° trimestre </td> <td> &nbsp;<input type="radio" name="<portlet:namespace/>INIZIALI_1_d" value="3Â° trimestre"> 3Â° trimestre </td> </tr></tbody></table> 
+<input type="radio" name="<portlet:namespace/>INIZIALI_1_d" value="1Â° trimestre"> 1Â° trimestre  </td><td> &nbsp;<input type="radio" name="<portlet:namespace/>INIZIALI_1_d" value="2Â° trimestre"> 2Â° trimestre  </td> <td> &nbsp;<input type="radio" name="<portlet:namespace/>INIZIALI_1_d" value="3Â° trimestre"> 3Â° trimestre  </td> </tr></tbody></table> 
 </td></tr>
 </tbody>
 </table> 
@@ -222,7 +225,7 @@ gli indirizzi dei responsabili possono essere recuperati nel sito dellâ??AIFA: w
 <tr> 
 <td style="text-align:right"> 
 <textarea style="background-color: #eee" class="form-control" rows="4" name="<portlet:namespace/>AZIONI_11"></textarea> 
-<br> In caso di sospensione compilare i campi da </td> </tr> </tbody>
+<br> In caso di sospensione compilare i campi da 17 a 20 </td> </tr> </tbody>
 </table> 
 </td> </tr> </tbody>
 </table> 
@@ -259,7 +262,7 @@ gli indirizzi dei responsabili possono essere recuperati nel sito dellâ??AIFA: w
 <div class="row border_cols"> 
 <br> 
 <div class="col-md-12"> 
-<table><tbody><tr><td>12. FARMACO/I SOSPETTO/I (indicare il nome della specialitÃ&nbsp; medicinale o del generico*). Riportare il numero di lotto per vaccini e medicinali biologici</td></tr>
+<table><tbody><tr><td>12. FARMACO/I SOSPETTO/I (indicare il nome della specialitÃ  medicinale o del generico*). Riportare il numero di lotto per vaccini e medicinali biologici</td></tr>
 </tbody></table> 
 <!-- A --> 
 <div class="col-md-12"> 
@@ -295,7 +298,7 @@ gli indirizzi dei responsabili possono essere recuperati nel sito dellâ??AIFA: w
 <br> 
 <div class="col-md-5"> 
 <table><tbody>
-<tr><td>17. IL FARMACO Eâ?? STATO SOSPESO?&nbsp;&nbsp;&nbsp; </td><td> <input type="radio" name="<portlet:namespace/>FARMACO_12_a_17" value="SI">&nbsp;SI&nbsp;<input type="radio" name="<portlet:namespace/>FARMACO_12_a_17" value="NO">&nbsp;NO&nbsp;
+<tr><td>17. IL FARMACO Eâ€™ STATO SOSPESO?&nbsp;&nbsp;&nbsp; </td><td> <input type="radio" name="<portlet:namespace/>FARMACO_12_a_17" value="SI">&nbsp;SI&nbsp;<input type="radio" name="<portlet:namespace/>FARMACO_12_a_17" value="NO">&nbsp;NO&nbsp;
 </td></tr></tbody></table> </div>  
 <div class="col-md-7"> 
 <table><tbody><tr><td> 18. LA REAZIONE E' MIGLIORATA DOPO LA SOSPENSIONE? &nbsp;&nbsp;&nbsp; </td><td> <input type="radio" name="<portlet:namespace/>FARMACO_12_a_18" value="SI">&nbsp;SI&nbsp;<input type="radio" name="<portlet:namespace/>FARMACO_12_a_18" value="NO">&nbsp;NO&nbsp;
@@ -303,7 +306,7 @@ gli indirizzi dei responsabili possono essere recuperati nel sito dellâ??AIFA: w
 </div> 
 <div class="col-md-12"> <br> 
 <div class="col-md-5"> 
-<table><tbody><tr><td>19. IL FARMACO Eâ?? STATO RIPRESO?&nbsp;&nbsp;&nbsp; </td><td> <input type="radio" name="<portlet:namespace/>FARMACO_12_a_19" value="SI">&nbsp;SI&nbsp;<input type="radio" name="<portlet:namespace/>FARMACO_12_a_19" value="NO">&nbsp;NO&nbsp; </td></tr>
+<table><tbody><tr><td>19. IL FARMACO Eâ€™ STATO RIPRESO?&nbsp;&nbsp;&nbsp; </td><td> <input type="radio" name="<portlet:namespace/>FARMACO_12_a_19" value="SI">&nbsp;SI&nbsp;<input type="radio" name="<portlet:namespace/>FARMACO_12_a_19" value="NO">&nbsp;NO&nbsp; </td></tr>
 </tbody></table> 
 </div> 
 <div class="col-md-7"> 
@@ -344,7 +347,7 @@ gli indirizzi dei responsabili possono essere recuperati nel sito dellâ??AIFA: w
 <div class="col-md-12">
  <br> 
 <div class="col-md-5"> 
-<table><tbody><tr><td>17. IL FARMACO Eâ?? STATO SOSPESO?&nbsp;&nbsp;&nbsp; </td><td> <input type="radio" name="<portlet:namespace/>FARMACO_12_b_17" value="SI"/>&nbsp;SI&nbsp;<input type="radio" name="<portlet:namespace/>FARMACO_12_b_17" value="NO"/>&nbsp;NO&nbsp;</td></tr>
+<table><tbody><tr><td>17. IL FARMACO Eâ€™ STATO SOSPESO?&nbsp;&nbsp;&nbsp; </td><td> <input type="radio" name="<portlet:namespace/>FARMACO_12_b_17" value="SI"/>&nbsp;SI&nbsp;<input type="radio" name="<portlet:namespace/>FARMACO_12_b_17" value="NO"/>&nbsp;NO&nbsp;</td></tr>
 </tbody></table> 
 </div> 
 <div class="col-md-7"> 
@@ -355,7 +358,7 @@ gli indirizzi dei responsabili possono essere recuperati nel sito dellâ??AIFA: w
 <div class="col-md-12"> 
 <br> 
 <div class="col-md-5"> 
-<table><tbody><tr><td>19. IL FARMACO Eâ?? STATO RIPRESO?&nbsp;&nbsp;&nbsp; </td><td> <input type="radio" name="<portlet:namespace/>FARMACO_12_b_19" value="SI">&nbsp;SI&nbsp;<input type="radio" name="<portlet:namespace/>FARMACO_12_b_19" value="NO">&nbsp;NO&nbsp; </td></tr>
+<table><tbody><tr><td>19. IL FARMACO Eâ€™ STATO RIPRESO?&nbsp;&nbsp;&nbsp; </td><td> <input type="radio" name="<portlet:namespace/>FARMACO_12_b_19" value="SI">&nbsp;SI&nbsp;<input type="radio" name="<portlet:namespace/>FARMACO_12_b_19" value="NO">&nbsp;NO&nbsp; </td></tr>
 </tbody></table>
 </div> 
 <div class="col-md-7"> 
@@ -399,7 +402,7 @@ gli indirizzi dei responsabili possono essere recuperati nel sito dellâ??AIFA: w
  <div class="col-md-12"> 
  <br> 
  <div class="col-md-5">
- <table><tbody><tr><td>17. IL FARMACO Eâ?? STATO SOSPESO?&nbsp;&nbsp;&nbsp; </td><td> <input type="radio" name="<portlet:namespace/>FARMACO_12_c_17" value="SI">&nbsp;SI&nbsp;<input type="radio" name="<portlet:namespace/>FARMACO_12_c_17" value="NO">&nbsp;NO&nbsp; </td></tr>
+ <table><tbody><tr><td>17. IL FARMACO Eâ€™ STATO SOSPESO?&nbsp;&nbsp;&nbsp; </td><td> <input type="radio" name="<portlet:namespace/>FARMACO_12_c_17" value="SI">&nbsp;SI&nbsp;<input type="radio" name="<portlet:namespace/>FARMACO_12_c_17" value="NO">&nbsp;NO&nbsp; </td></tr>
  </tbody></table> 
  </div> 
  <div class="col-md-7"> 
@@ -410,7 +413,7 @@ gli indirizzi dei responsabili possono essere recuperati nel sito dellâ??AIFA: w
  <div class="col-md-12">
   <br> 
   <div class="col-md-5"> 
- <table><tbody><tr><td>19. IL FARMACO Eâ?? STATO RIPRESO?&nbsp;&nbsp;&nbsp; </td><td> <input type="radio" name="<portlet:namespace/>FARMACO_12_c_19" value="SI">&nbsp;SI&nbsp;<input type="radio" name="<portlet:namespace/>FARMACO_12_c_19" value="NO">&nbsp;NO&nbsp; </td></tr>
+ <table><tbody><tr><td>19. IL FARMACO Eâ€™ STATO RIPRESO?&nbsp;&nbsp;&nbsp; </td><td> <input type="radio" name="<portlet:namespace/>FARMACO_12_c_19" value="SI">&nbsp;SI&nbsp;<input type="radio" name="<portlet:namespace/>FARMACO_12_c_19" value="NO">&nbsp;NO&nbsp; </td></tr>
  </tbody></table> 
  </div> 
  <div class="col-md-7"> 
@@ -418,7 +421,7 @@ gli indirizzi dei responsabili possono essere recuperati nel sito dellâ??AIFA: w
   </tbody></table> 
   </div> 
   </div> 
- <table><tbody><tr> <td>* Nel caso di vaccini specificare anche il numero di dosi e/o di richiamo, lâ??ora e il sito della somministrazione</td> </tr></tbody></table> </div> </div> 
+ <table><tbody><tr> <td>* Nel caso di vaccini specificare anche il numero di dosi e/o di richiamo, lâ€™ora e il sito della somministrazione</td> </tr></tbody></table> </div> </div> 
 
 
 <!-- eight --> 
@@ -426,7 +429,7 @@ gli indirizzi dei responsabili possono essere recuperati nel sito dellâ??AIFA: w
 <div class="col-md-12">
 <br> 
 <table width="100%"> <tbody>
-<tr> <td>21. INDICAZIONI O ALTRO MOTIVO PER CUI IL FARMACO Ã? STATO USATO (le lettere fanno riferimento ai farmaci indicati precedentemente)</td> </tr> <tr> <td> 
+<tr> <td>21. INDICAZIONI O ALTRO MOTIVO PER CUI IL FARMACO Ãˆ STATO USATO (le lettere fanno riferimento ai farmaci indicati precedentemente)</td> </tr> <tr> <td> 
 <table width="300px"> <tbody>
 <tr><td>A.</td><td><input class="form-control" style="background-color: #eee" name="<portlet:namespace/>INDICAZIONI_21_a"></td></tr> 
 <tr><td>B.</td><td><input class="form-control" style="background-color: #eee" name="<portlet:namespace/>INDICAZIONI_21_b"></td></tr> 
@@ -440,7 +443,7 @@ gli indirizzi dei responsabili possono essere recuperati nel sito dellâ??AIFA: w
 <div class="row border_cols "> 
 <div class="col-md-12"> 
 <br> 
-<table><tbody><tr><td>22. FARMACO/I SOSPETTO/I (indicare il nome della specialitÃ&nbsp; medicinale o del generico*). Riportare il numero di lotto per vaccini e medicinali biologici</td></tr></tbody></table>
+<table><tbody><tr><td>22. FARMACO/I CONCOMITANTE/I (indicare il nome della specialitÃ  medicinale o del generico*). Riportare il numero di lotto per vaccini e medicinali biologici</td></tr></tbody></table>
  <!-- A -->
  <div class="col-md-12"> 
  <br> 
@@ -477,7 +480,7 @@ gli indirizzi dei responsabili possono essere recuperati nel sito dellâ??AIFA: w
  <div class="col-md-12"> 
  <br> 
  <div class="col-md-5"> 
- <table><tbody><tr><td>27. IL FARMACO Eâ?? STATO SOSPESO?&nbsp;&nbsp;&nbsp; </td><td> <input type="radio" name="<portlet:namespace/>FARMACO_22_a_27" value="SI">&nbsp;SI&nbsp;<input type="radio" name="<portlet:namespace/>FARMACO_22_a_27" value="NO">&nbsp;NO&nbsp;
+ <table><tbody><tr><td>27. IL FARMACO Eâ€™ STATO SOSPESO?&nbsp;&nbsp;&nbsp; </td><td> <input type="radio" name="<portlet:namespace/>FARMACO_22_a_27" value="SI">&nbsp;SI&nbsp;<input type="radio" name="<portlet:namespace/>FARMACO_22_a_27" value="NO">&nbsp;NO&nbsp;
  <table><tbody><tr> <td></td><td> </td><td></td><td> </td></tr></tbody></table> </td></tr>
  </tbody></table> 
  </div> 
@@ -490,7 +493,7 @@ gli indirizzi dei responsabili possono essere recuperati nel sito dellâ??AIFA: w
  <div class="col-md-12"> 
  <br> 
  <div class="col-md-5"> 
- <table><tbody><tr><td>29. IL FARMACO Eâ?? STATO RIPRESO?&nbsp;&nbsp;&nbsp; </td><td> <input type="radio" name="<portlet:namespace/>FARMACO_22_a_29" value="SI">&nbsp;SI&nbsp;<input type="radio" name="<portlet:namespace/>FARMACO_22_a_29" value="NO">&nbsp;NO&nbsp; </td></tr>
+ <table><tbody><tr><td>29. IL FARMACO Eâ€™ STATO RIPRESO?&nbsp;&nbsp;&nbsp; </td><td> <input type="radio" name="<portlet:namespace/>FARMACO_22_a_29" value="SI">&nbsp;SI&nbsp;<input type="radio" name="<portlet:namespace/>FARMACO_22_a_29" value="NO">&nbsp;NO&nbsp; </td></tr>
  </tbody></table> 
  </div> 
  <div class="col-md-7"> 
@@ -529,7 +532,7 @@ gli indirizzi dei responsabili possono essere recuperati nel sito dellâ??AIFA: w
  <div class="col-md-12"> 
  <br> 
  <div class="col-md-5"> 
- <table><tbody><tr><td>27. IL FARMACO Eâ?? STATO SOSPESO?&nbsp;&nbsp;&nbsp; </td><td> <input type="radio" name="<portlet:namespace/>FARMACO_22_b_27" value="SI">&nbsp;SI&nbsp;<input type="radio" name="<portlet:namespace/>FARMACO_22_b_27" value="NO">&nbsp;NO&nbsp;
+ <table><tbody><tr><td>27. IL FARMACO Eâ€™ STATO SOSPESO? &nbsp;&nbsp;&nbsp; </td><td> <input type="radio" name="<portlet:namespace/>FARMACO_22_b_27" value="SI">&nbsp;SI&nbsp;<input type="radio" name="<portlet:namespace/>FARMACO_22_b_27" value="NO">&nbsp;NO&nbsp;
  <table><tbody><tr> <td></td><td> </td><td></td><td> </td></tr></tbody></table> </td></tr>
  </tbody></table> 
  </div> 
@@ -541,7 +544,7 @@ gli indirizzi dei responsabili possono essere recuperati nel sito dellâ??AIFA: w
   <div class="col-md-12"> 
   <br> 
   <div class="col-md-5"> 
- <table><tbody><tr><td>29. IL FARMACO Eâ?? STATO RIPRESO?&nbsp;&nbsp;&nbsp; </td><td> <input type="radio" name="<portlet:namespace/>FARMACO_22_b_29" value="SI">&nbsp;SI&nbsp;<input type="radio" name="<portlet:namespace/>FARMACO_22_b_29" value="NO">&nbsp;NO&nbsp;</td></tr>
+ <table><tbody><tr><td>IL FARMACO Eâ€™ STATO RIPRESO?&nbsp;&nbsp;&nbsp; </td><td> <input type="radio" name="<portlet:namespace/>FARMACO_22_b_29" value="SI">&nbsp;SI&nbsp;<input type="radio" name="<portlet:namespace/>FARMACO_22_b_29" value="NO">&nbsp;NO&nbsp;</td></tr>
  </tbody></table> 
  </div> 
  <div class="col-md-7"> 
@@ -549,7 +552,7 @@ gli indirizzi dei responsabili possono essere recuperati nel sito dellâ??AIFA: w
  </tbody></table> 
  </div> 
  </div> 
- <table><tbody><tr> <td>* Nel caso di vaccini specificare anche il numero di dosi e/o di richiamo, lâ??ora e il sito della somministrazione</td> </tr></tbody></table> 
+ <table><tbody><tr> <td>* Nel caso di vaccini specificare anche il numero di dosi e/o di richiamo, lâ€™ora e il sito della somministrazione</td> </tr></tbody></table> 
  </div> 
  </div> 
  
@@ -557,7 +560,7 @@ gli indirizzi dei responsabili possono essere recuperati nel sito dellâ??AIFA: w
  <div class="row border_cols"> 
  <div class="col-md-12"> 
  <br> 
- <table> <tbody><tr><td colspan="5">31. INDICAZIONI O ALTRO MOTIVO PER CUI IL FARMACO Ã? STATO USATO (le lettere fanno riferimento ai farmaci indicati qui sopra)</td></tr> <tr><td> A:</td><td><input class="form-control" style="background-color: #eee" name="<portlet:namespace/>INDICAZIONI_31_a"></td><td> B:</td><td><input class="form-control" style="background-color: #eee" name="<portlet:namespace/>INDICAZIONI_31_b"></td></tr>
+ <table> <tbody><tr><td colspan="5">31. INDICAZIONI O ALTRO MOTIVO PER CUI IL FARMACO Ãˆ STATO USATO (le lettere fanno riferimento ai farmaci indicati qui sopra):</td></tr> <tr><td> A:</td><td><input class="form-control" style="background-color: #eee" name="<portlet:namespace/>INDICAZIONI_31_a"></td><td> B:</td><td><input class="form-control" style="background-color: #eee" name="<portlet:namespace/>INDICAZIONI_31_b"></td></tr>
 </tbody></table>
  </div> 
  </div> 

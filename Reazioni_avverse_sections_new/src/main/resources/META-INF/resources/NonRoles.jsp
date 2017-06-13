@@ -40,7 +40,7 @@
 </portlet:actionURL>
 <%--<liferay-ui:success key="success" message="Record saved successfully!"/> --%>
 
-<div  class="container">
+<div  class="container-fluid-1280">
 <div class="row">
 <div class="cd-md-12">
 <ul class="ul">

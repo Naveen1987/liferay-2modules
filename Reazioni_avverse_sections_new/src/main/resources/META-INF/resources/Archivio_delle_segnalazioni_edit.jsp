@@ -73,7 +73,7 @@ $(document).ready(function() {
     <%--<th><b>#</b></th> --%>
     <th><b>CODICE SEGNALAZIONE</b></th>
     <th><b>INIZIALI PAZIENTE</b></th>
-    <th><b>DATA di NASCITA o ETÃ?</b></th>
+    <th><b>DATA di NASCITA o ETÀ</b></th>
     <th><b>SESSO</b></th>
     <th><b>DATA INSORGENZA REAZIONE</b></th>
     <th><b>Action</b></th>
