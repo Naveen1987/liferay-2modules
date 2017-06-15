@@ -12,7 +12,7 @@ prontuario_drug pd=prontuario_drugLocalServiceUtil.getprontuario_drug(new Long(d
 <liferay-ui:success key="success" message="Successfully Updated"/>
 
 <portlet:actionURL name="editSubmit_drug" var="formSubmit">
-<portlet:param name="mvcPath" value="/drug_add.jsp"/> 
+<portlet:param name="mvcPath" value="/drug_edit.jsp"/> 
 </portlet:actionURL>
 <aui:form name="fm" id="fm" action="${formSubmit}">  
 <input type="hidden" value="<%=pd.getDrug_id()%>" name="<portlet:namespace/>drug_id"/>

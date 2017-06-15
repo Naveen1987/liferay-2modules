@@ -32,7 +32,7 @@ tr{ //text-align:center; font-family: Arial Unicode MS, Lucida Sans Unicode, san
 </div> 
 <div class="col-md-2"> 
 <table><tbody><tr><td>2. DATA di NASCITA o ETÀ</td></tr>
-<tr><td><br/> <input class="form-control" style="background-color:#FFFACD;color:black" name="<portlet:namespace/>DATA_2" id="DATA_2" placeholder="dd/mm/yyyy" readonly="readonly" value="<%=frm.getDATA_2()%>"> </td></tr></tbody></table> 
+<tr><td> <input class="form-control" style="background-color:#FFFACD;color:black" name="<portlet:namespace/>DATA_2" id="DATA_2" placeholder="dd/mm/yyyy" readonly="readonly" value="<%=frm.getDATA_2()%>"> </td></tr></tbody></table> 
 </div> 
 <div class="col-md-2">  
 <table width="100%"><tbody><tr><td>3. SESSO <br>&nbsp;</td></tr><tr><td><table><tbody><tr><td> <input type="radio" name="<portlet:namespace/>SESSO_3" value="M" style="outline:<%=frm.getSESSO_3().contains("M")?"2px solid red;":""%>" <%=frm.getSESSO_3().contains("M")?"checked":""%> disabled > M</td> <td>&nbsp;<input type="radio"  name="<portlet:namespace/>SESSO_3" value="F" style="outline:<%=frm.getSESSO_3().contains("F")?"2px solid red;":""%>" <%=frm.getSESSO_3().contains("F")?"checked":""%> disabled > F </td></tr></tbody></table> </td></tr></tbody></table>
