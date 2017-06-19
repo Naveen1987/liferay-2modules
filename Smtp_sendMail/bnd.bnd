@@ -1,0 +1,3 @@
+Bundle-Name: Smtp_sendMail
+Bundle-SymbolicName: com.daffo.Smtp_sendMail
+Bundle-Version: 1.0.0

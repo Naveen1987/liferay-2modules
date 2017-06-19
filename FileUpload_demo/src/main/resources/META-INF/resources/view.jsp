@@ -12,3 +12,4 @@
 <input type="Submit" name="Submit"> 
 </form> 
 <a href="<%=downloadURL%>">Download Files</a>
+<jsp:include page="/Particuler.jsp"></jsp:include>

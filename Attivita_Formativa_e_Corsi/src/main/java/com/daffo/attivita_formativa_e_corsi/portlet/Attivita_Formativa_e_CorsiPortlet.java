@@ -1,10 +1,13 @@
 package com.daffo.attivita_formativa_e_corsi.portlet;
 
+
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCPortlet;
+import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.upload.UploadPortletRequest;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.PortalUtil;
+import com.liferay.portal.kernel.util.WebKeys;
 
 import java.io.IOException;
 
@@ -34,6 +37,7 @@ import org.osgi.service.component.annotations.Component;
 	service = Portlet.class
 )
 public class Attivita_Formativa_e_CorsiPortlet extends MVCPortlet {
+	private FileUpload_ServiceClass fus=new FileUpload_ServiceClass();
 	@ProcessAction(name="formSubmit")
 	 public void formSubmit(ActionRequest actionRequest, ActionResponse actionResponse)
 	   throws IOException, PortletException, PortalException {
@@ -56,10 +60,26 @@ public class Attivita_Formativa_e_CorsiPortlet extends MVCPortlet {
 		System.out.println("Ammessi_al_corso-"+ParamUtil.getString(actionRequest, "Ammessi_al_corso"));
 		System.out.println("Visibile-"+ParamUtil.getString(actionRequest, "Visibile_data"));
 		System.out.println("Bloccato-"+ParamUtil.getString(actionRequest, "Bloccato_data"));
-		System.out.println("Dispensa_corso-"+ParamUtil.getString(actionRequest, "Dispensa_corso"));
-		UploadPortletRequest uploadRequest = PortalUtil.getUploadPortletRequest(actionRequest);
-		long sizeInBytes = uploadRequest.getSize("One");
-		System.out.println(sizeInBytes);
+		//System.out.println("Dispensa_corso-"+ParamUtil.getString(actionRequest, "Dispensa_corso"));
+		ThemeDisplay themeDisplay = (ThemeDisplay) actionRequest.getAttribute(WebKeys.THEME_DISPLAY);
+		fus.createFolder(actionRequest, themeDisplay);
+		/*
+		 There are three parameter
+		 1. themeDisplay
+		 2. actionRequest
+		 3. Name of type=file control name
+		 */
+		String fileName=fus.fileUpload(themeDisplay, actionRequest,"Dispensa_corso");
+		if(!fileName.isEmpty())
+		{
+			
+				System.out.println(fileName);
+				System.out.println(fus.getFileLink(themeDisplay, fileName));	
+		
+		}
+		else{
+			System.out.println(" File Is Exists");
+		}
 		
 	}
 
