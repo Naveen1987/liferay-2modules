@@ -13,7 +13,12 @@
 <%@page import="com.daffo.suilupposervice.model.suiluppo_application"%>
 <%@page import="com.daffo.suilupposervice.service.suiluppo_courseLocalServiceUtil"%>
 <%@ include file="/init.jsp" %>
-<%@include file="/AddCourse.jsp" %>
+
+
+
+
+<%-- <%@include file="/AddCourse.jsp" %> --%>
+<%@include file="/listCourse.jsp" %>
 
 <%--
 <%=suiluppo_courseLocalServiceUtil.getsuiluppo_course(1)%>

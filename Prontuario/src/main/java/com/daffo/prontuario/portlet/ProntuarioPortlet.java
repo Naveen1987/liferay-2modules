@@ -61,6 +61,7 @@ public class ProntuarioPortlet extends MVCPortlet {
 		pd.setPrincipio_Attivo(ParamUtil.getString(actionRequest, "Principio_Attivo"));
 		pd.setNome_Commerciale(ParamUtil.getString(actionRequest, "Nome_Commerciale"));
 		prontuario_drugLocalServiceUtil.updateprontuario_drug(pd);
+		actionRequest.setAttribute("data", pd.getDrug_id());
 		SessionMessages.add(actionRequest, "success");
 		
 	}

@@ -80,20 +80,33 @@ public class FileUpload_ServiceClass {
 	
 		public String fileUpload(ThemeDisplay themeDisplay,ActionRequest actionRequest,String fieldName) throws PortalException
 		{
+			
 			_logger.info("Uploading in prograess.............");
-			String mili=new Date().getDate()+"_"+new Date().getTime();
-			System.out.println(mili);
 			UploadPortletRequest uploadPortletRequest = PortalUtil.getUploadPortletRequest(actionRequest);
-			String fileName=uploadPortletRequest.getFileName(fieldName);		 			
+			String fileName=uploadPortletRequest.getFileName(fieldName);	
+			if(fileName==null){
+				return "blank";
+			}else{
+				try{
+					fileName.split("\\.")[1].length();
+				}catch (ArrayIndexOutOfBoundsException e) {
+					return "No Extension";
+				}
+				
+			}
+			
 			File file = uploadPortletRequest.getFile(fieldName);
 			String mimeType = uploadPortletRequest.getContentType(fieldName);
-            String title=fileName;
-			//String title = fileName.split("\\.")[0]+"_"+mili+fileName.split("\\.")[1];
 			String description = "This file is added via programatically";
 			long repositoryId = themeDisplay.getScopeGroupId();
-			_logger.info("Title=>"+title);
+			
 			try
 		    {  
+				//Logic for duplicate file
+				String mili=new Date().getDate()+"_"+new Date().getTime();
+				String title=fileName.split("\\.")[0]+"_"+mili+"."+fileName.split("\\.")[1];
+				fileName=title;
+				_logger.info("Title=>"+title);
 		    	Folder folder = getFolder(themeDisplay);
 		    	ServiceContext serviceContext = ServiceContextFactory.getInstance(DLFileEntry.class.getName(), actionRequest);
 		    	InputStream is = new FileInputStream( file );
@@ -104,7 +117,7 @@ public class FileUpload_ServiceClass {
 		     } catch (Exception e)
 		    	{
 		    	 _logger.error(e.getMessage());
-		    	return "";
+		    	 return "";
 		    }
 
 		}

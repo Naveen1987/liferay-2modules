@@ -1,6 +1,22 @@
+<%@page import="com.liferay.portal.kernel.log.LogFactoryUtil"%>
+<%@page import="com.liferay.portal.kernel.log.Log"%>
+<%@page import="java.util.regex.Pattern"%>
+<%@page import="com.daffo.suilupposervice.service.suiluppo_courseLocalServiceUtil"%>
+<%@page import="com.daffo.suilupposervice.model.suiluppo_course"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/init.jsp" %>
+<%
+final Log logger=LogFactoryUtil.getLog(this.getClass());
+suiluppo_course ls=null;
+try{
+ls=suiluppo_courseLocalServiceUtil.getsuiluppo_course(new Long(request.getParameter("courseId")).longValue());
+}catch(Exception e){
+logger.info("Object getting for attribute");
+ls=suiluppo_courseLocalServiceUtil.getsuiluppo_course(new Long(request.getAttribute("courseId").toString()).longValue());
+}
+			
+%> 
 <%--Toggle button /date picker /Time picker/ Spinner(Not have css only js) --%>
 <link href="<%= request.getContextPath()%>/css/bootstrap-toggle.min.css" rel="stylesheet">
 <script src="<%= request.getContextPath()%>/css/bootstrap-toggle.min.js"></script>
@@ -9,25 +25,20 @@
 <link href="<%= request.getContextPath()%>/css/clockpicker.css" rel="stylesheet">
 <script src="<%= request.getContextPath()%>/css/clockpicker.js"></script>
 <script src="<%= request.getContextPath()%>/css/bootstrap-spinner.js"></script>
-<liferay-ui:success key="success" message="New Record Inserted successfully!"/>
-<portlet:actionURL name="formSubmit" var="formSubmit">
-<%--<portlet:param name="mvcPath" value="/views/selEmployee.jsp"/> --%>
+<liferay-ui:success key="success" message="Record Updated successfully!"/>
+<portlet:actionURL name="updateSubmit" var="formSubmit">
+<portlet:param name="mvcPath" value="/editCourse.jsp"/>
 </portlet:actionURL>
 <aui:form action="${formSubmit}" enctype="multipart/form-data" method="post" id="fm" name="fm">
+<input type="hidden" name="<portlet:namespace/>courseId" value="<%=ls.getCourse_id()%>">
 <div class="container-fluid-1280">
-<div class="row">
-<div class="col-md-12 text-center">
-<h1>New Course</h1>
-<hr/>
-</div>
-</div>
 <div class="row">
 <div class="col-md-12">
 <center>
 <table width="70%">
 <tbody>
 <tr>
-<td>Docente<span style="font-size:20px;color:red"><b>*</b></span></td><td><input type="text" id="Docente" name="<portlet:namespace/>Docente" placeholder="Enter Docente" value="<%=user.getFullName()%>" class="form-control"  readonly="readonly" style="color:black"/>
+<td>Docente<span style="font-size:20px;color:red"><b>*</b></span></td><td><input type="text" id="Docente" name="<portlet:namespace/>Docente" placeholder="Enter Docente" value="<%=ls.getDocente()%>" class="form-control"  readonly="readonly" style="color:black"/>
 <span id="_Docente" style="color:red; display:none">Please Enter Docente</span>
 </td>
 </tr>
@@ -35,7 +46,7 @@
 <td><br/></td>
 </tr>
 <tr>
-<td>Evento Progetto<span style="font-size:20px;color:red"><b>*</b></span></td><td><input  type="text" name="<portlet:namespace/>Evento_Progetto" class="form-control" placeholder="Enter Evento Progetto" value="" id="Evento_Progetto"/>
+<td>Evento Progetto<span style="font-size:20px;color:red"><b>*</b></span></td><td><input  type="text" name="<portlet:namespace/>Evento_Progetto" class="form-control" placeholder="Enter Evento Progetto" value="<%=ls.getEvento_Progetto()%>" id="Evento_Progetto"/>
 <span id="_Evento_Progetto" style="color:red; display:none">Please Enter Evento Progetto</span>
 </td>
 </tr>
@@ -43,7 +54,7 @@
 <td><br/></td>
 </tr>
 <tr>
-<td>Titolo<span style="font-size:20px;color:red"><b>*</b></span></td><td><input  type="text" name="<portlet:namespace/>Titolo"  class="form-control" placeholder="Enter Titolo" value="" id="Titolo">
+<td>Titolo<span style="font-size:20px;color:red"><b>*</b></span></td><td><input  type="text" name="<portlet:namespace/>Titolo"  class="form-control" placeholder="Enter Titolo" value="<%=ls.getTitolo()%>" id="Titolo">
 <span id="_Titolo" style="color:red; display:none">Please Enter Titolo</span>
 </td>
 </tr>
@@ -51,7 +62,7 @@
 <td><br/></td>
 </tr>
 <tr>
-<td>Descrizione<span style="font-size:20px;color:red"><b>*</b></span></td><td><input  type="text" name="<portlet:namespace/>Descrizione"  class="form-control" placeholder="Enter Descrizione" value="" id="Descrizione">
+<td>Descrizione<span style="font-size:20px;color:red"><b>*</b></span></td><td><input  type="text" name="<portlet:namespace/>Descrizione"  class="form-control" placeholder="Enter Descrizione" value="<%=ls.getDescrizione()%>" id="Descrizione">
 <span id="_Descrizione" style="color:red; display:none">Please Enter Descrizione</span>
 </td>
 </tr>
@@ -59,7 +70,7 @@
 <td><br/></td>
 </tr>
 <tr>
-<td>Figure Professionali Coinvolte<span style="font-size:20px;color:red"><b>*</b></span></td><td><input  type="text" name="<portlet:namespace/>Figure_Professionali_Coinvolte"  class="form-control" placeholder="Enter Figure Professionali Coinvolte" value="" id="Figure_Professionali_Coinvolte">
+<td>Figure Professionali Coinvolte<span style="font-size:20px;color:red"><b>*</b></span></td><td><input  type="text" name="<portlet:namespace/>Figure_Professionali_Coinvolte"  class="form-control" placeholder="Enter Figure Professionali Coinvolte" value="<%=ls.getFigure_Professionali_Coinvolte()%>" id="Figure_Professionali_Coinvolte">
 <span id="_Figure_Professionali_Coinvolte" style="color:red; display:none">Please Enter Figure Professionali Coinvolte</span>
 </td>
 </tr>
@@ -68,7 +79,7 @@
 </tr>
 
 <tr>
-<td>Nr Edizione<span style="font-size:20px;color:red"><b>*</b></span></td><td><input  type="text" name="<portlet:namespace/>Nr_Edizione"  class="form-control" placeholder="Enter Nr Edizione" value="" id="Nr_Edizione">
+<td>Nr Edizione<span style="font-size:20px;color:red"><b>*</b></span></td><td><input  type="text" name="<portlet:namespace/>Nr_Edizione"  class="form-control" placeholder="Enter Nr Edizione" value="<%=ls.getNr_Edizione()%>" id="Nr_Edizione">
 <span id="_Nr_Edizione" style="color:red; display:none">Please Enter Nr Edizione</span>
 </td>
 </tr>
@@ -76,7 +87,7 @@
 <td><br/></td>
 </tr>
 <tr>
-<td>Sede<span style="font-size:20px;color:red"><b>*</b></span></td><td><input  type="text" name="<portlet:namespace/>Sede"  class="form-control" placeholder="Enter Sede" value="" id="Sede">
+<td>Sede<span style="font-size:20px;color:red"><b>*</b></span></td><td><input  type="text" name="<portlet:namespace/>Sede"  class="form-control" placeholder="Enter Sede" value="<%=ls.getSede()%>" id="Sede">
 <span id="_Sede" style="color:red; display:none">Please Enter Sede</span>
 </td>
 </tr>
@@ -84,7 +95,7 @@
 <td><br/></td>
 </tr>
 <tr>
-<td>Abstract<span style="font-size:20px;color:red"><b>*</b></span></td><td><input  type="text" name="<portlet:namespace/>Abstract"  class="form-control" placeholder="Enter Abstract" value="" id="Abstract">
+<td>Abstract<span style="font-size:20px;color:red"><b>*</b></span></td><td><input  type="text" name="<portlet:namespace/>Abstract"  class="form-control" placeholder="Enter Abstract" value="<%=ls.getAbstract()%>" id="Abstract">
 <span id="_Abstract" style="color:red; display:none">Please Enter Abstract</span>
 </td>
 </tr>
@@ -99,14 +110,14 @@
 <tr>
 <td>
 <div class="hero-unit">
-<input class="form-control Date-creator"  type="text" placeholder="Click for Calendar"  name="<portlet:namespace/>Data_Inizio-date" id="Data_Inizio-date" readonly="readonly">
+<input class="form-control Date-creator"  type="text" placeholder="Click for Calendar"  name="<portlet:namespace/>Data_Inizio-date" id="Data_Inizio-date" value="<%=ls.getData_Inizio().split(Pattern.quote(" "))[0]%>" readonly="readonly">
 <span id="_Data_Inizio-date" style="color:red; display:none">Please Enter Data Inizio Date</span>
  </div>
  </td>
  <td>/</td>
  <td>
  <div class="input-group clockpicker">
- <input type="text"  name="<portlet:namespace/>Data_Inizio-time" id="Data_Inizio-time" class="form-control" placeholder="Click for Clock" readonly="readonly">
+ <input type="text"  name="<portlet:namespace/>Data_Inizio-time" id="Data_Inizio-time" class="form-control" placeholder="Click for Clock" value="<%=ls.getData_Inizio().split(Pattern.quote(" "))[1]%>" readonly="readonly">
  <span id="_Data_Inizio-time" style="color:red; display:none">Please Enter Data Inizio Time</span>
 </div>
  </td>
@@ -127,14 +138,14 @@
 <tr>
 <td>
 <div class="hero-unit">
-<input class="form-control Date-creator"  type="text" placeholder="Click for Calendar"  id="Data_Fine-date" name="<portlet:namespace/>Data_Fine-date"  readonly="readonly">
+<input class="form-control Date-creator"  type="text" placeholder="Click for Calendar"  id="Data_Fine-date" name="<portlet:namespace/>Data_Fine-date" value="<%=ls.getData_Fine().split(Pattern.quote(" "))[0]%>"  readonly="readonly">
 <span id="_Data_Fine-date" style="color:red; display:none">Please Enter Data Fine Date</span>
 </div>
  </td>
  <td>/</td>
  <td>
  <div class="input-group clockpicker">
- <input type="text" id="Data_Fine-time" name="<portlet:namespace/>Data_Fine-time" class="form-control" placeholder="Click for Clock" readonly="readonly">
+ <input type="text" id="Data_Fine-time" name="<portlet:namespace/>Data_Fine-time" class="form-control" placeholder="Click for Clock" value="<%=ls.getData_Fine().split(Pattern.quote(" "))[1]%>" readonly="readonly">
  <span id="_Data_Fine-time" style="color:red; display:none">Please Enter Data Fine Time</span>
 </div>
  </td>
@@ -153,14 +164,14 @@
 <tr>
 <td>
 <div class="hero-unit">
-<input class="form-control Date-creator"  type="text" placeholder="Click for Calendar"  id="Tot_Ore-date" name="<portlet:namespace/>Tot_Ore-date" readonly="readonly">
+<input class="form-control Date-creator"  type="text" placeholder="Click for Calendar"  id="Tot_Ore-date" name="<portlet:namespace/>Tot_Ore-date" value="<%=ls.getTot_Ore().split(Pattern.quote(" "))[0]%>" readonly="readonly">
  <span  id="_Tot_Ore-date" style="color:red; display:none">Please Enter Tot Ore Date</span>
  </div>
  </td>
  <td>/</td>
  <td>
  <div class="input-group clockpicker">
- <input type="text" id="Tot_Ore-time" class="form-control" placeholder="Click for Clock" name="<portlet:namespace/>Tot_Ore-time" readonly="readonly">
+ <input type="text" id="Tot_Ore-time" class="form-control" placeholder="Click for Clock" name="<portlet:namespace/>Tot_Ore-time" value="<%=ls.getTot_Ore().split(Pattern.quote(" "))[1]%>" readonly="readonly">
  <span id="_Tot_Ore-time" style="color:red; display:none">Please Enter Tot Ore Time</span>
 </div>
  </td>
@@ -179,14 +190,14 @@
 <tr>
 <td>
 <div class="hero-unit">
-<input class="form-control Date-creator"  type="text" placeholder="Click for Calendar"  id="Scadenza_Iscrizioni-date" name="<portlet:namespace/>Scadenza_Iscrizioni-date" readonly="readonly">
+<input class="form-control Date-creator"  type="text" placeholder="Click for Calendar"  id="Scadenza_Iscrizioni-date" name="<portlet:namespace/>Scadenza_Iscrizioni-date" value="<%=ls.getScadenza_Iscrizioni().split(Pattern.quote(" "))[0]%>" readonly="readonly">
 <span id="_Scadenza_Iscrizioni-date" style="color:red; display:none">Please Enter Scadenza Iscrizioni Date</span>
 </div>
  </td>
  <td>/</td>
  <td>
  <div class="input-group clockpicker">
- <input type="text" id="Scadenza_Iscrizioni-time" class="form-control" placeholder="Click for Clock" name="<portlet:namespace/>Scadenza_Iscrizioni-time" readonly="readonly">
+ <input type="text" id="Scadenza_Iscrizioni-time" class="form-control" placeholder="Click for Clock" name="<portlet:namespace/>Scadenza_Iscrizioni-time" value="<%=ls.getScadenza_Iscrizioni().split(Pattern.quote(" "))[1]%>" readonly="readonly">
 <span id="_Scadenza_Iscrizioni-time" style="color:red; display:none">Please Enter Scadenza Iscrizioni Time</span>
 </div>
  </td>
@@ -207,7 +218,7 @@
             <span class="glyphicon glyphicon-minus"></span>
         </button>
     </span>
-    <input type="text" data-ride="spinner" id="Ammessi_al_corso" class="form-control input-number" value="1" name="<portlet:namespace/>Ammessi_al_corso">
+    <input type="text" data-ride="spinner" id="Ammessi_al_corso" class="form-control input-number" value="<%=ls.getAmmessi_al_corso()%>" name="<portlet:namespace/>Ammessi_al_corso">
     <span class="input-group-btn">
         <button type="button" class="btn btn-default" data-value="increase" data-target="#Ammessi_al_corso" data-toggle="spinner">
             <span class="glyphicon glyphicon-plus"></span>
@@ -226,7 +237,7 @@
 <tr>
 <td>Visibile<span style="font-size:20px;color:red"><b>*</b></span></td><td>
 <input type="hidden" name="<portlet:namespace/>Visibile_data" id="Visibile_data">
-<input type="checkbox" id="Visibile" name="<portlet:namespace/>Visibile" data-toggle="toggle" data-on="DI" data-off="NO" data-size="large" data-onstyle="success" data-offstyle="info">
+<input type="checkbox" id="Visibile" name="<portlet:namespace/>Visibile" data-toggle="toggle" data-on="DI" data-off="NO" data-size="large" data-onstyle="success" data-offstyle="info" <%=ls.getVisibile().equalsIgnoreCase("true")?"checked":""%>>
 </td>
 </tr>
 <tr>
@@ -235,7 +246,7 @@
 <tr>
 <td>Bloccato<span style="font-size:20px;color:red"><b>*</b></span></td><td>
 <input type="hidden" name="<portlet:namespace/>Bloccato_data" id="Bloccato_data">
-<input type="checkbox" id="Bloccato" name="<portlet:namespace/>Bloccato" data-toggle="toggle" data-on="DI" data-off="NO" data-size="large" data-onstyle="success" data-offstyle="info">
+<input type="checkbox" id="Bloccato"  name="<portlet:namespace/>Bloccato" data-toggle="toggle" data-on="DI" data-off="NO" data-size="large" data-onstyle="success" data-offstyle="info" <%=ls.getBloccato().equalsIgnoreCase("true")?"checked":""%>>
 </td>
 </tr>
 <tr>
@@ -250,8 +261,7 @@
 <td><br/></td>
 </tr>
 <tr>
-<td></td><td style="text-align:right"><span id="submit" class="btn btn-success" onClick="showAddNoteDialog()" style="width:100px">   Submit   </span>     
-    <span id="reset" class="btn btn-warning" style="width:100px">   Reset   </span>
+<td></td><td style="text-align:right"><span id="submit" class="btn btn-success" onClick="showAddNoteDialog()" style="width:100px">   Update   </span>     
 </td>
 </tr>
 </tbody>
@@ -290,33 +300,6 @@ $('.clockpicker').clockpicker({donetext: 'Done'});
 </div> 
 
 <script type="text/javascript">
-  $("#reset").click(function(){
-	 $("#_Docente").hide();
-	 $("#_Evento_Progetto").hide();
-	 $("#_Titolo").hide();
-	 $("#_Descrizione").hide();
-	 $("#_Figure_Professionali_Coinvolte").hide();
-	 $("#_Nr_Edizione").hide();
-	 $("#_Sede").hide();
-	 $("#_Abstract").hide();
-	 $("#_Data_Inizio-date").hide();
-	 $("#_Data_Inizio-time").hide();
-	 $("#_Data_Fine-date").hide();
-	 $("#_Data_Fine-time").hide();
-	 $("#_Tot_Ore-date").hide();
-	 $("#_Tot_Ore-time").hide();
-	 $("#_Scadenza_Iscrizioni-date").hide();
-	 $("#_Scadenza_Iscrizioni-time").hide();
-	 $("#_Ammessi_al_corso").hide();
-	 $("#_Dispensa_corso").hide();
-	 $("#<portlet:namespace/>fm").closest('form').find("input[type=text] ").val("");
-	 $("#<portlet:namespace/>fm").closest('form').find("input[type=file]").val("");
-	 $("#Docente").val("<%=user.getFullName()%>");
-	 $("#Ammessi_al_corso").val(1);
-	 $('#Visibile').bootstrapToggle('off')
-	 $('#Bloccato').bootstrapToggle('off')
-});  
-
 //Now Validation
 function showAddNoteDialog(){
    YUI().use('aui-modal', function(Y) {
@@ -351,7 +334,7 @@ function showAddNoteDialog(){
                       var inputs = document.getElementsByTagName('input');
                       var flag=true;
                       for(var i = 0; i < inputs.length; i++) {
-                    	  if(inputs[i].type.toLowerCase() == 'file') {
+                    	 /*  if(inputs[i].type.toLowerCase() == 'file') {
                     		  if(inputs[i].value==''){
                     			  if(inputs[i].name=="<portlet:namespace/>Dispensa_corso")
                             	  {
@@ -369,7 +352,7 @@ function showAddNoteDialog(){
                             	  }
                    
                     		  }
-                    	  }
+                    	  } */
                     	  
                           if(inputs[i].type.toLowerCase() == 'text') {
                         	  if(inputs[i].value){
@@ -646,6 +629,7 @@ function showAddNoteDialog(){
        							$("#Visibile_data").val(vis);
        						 }
                     	document.getElementById("<portlet:namespace/>fm").submit();
+                    	 Liferay.Util.getOpener().refreshPortlet();
 						} 
                        //document.getElementById("<portlet:namespace/>fm").submit();
                       //End OF On method
@@ -657,7 +641,6 @@ function showAddNoteDialog(){
      }
    );
     }
-
 
 </script>
 

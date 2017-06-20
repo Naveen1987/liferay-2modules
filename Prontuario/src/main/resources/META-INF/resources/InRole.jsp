@@ -109,7 +109,7 @@ function getRowId(data){
     portletURL.setParameter('data', data);    
     portletURL.setPortletId("<%=themeDisplay.getPortletDisplay().getId() %>");
     portletURL.setParameter('mvcPath', '/drug_edit.jsp');
-   Liferay.Util.openWindow({
+  /*  Liferay.Util.openWindow({
 		dialog: {
 		centered: true,
 		cssClass: 'my-liferay-popup',
@@ -121,7 +121,27 @@ function getRowId(data){
 		id: '<portlet:namespace/>Edit_Drug',
 		title: 'Edit Drug' ,
 		uri:  portletURL.toString()
-		});	
+		});	 */
+    YUI().ready(function(A) {
+        YUI().use('aui-base','liferay-util-window', function(A) {
+            Liferay.Util.Window.getWindow({
+                title :'Edit Drug',
+                uri: portletURL,
+                id:'<portlet:namespace/>Edit_Drug',
+                dialog: {
+                	centered: true,
+                    destroyOnHide: true,
+                    cache: false,
+                    modal: true,
+                    width: 700,
+            		height:450
+                }
+            }).after('destroy', function(event) {
+            	//It will refresh
+            	location.reload();
+            });
+        });
+    });
 } 
 
 $("#add-new").click(function(){
@@ -132,7 +152,7 @@ $("#add-new").click(function(){
     portletURL.setParameter('mvcPath', '/drug_add.jsp');
     // Now we can use the URL
   // alert(portletURL.toString());
-   Liferay.Util.openWindow({
+  /*  Liferay.Util.openWindow({
 		dialog: {
 		centered: true,
 		cssClass: 'my-liferay-popup',
@@ -144,13 +164,33 @@ $("#add-new").click(function(){
 		id: '<portlet:namespace/>Add_New_Drug',
 		title: 'Add New Drug' ,
 		uri:  portletURL.toString()
-		});
+		}); */
+    YUI().ready(function(A) {
+        YUI().use('aui-base','liferay-util-window', function(A) {
+            Liferay.Util.Window.getWindow({
+                title :'Add New Drug',
+                uri: portletURL,
+                id:'<portlet:namespace/>Add_New_Drug',
+                dialog: {
+                	centered: true,
+                    destroyOnHide: true,
+                    cache: false,
+                    modal: true,
+                    width: 700,
+            		height:450
+                }
+            }).after('destroy', function(event) {
+            	//It will refresh
+            	location.reload();
+            });
+        });
+    });
 	
 });
 </script>
 
 
-<aui:script> 
+<!-- <aui:script> 
 Liferay.provide(window,'<portlet:namespace/>windowRefresh', function() 
 	{
 	alert("Hello");
@@ -158,4 +198,4 @@ Liferay.provide(window,'<portlet:namespace/>windowRefresh', function()
 	}, 
 	['liferay-util-window'] 
 	); 
-</aui:script>
+</aui:script> -->

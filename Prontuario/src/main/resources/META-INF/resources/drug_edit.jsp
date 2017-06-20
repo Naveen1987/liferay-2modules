@@ -4,8 +4,12 @@
 
 <%
 String drug_id=request.getParameter("data");
-prontuario_drug pd=prontuario_drugLocalServiceUtil.getprontuario_drug(new Long(drug_id).longValue());
-
+prontuario_drug pd=null;
+try{
+pd=prontuario_drugLocalServiceUtil.getprontuario_drug(new Long(drug_id).longValue());
+}catch(Exception e){
+	pd=prontuario_drugLocalServiceUtil.getprontuario_drug(new Long(request.getAttribute("data").toString()).longValue());
+}
 %>
 
 <%--Message area --%>
