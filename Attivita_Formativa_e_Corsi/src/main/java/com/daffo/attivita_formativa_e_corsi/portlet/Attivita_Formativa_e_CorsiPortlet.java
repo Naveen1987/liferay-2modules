@@ -195,10 +195,10 @@ public class Attivita_Formativa_e_CorsiPortlet extends MVCPortlet {
 	 public void addApplicant(ActionRequest actionRequest, ActionResponse actionResponse)
 	   throws IOException, PortletException, PortalException {
 		log.info("New Applicant Adding ............");
-		//		System.out.println("courseId-"+ParamUtil.getString(actionRequest, "courseId"));
-		//		System.out.println("Applicant Name-"+ParamUtil.getString(actionRequest, "Applicant_Name"));
-		//		System.out.println("Email-"+ParamUtil.getString(actionRequest, "email"));
-		//		System.out.println("Phone-"+ParamUtil.getString(actionRequest, "phone"));
+				/*System.out.println("courseId-"+ParamUtil.getString(actionRequest, "courseId"));
+				System.out.println("Applicant Name-"+ParamUtil.getString(actionRequest, "Applicant_Name"));
+				System.out.println("Email-"+ParamUtil.getString(actionRequest, "email"));
+				System.out.println("Phone-"+ParamUtil.getString(actionRequest, "phone"));*/
 		suiluppo_application su=suiluppo_applicationLocalServiceUtil.createsuiluppo_application(CounterLocalServiceUtil.increment());
 		su.setApplicat_name(ParamUtil.getString(actionRequest, "Applicant_Name"));
 		su.setApplicat_phone(ParamUtil.getString(actionRequest, "phone"));
@@ -206,7 +206,7 @@ public class Attivita_Formativa_e_CorsiPortlet extends MVCPortlet {
 		su.setApplicat_email(ParamUtil.getString(actionRequest, "email"));
 		suiluppo_applicationLocalServiceUtil.addsuiluppo_application(su);
 		log.info("New Applicant Added");
-		SessionMessages.add(actionRequest, "success");
+		SessionMessages.add(actionRequest, "successApply");
 	}
 
 }

@@ -15,12 +15,12 @@
 </portlet:actionURL>
 <aui:form action="${formSubmit}" enctype="multipart/form-data" method="post" id="fm" name="fm">
 <div class="container-fluid-1280">
-<div class="row">
+<%--<div class="row">
 <div class="col-md-12 text-center">
 <h1>New Course</h1>
 <hr/>
 </div>
-</div>
+</div> --%>
 <div class="row">
 <div class="col-md-12">
 <center>
@@ -226,7 +226,7 @@
 <tr>
 <td>Visibile<span style="font-size:20px;color:red"><b>*</b></span></td><td>
 <input type="hidden" name="<portlet:namespace/>Visibile_data" id="Visibile_data">
-<input type="checkbox" id="Visibile" name="<portlet:namespace/>Visibile" data-toggle="toggle" data-on="DI" data-off="NO" data-size="large" data-onstyle="success" data-offstyle="info">
+<input type="checkbox" id="Visibile" name="<portlet:namespace/>Visibile" data-toggle="toggle" data-on="SI" data-off="NO" data-size="large" data-onstyle="success" data-offstyle="info">
 </td>
 </tr>
 <tr>
@@ -235,7 +235,7 @@
 <tr>
 <td>Bloccato<span style="font-size:20px;color:red"><b>*</b></span></td><td>
 <input type="hidden" name="<portlet:namespace/>Bloccato_data" id="Bloccato_data">
-<input type="checkbox" id="Bloccato" name="<portlet:namespace/>Bloccato" data-toggle="toggle" data-on="DI" data-off="NO" data-size="large" data-onstyle="success" data-offstyle="info">
+<input type="checkbox" id="Bloccato" name="<portlet:namespace/>Bloccato" data-toggle="toggle" data-on="SI" data-off="NO" data-size="large" data-onstyle="success" data-offstyle="info">
 </td>
 </tr>
 <tr>

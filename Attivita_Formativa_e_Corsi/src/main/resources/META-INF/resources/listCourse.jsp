@@ -1,3 +1,4 @@
+<%@page import="com.liferay.portal.kernel.model.User"%>
 <%@page import="com.daffo.suilupposervice.service.suiluppo_applicationLocalServiceUtil"%>
 <%@page import="com.daffo.suilupposervice.model.suiluppo_application"%>
 <%@page import="com.liferay.portal.kernel.portlet.LiferayWindowState"%>
@@ -11,7 +12,7 @@
     pageEncoding="UTF-8"%>
 <%@ include file="/init.jsp" %>
 <%--Message area --%>
-<liferay-ui:success key="showall" message="This is list of all Employee!"/>
+<liferay-ui:success key="successApply" message="Successfully applied for Course!"/>
 
 <style>
 .results tr[visible='false'],
@@ -195,7 +196,7 @@ $(document).ready(function() {
     }
     else{
     	%>
-    <td style="padding: 5px;"><span id="<%="btn_"+su.getCourse_id()%>"  onclick="getCourseApplyId('<%=su.getCourse_id() +""%>')" class="btn btn-warning btnedit">Apply</span></td>	
+    <td style="padding: 5px;"><span id="<%="btn_"+su.getCourse_id()%>"  onclick="getCourseApplyId('<%=su.getCourse_id() +""%>','<%=user.getFullName()%>')" class="btn btn-warning btnedit">Apply</span></td>	
     <%
     }
     %>
@@ -295,52 +296,44 @@ function getCourseEditId(courseId)
 	    });
 }
 
-function getCourseApplyId(courseId)
+function getCourseApplyId(courseId,userName)
 {
 		var ID="#btn_"+courseId;
 		if($(ID).text()=='Applied'){
 			alert('You have already Applied For It');
 			return;
 		}
-	    // alert('Hello-'+courseId);
-	    var portletURL = Liferay.PortletURL.createRenderURL();
-	 	portletURL.setWindowState('<%=LiferayWindowState.POP_UP.toString() %>');
-	    portletURL.setParameter('courseId', courseId);    
-	    portletURL.setPortletId("<%=themeDisplay.getPortletDisplay().getId() %>");
-	    portletURL.setParameter('mvcPath', '/newApplicant.jsp');
-	    // Now we can use the URL
-	  // alert(portletURL.toString());
-	  	    YUI().ready(function(A) {
-	        YUI().use('aui-base','liferay-util-window', function(A) {
-	            Liferay.Util.Window.getWindow({
-	                title :'New Applicant',
-	                uri: portletURL,
-	                id:'<portlet:namespace/>New_Applicant',
-	                dialog: {
-	                	centered: true,
-	                	constrain2view: true,
-	                    destroyOnHide: true,
-	                    resizable: false,
-	                    cache: false,
-	                    modal: true,
-	                    width: 700,
-	                    height:500
-	                }
-	            }).after('destroy', function(event) {
-	            	//It will refresh
-	            	
-	            	$(ID).text('Applied');
-	            	//location.reload();
-	            });
-	        });
-	    });
+		formSubmiting(courseId,userName);
 	   
 }
 
 </script>
+<portlet:actionURL name="addApplicant" var="addApplicant">
+<portlet:param name="mvcPath" value="/listCourse.jsp"/> 
+</portlet:actionURL>
+<script type="text/javascript">
+function formSubmiting(courseId,userName){
+	var ID="#btn_"+courseId;
+	AUI().use('aui-base','aui-io-request', function(A){
+		//aui ajax call to get updated content
+		A.io.request('<%=addApplicant%>',{
+  		dataType: 'json',
+  		method: 'POST',
+  		data:{'<portlet:namespace/>courseId':courseId,'<portlet:namespace/>Applicant_Name':userName,'<portlet:namespace/>email':'<%=user.getEmailAddress()%>'},
+  		on: {
+   			 success: function() {
+   			 $(ID).text('Applied');
+   			alert("Successfully Applied for course!")
+    		}
+  		}
+		});
+		});
+	    //aui ajax call to get updated content
+}
+</script>
 <script type="text/javascript">
 $("#btnNew").click(function(){
-	alert('Hello New');
+	//alert('Hello New');
 	    var portletURL = Liferay.PortletURL.createRenderURL();
 	 	portletURL.setWindowState('<%=LiferayWindowState.POP_UP.toString() %>');
 	    portletURL.setPortletId("<%=themeDisplay.getPortletDisplay().getId() %>");
