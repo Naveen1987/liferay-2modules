@@ -11,7 +11,7 @@
 <script src="<%= request.getContextPath()%>/css/bootstrap-spinner.js"></script>
 <liferay-ui:success key="success" message="New Record Inserted successfully!"/>
 <portlet:actionURL name="formSubmit" var="formSubmit">
-<%--<portlet:param name="mvcPath" value="/views/selEmployee.jsp"/> --%>
+<portlet:param name="mvcPath" value="/AddCourse.jsp"/> 
 </portlet:actionURL>
 <aui:form action="${formSubmit}" enctype="multipart/form-data" method="post" id="fm" name="fm">
 <div class="container-fluid-1280">

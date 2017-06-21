@@ -1,3 +1,5 @@
+<%@page import="com.daffo.suilupposervice.service.suiluppo_applicationLocalServiceUtil"%>
+<%@page import="com.daffo.suilupposervice.model.suiluppo_application"%>
 <%@page import="com.liferay.portal.kernel.portlet.LiferayWindowState"%>
 <%@page import="com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil"%>
 <%@page import="com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil"%>
@@ -63,6 +65,7 @@ $(document).ready(function() {
     <table>
     <tbody>
     <tr>
+     <td style="padding: 10px;"><span id="btnNew" class="btn btn-warning">New Course</span></td>
     <td style="padding: 10px;"><span id="btnOwn" class="btn btn-warning">Own Course</span></td>
     <td style="padding: 10px;"><span id="btnOther" class="btn btn-warning">Course for Apply</span></td>
     </tr>
@@ -143,6 +146,7 @@ $(document).ready(function() {
 <table class="table table-hover table-bordered results">
   <thead>
     <tr class="bg-primary">
+    <th><b>#</b></th>
     <th><b>Docente</b></th>
     <th><b>Evento Progetto</b></th>
     <th><b>Titolo</b></th>
@@ -151,7 +155,6 @@ $(document).ready(function() {
     <th><b>Tot Ore</b></th>
     <th><b>Visibile</b></th>
     <th><b>Bloccato</b></th>
-    <th><b>Dispensa corso</b></th>
      <th><b>Action</b></th>
     </tr>
     <tr class="warning no-result">
@@ -159,26 +162,51 @@ $(document).ready(function() {
     </tr>
   </thead>
     <tbody>
-   <tr>
-     <td>Docente</td>
-    <td>Evento Progetto</td>
-    <td>Titolo</td>
-    <td>Data Inizio</td>
-    <td>Data Fine</td>
-    <td>Tot Ore</td>
-    <td>Visibile</td>
-    <td>Bloccato</td>
-    <td>Dispensa corso</td>
+   <% 
+    DynamicQuery userVQuery = DynamicQueryFactoryUtil.forClass(suiluppo_course.class);
+    userVQuery.add(RestrictionsFactoryUtil.ne("Docente", user.getFullName()));
+    List<suiluppo_course> suil1=suiluppo_courseLocalServiceUtil.dynamicQuery(userVQuery);
+    for(suiluppo_course su:suil1)
+    {%>
+     <tr>
+     <td><%=su.getCourse_id() %></td> 
+     <td><%=su.getDocente() %></td> 
+    <td><%=su.getEvento_Progetto()%></td>
+    <td><%=su.getTitolo()%></td>
+    <td><%=su.getData_Inizio()%></td>
+    <td><%=su.getData_Fine()%></td>
+    <td><%=su.getTot_Ore()%></td>
+    <td><%=su.getVisibile()%></td>
+    <td><%=su.getBloccato()%></td>
     <td>
     <table>
     <tbody>
     <tr>
-    <td style="padding: 10px;"><span id="btnApply"  class="btn btn-success">Apply</span></td>
+    <td style="padding: 5px;"><span onclick="getCourseViewId('<%=su.getCourse_id() +""%>')" class="btn btn-primary btnview">View</span></td>
+    <%
+    DynamicQuery appQuery = DynamicQueryFactoryUtil.forClass(suiluppo_application.class);
+    appQuery.add(RestrictionsFactoryUtil.and(RestrictionsFactoryUtil.eq("applicat_name", user.getFullName()), RestrictionsFactoryUtil.eq("course_id", su.getCourse_id())));
+    List<suiluppo_application> sp=suiluppo_applicationLocalServiceUtil.dynamicQuery(appQuery);
+    if(sp.size()>0){
+    	System.out.println("found");
+    	%>
+    <td style="padding: 5px;"><span id="<%="btn_"+su.getCourse_id()%>"  onclick="getCourseApplyId('<%=su.getCourse_id() +""%>')" class="btn btn-warning btnedit">Applied</span></td>	
+        <%
+    }
+    else{
+    	%>
+    <td style="padding: 5px;"><span id="<%="btn_"+su.getCourse_id()%>"  onclick="getCourseApplyId('<%=su.getCourse_id() +""%>')" class="btn btn-warning btnedit">Apply</span></td>	
+    <%
+    }
+    %>
+    
+    
     </tr>
     </tbody>
     </table>
     </td>
     </tr>
+    <%}%>
     </tbody>
     </table>
 
@@ -213,7 +241,7 @@ function getCourseViewId(courseId)
 			cssClass: 'my-liferay-popup',
 			constrain2view: true,
 			modal: true,
-			resize:false,
+			resizable: false,
 			width: 950,
 			height:800
 
@@ -252,7 +280,9 @@ function getCourseEditId(courseId)
 	                id:'<portlet:namespace/>Course_Edit',
 	                dialog: {
 	                	centered: true,
+	                	constrain2view: true,
 	                    destroyOnHide: true,
+	                    resizable: false,
 	                    cache: false,
 	                    modal: true,
 	                    width: 950
@@ -265,5 +295,91 @@ function getCourseEditId(courseId)
 	    });
 }
 
+function getCourseApplyId(courseId)
+{
+		var ID="#btn_"+courseId;
+		if($(ID).text()=='Applied'){
+			alert('You have already Applied For It');
+			return;
+		}
+	    // alert('Hello-'+courseId);
+	    var portletURL = Liferay.PortletURL.createRenderURL();
+	 	portletURL.setWindowState('<%=LiferayWindowState.POP_UP.toString() %>');
+	    portletURL.setParameter('courseId', courseId);    
+	    portletURL.setPortletId("<%=themeDisplay.getPortletDisplay().getId() %>");
+	    portletURL.setParameter('mvcPath', '/newApplicant.jsp');
+	    // Now we can use the URL
+	  // alert(portletURL.toString());
+	  	    YUI().ready(function(A) {
+	        YUI().use('aui-base','liferay-util-window', function(A) {
+	            Liferay.Util.Window.getWindow({
+	                title :'New Applicant',
+	                uri: portletURL,
+	                id:'<portlet:namespace/>New_Applicant',
+	                dialog: {
+	                	centered: true,
+	                	constrain2view: true,
+	                    destroyOnHide: true,
+	                    resizable: false,
+	                    cache: false,
+	                    modal: true,
+	                    width: 700,
+	                    height:500
+	                }
+	            }).after('destroy', function(event) {
+	            	//It will refresh
+	            	
+	            	$(ID).text('Applied');
+	            	//location.reload();
+	            });
+	        });
+	    });
+	   
+}
+
 </script>
+<script type="text/javascript">
+$("#btnNew").click(function(){
+	alert('Hello New');
+	    var portletURL = Liferay.PortletURL.createRenderURL();
+	 	portletURL.setWindowState('<%=LiferayWindowState.POP_UP.toString() %>');
+	    portletURL.setPortletId("<%=themeDisplay.getPortletDisplay().getId() %>");
+	    portletURL.setParameter('mvcPath', '/AddCourse.jsp');
+	    YUI().ready(function(A) {
+	        YUI().use('aui-base','liferay-util-window', function(A) {
+	            Liferay.Util.Window.getWindow({
+	                title :'Add New Course',
+	                uri: portletURL,
+	                id:'<portlet:namespace/>AddCourse',
+	                dialog: {
+	                	centered: true,
+	                	constrain2view: true,
+	                    destroyOnHide: true,
+	                    resizable: false,
+	                    cache: false,
+	                    modal: true,
+	                    width: 950
+	                }
+	            }).after('destroy', function(event) {
+	            	//It will refresh
+	            	location.reload();
+	            });
+	        });
+	    });
+});
+</script>
+<aui:script>
+   Liferay.provide(window, 'closePopup', function(dialogId) {
+        var A = AUI();
+        /*  var dialog = Liferay.Util.Window.getById(dialogId);
+        dialog.destroy(); */
+        Liferay.fire('closeWindow',{
+        	id:dialogId
+        });
+    },
+    ['liferay-util-window']
+    );
+</aui:script>
+
+
 

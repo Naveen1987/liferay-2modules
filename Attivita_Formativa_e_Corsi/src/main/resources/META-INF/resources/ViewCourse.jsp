@@ -56,6 +56,9 @@ suiluppo_course ls=suiluppo_courseLocalServiceUtil.getsuiluppo_course(new Long(r
 <td><b>Scadenza Iscrizioni</b></td><td><%=ls.getScadenza_Iscrizioni() %></td>
 </tr>
 <tr>
+<td><b>Ammessi al corso</b></td><td><%=ls.getAmmessi_al_corso() %></td>
+</tr>
+<tr>
 <td><b>Visibile</b></td><td><%=(ls.getVisibile().equalsIgnoreCase("true"))?"DI":"NO" %></td>
 </tr>
 <tr>
