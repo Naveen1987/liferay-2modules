@@ -68,22 +68,22 @@ public class Attivita_Formativa_e_CorsiPortlet extends MVCPortlet {
 		System.out.println("Data_Inizio-time-"+ParamUtil.getString(actionRequest, "Data_Inizio-time"));
 		System.out.println("Data_Fine-date"+ParamUtil.getString(actionRequest, "Data_Fine-date"));
 		System.out.println("getString-"+ParamUtil.getString(actionRequest, "Data_Fine-time"));
-		System.out.println("Tot_Ore-date-"+ParamUtil.getString(actionRequest, "Tot_Ore-date"));
-		System.out.println("Tot_Ore-time-"+ParamUtil.getString(actionRequest, "Tot_Ore-time"));
+		System.out.println("Tot_Ore-"+ParamUtil.getString(actionRequest, "Tot_Ore"));
 		System.out.println("Scadenza_Iscrizioni-date-"+ParamUtil.getString(actionRequest, "Scadenza_Iscrizioni-date"));
 		System.out.println("Scadenza_Iscrizioni-time-"+ParamUtil.getString(actionRequest, "Scadenza_Iscrizioni-time"));
 		System.out.println("Ammessi_al_corso-"+ParamUtil.getString(actionRequest, "Ammessi_al_corso"));
 		System.out.println("Visibile-"+ParamUtil.getString(actionRequest, "Visibile_data"));
 		System.out.println("Bloccato-"+ParamUtil.getString(actionRequest, "Bloccato_data"));*/
-		//System.out.println("Dispensa_corso-"+ParamUtil.getString(actionRequest, "Dispensa_corso"));
+		//System.out.println("Dispensa_corso-"+ParamUtil.getString(actionRequest, "Dispensa_corso"));*/
+		
 		ThemeDisplay themeDisplay = (ThemeDisplay) actionRequest.getAttribute(WebKeys.THEME_DISPLAY);
 		fus.createFolder(actionRequest, themeDisplay);
-		/*
-		 There are three parameter
-		 1. themeDisplay
-		 2. actionRequest
-		 3. Name of type=file control name
-		 */
+		
+//		 There are three parameter
+//		 1. themeDisplay
+//		 2. actionRequest
+//		 3. Name of type=file control name
+
 		String fileName=fus.fileUpload(themeDisplay, actionRequest,"Dispensa_corso");
 		if(!fileName.isEmpty())
 		{
@@ -110,7 +110,7 @@ public class Attivita_Formativa_e_CorsiPortlet extends MVCPortlet {
 			cs.setAbstract(ParamUtil.getString(actionRequest, "Abstract"));
 			cs.setData_Inizio(ParamUtil.getString(actionRequest, "Data_Inizio-date")+" "+ParamUtil.getString(actionRequest, "Data_Inizio-time"));
 			cs.setData_Fine(ParamUtil.getString(actionRequest, "Data_Fine-date")+" "+ParamUtil.getString(actionRequest, "Data_Fine-time"));
-			cs.setTot_Ore(ParamUtil.getString(actionRequest, "Tot_Ore-date")+" "+ParamUtil.getString(actionRequest, "Tot_Ore-time"));
+			cs.setTot_Ore(ParamUtil.getString(actionRequest, "Tot_Ore"));
 			cs.setScadenza_Iscrizioni(ParamUtil.getString(actionRequest, "Scadenza_Iscrizioni-date")+" "+ParamUtil.getString(actionRequest, "Scadenza_Iscrizioni-time"));
 			cs.setAmmessi_al_corso(new Long(ParamUtil.getString(actionRequest, "Ammessi_al_corso")).longValue());
 			cs.setBloccato(ParamUtil.getString(actionRequest, "Bloccato_data"));
@@ -178,7 +178,8 @@ public class Attivita_Formativa_e_CorsiPortlet extends MVCPortlet {
 			cs.setAbstract(ParamUtil.getString(actionRequest, "Abstract"));
 			cs.setData_Inizio(ParamUtil.getString(actionRequest, "Data_Inizio-date")+" "+ParamUtil.getString(actionRequest, "Data_Inizio-time"));
 			cs.setData_Fine(ParamUtil.getString(actionRequest, "Data_Fine-date")+" "+ParamUtil.getString(actionRequest, "Data_Fine-time"));
-			cs.setTot_Ore(ParamUtil.getString(actionRequest, "Tot_Ore-date")+" "+ParamUtil.getString(actionRequest, "Tot_Ore-time"));
+			//cs.setTot_Ore(ParamUtil.getString(actionRequest, "Tot_Ore-date")+" "+ParamUtil.getString(actionRequest, "Tot_Ore-time"));
+			cs.setTot_Ore(ParamUtil.getString(actionRequest, "Tot_Ore"));
 			cs.setScadenza_Iscrizioni(ParamUtil.getString(actionRequest, "Scadenza_Iscrizioni-date")+" "+ParamUtil.getString(actionRequest, "Scadenza_Iscrizioni-time"));
 			cs.setAmmessi_al_corso(new Long(ParamUtil.getString(actionRequest, "Ammessi_al_corso")).longValue());
 			cs.setBloccato(ParamUtil.getString(actionRequest, "Bloccato_data"));

@@ -15,9 +15,16 @@ ls=suiluppo_courseLocalServiceUtil.getsuiluppo_course(new Long(request.getParame
 logger.info("Object getting for attribute");
 ls=suiluppo_courseLocalServiceUtil.getsuiluppo_course(new Long(request.getAttribute("courseId").toString()).longValue());
 }
-			
+String duration[]=ls.getTot_Ore().split(",");
+String sh=duration[0].substring(0,duration[0].length()-1);
+String sm=duration[1].substring(0,duration[1].length()-1);
+String ss=duration[2].substring(0,duration[2].length()-1);
 %> 
 <%--Toggle button /date picker /Time picker/ Spinner(Not have css only js) --%>
+<link href="<%= request.getContextPath()%>/testing/duration-picker.css" rel="stylesheet">
+<script src="<%= request.getContextPath()%>/testing/duration-picker.js"></script>
+
+
 <link href="<%= request.getContextPath()%>/css/bootstrap-toggle.min.css" rel="stylesheet">
 <script src="<%= request.getContextPath()%>/css/bootstrap-toggle.min.js"></script>
 <link href="<%= request.getContextPath()%>/css/datepicker_1.css" rel="stylesheet">
@@ -158,32 +165,6 @@ ls=suiluppo_courseLocalServiceUtil.getsuiluppo_course(new Long(request.getAttrib
 <td><br/></td>
 </tr>
 <tr>
-<td>Tot Ore<span style="font-size:20px;color:red"><b>*</b></span></td><td>
-<table>
-<tbody>
-<tr>
-<td>
-<div class="hero-unit">
-<input class="form-control Date-creator"  type="text" placeholder="Click for Calendar"  id="Tot_Ore-date" name="<portlet:namespace/>Tot_Ore-date" value="<%=ls.getTot_Ore().split(Pattern.quote(" "))[0]%>" readonly="readonly">
- <span  id="_Tot_Ore-date" style="color:red; display:none">Please Enter Tot Ore Date</span>
- </div>
- </td>
- <td>/</td>
- <td>
- <div class="input-group clockpicker">
- <input type="text" id="Tot_Ore-time" class="form-control" placeholder="Click for Clock" name="<portlet:namespace/>Tot_Ore-time" value="<%=ls.getTot_Ore().split(Pattern.quote(" "))[1]%>" readonly="readonly">
- <span id="_Tot_Ore-time" style="color:red; display:none">Please Enter Tot Ore Time</span>
-</div>
- </td>
-</tr>
-</tbody>
-</table>
-</td>
-</tr>
-<tr>
-<td><br/></td>
-</tr>
-<tr>
 <td>Scadenza Iscrizioni<span style="font-size:20px;color:red"><b>*</b></span></td><td>
 <table>
 <tbody>
@@ -204,6 +185,18 @@ ls=suiluppo_courseLocalServiceUtil.getsuiluppo_course(new Long(request.getAttrib
 </tr>
 </tbody>
 </table>
+</td>
+</tr>
+<tr>
+<td><br/></td>
+</tr>
+<tr>
+<td><br/></td>
+</tr>
+<tr>
+<td>Tot Ore<span style="font-size:20px;color:red"><b>*</b></span></td><td>
+<input  type="text" name="<portlet:namespace/>Tot_Ore"  class="form-control" placeholder="Enter Tot_Ore" value="<%=ls.getTot_Ore()%>" id="Tot_Ore"><br/>
+<span id="_Tot_Ore" style="color:red; display:none">Please Enter Tot_Ore</span>
 </td>
 </tr>
 <tr>
@@ -290,9 +283,30 @@ $('.Date-creator').datepicker({
 
 $('.clockpicker').clockpicker({donetext: 'Done'});
 });
-
-
+//Duration
+$("#Tot_Ore").durationPicker({
+	  hours: {
+	    label: "h",
+	    min: 0,
+	    max: 1000
+	  },
+	  minutes: {
+	    label: "m",
+	    min: 0,
+	    max: 59
+	  },
+	  seconds: {
+	    label: "s",
+	    min: 0,
+	    max: 59
+	  },
+	  responsive: true
+	});
 //Now Validation
+//Default value setting for duration 
+$("#duration-hours").val('<%=sh%>');
+$("#duration-minutes").val('<%=sm%>');
+$("#duration-seconds").val('<%=ss%>');
 </script>
 
 <div class="yui3-skin-sam">
@@ -433,18 +447,13 @@ function showAddNoteDialog(){
                                 	//alert(inputs[i].name);
                                   }
                                   
-                                  if(inputs[i].name=="<portlet:namespace/>Tot_Ore-date")
+                                  if(inputs[i].name=="<portlet:namespace/>Tot_Ore")
                             	  {
-                                	  $("#_Tot_Ore-date").hide();
+                                	  $("#_Tot_Ore").hide();
                                 	//alert(inputs[i].name);
                                   }
                                   
-                                  if(inputs[i].name=="<portlet:namespace/>Tot_Ore-time")
-                            	  {
-                                	  $("#_Tot_Ore-time").hide();
-                                	//alert(inputs[i].name);
-                                  }
-                                  
+                                
                                   if(inputs[i].name=="<portlet:namespace/>Scadenza_Iscrizioni-date")
                             	  {
                                 	  $("#_Scadenza_Iscrizioni-date").hide();
@@ -553,19 +562,14 @@ function showAddNoteDialog(){
                             	//alert(inputs[i].name);
                               }
                               
-                              if(inputs[i].name=="<portlet:namespace/>Tot_Ore-date")
+                              if(inputs[i].name=="<portlet:namespace/>Tot_Ore")
                         	  {
-                            	  $("#_Tot_Ore-date").show();
+                            	  $("#_Tot_Ore").show();
                             	  flag=false;
                             	//alert(inputs[i].name);
                               }
                               
-                              if(inputs[i].name=="<portlet:namespace/>Tot_Ore-time")
-                        	  {
-                            	  $("#_Tot_Ore-time").show();
-                            	  flag=false;
-                            	//alert(inputs[i].name);
-                              }
+                             
                               
                               if(inputs[i].name=="<portlet:namespace/>Scadenza_Iscrizioni-date")
                         	  {
@@ -608,8 +612,8 @@ function showAddNoteDialog(){
                     		 $("#_Data_Inizio-time").hide();
                     		 $("#_Data_Fine-date").hide();
                     		 $("#_Data_Fine-time").hide();
-                    		 $("#_Tot_Ore-date").hide();
-                    		 $("#_Tot_Ore-time").hide();
+                    		 $("#_Tot_Ore").hide();
+                    		
                     		 $("#_Scadenza_Iscrizioni-date").hide();
                     		 $("#_Scadenza_Iscrizioni-time").hide();
                     		 $("#_Ammessi_al_corso").hide();
@@ -629,7 +633,7 @@ function showAddNoteDialog(){
        							$("#Visibile_data").val(vis);
        						 }
                     	document.getElementById("<portlet:namespace/>fm").submit();
-                    	 Liferay.Util.getOpener().refreshPortlet();
+                    	 
 						} 
                        //document.getElementById("<portlet:namespace/>fm").submit();
                       //End OF On method

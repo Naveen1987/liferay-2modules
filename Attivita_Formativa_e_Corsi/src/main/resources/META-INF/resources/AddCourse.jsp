@@ -2,6 +2,9 @@
     pageEncoding="UTF-8"%>
 <%@ include file="/init.jsp" %>
 <%--Toggle button /date picker /Time picker/ Spinner(Not have css only js) --%>
+<link href="<%= request.getContextPath()%>/testing/duration-picker.css" rel="stylesheet">
+<script src="<%= request.getContextPath()%>/testing/duration-picker.js"></script>
+
 <link href="<%= request.getContextPath()%>/css/bootstrap-toggle.min.css" rel="stylesheet">
 <script src="<%= request.getContextPath()%>/css/bootstrap-toggle.min.js"></script>
 <link href="<%= request.getContextPath()%>/css/datepicker_1.css" rel="stylesheet">
@@ -146,32 +149,7 @@
 <tr>
 <td><br/></td>
 </tr>
-<tr>
-<td>Tot Ore<span style="font-size:20px;color:red"><b>*</b></span></td><td>
-<table>
-<tbody>
-<tr>
-<td>
-<div class="hero-unit">
-<input class="form-control Date-creator"  type="text" placeholder="Click for Calendar"  id="Tot_Ore-date" name="<portlet:namespace/>Tot_Ore-date" readonly="readonly">
- <span  id="_Tot_Ore-date" style="color:red; display:none">Please Enter Tot Ore Date</span>
- </div>
- </td>
- <td>/</td>
- <td>
- <div class="input-group clockpicker">
- <input type="text" id="Tot_Ore-time" class="form-control" placeholder="Click for Clock" name="<portlet:namespace/>Tot_Ore-time" readonly="readonly">
- <span id="_Tot_Ore-time" style="color:red; display:none">Please Enter Tot Ore Time</span>
-</div>
- </td>
-</tr>
-</tbody>
-</table>
-</td>
-</tr>
-<tr>
-<td><br/></td>
-</tr>
+
 <tr>
 <td>Scadenza Iscrizioni<span style="font-size:20px;color:red"><b>*</b></span></td><td>
 <table>
@@ -199,6 +177,15 @@
 <td><br/></td>
 </tr>
 <tr>
+<td>Tot Ore<span style="font-size:20px;color:red"><b>*</b></span></td><td>
+<input  type="text" name="<portlet:namespace/>Tot_Ore"  class="form-control" placeholder="Enter Tot_Ore" value="" id="Tot_Ore"><br/>
+<span id="_Tot_Ore" style="color:red; display:none">Please Enter Tot_Ore</span>
+</td>
+</tr>
+<tr>
+<td><br/></td>
+</tr>
+<tr>
 <td>Ammessi al corso<span style="font-size:20px;color:red"><b>*</b></span></td><td>
 <table><tr><td>
 <div class="input-group">
@@ -207,7 +194,7 @@
             <span class="glyphicon glyphicon-minus"></span>
         </button>
     </span>
-    <input type="text" data-ride="spinner" id="Ammessi_al_corso" class="form-control input-number" value="1" name="<portlet:namespace/>Ammessi_al_corso">
+    <input type="text" data-ride="spinner" id="Ammessi_al_corso" class="form-control input-number" value="" name="<portlet:namespace/>Ammessi_al_corso">
     <span class="input-group-btn">
         <button type="button" class="btn btn-default" data-value="increase" data-target="#Ammessi_al_corso" data-toggle="spinner">
             <span class="glyphicon glyphicon-plus"></span>
@@ -261,17 +248,49 @@
 </div>
 </div>
 </div>
-
 </aui:form>
 
+<%--
+
+<link href="<%= request.getContextPath()%>/testing/duration-picker.css" rel="stylesheet">
+<script src="<%= request.getContextPath()%>/testing/duration-picker.js"></script>
+
+duration picker demo
+<input type="text" id="duration" name="duration">
+ 
+
+//$("#duration").durationPicker();
+$("#btn").click(function(){
+	alert($("#duration").val());
+});
+$("#duration").durationPicker({
+	  hours: {
+	    label: "h",
+	    min: 0,
+	    max: 100
+	  },
+	  minutes: {
+	    label: "m",
+	    min: 0,
+	    max: 59
+	  },
+	  seconds: {
+	    label: "s",
+	    min: 0,
+	    max: 59
+	  },
+	  classname: 'form-control',
+	  responsive: true
+	});
+ --%> 
 <script type="text/javascript">
 //How to get value of CHeckox
 /* $("#oncl").click(function(){
 	//
 	var data= $("#Bloccato").prop('checked');
 	alert(data+""+$('#example1').val()+" "+$('#input-time').val()+" "+$("#spinner").val());
-}); */
-
+});
+*/
 //Any data want to update on page load
 $(document).ready(function () {
 $('.Date-creator').datepicker({
@@ -282,6 +301,25 @@ $('.clockpicker').clockpicker({donetext: 'Done'});
 });
 
 
+//Duration
+$("#Tot_Ore").durationPicker({
+	  hours: {
+	    label: "h",
+	    min: 0,
+	    max: 1000
+	  },
+	  minutes: {
+	    label: "m",
+	    min: 0,
+	    max: 59
+	  },
+	  seconds: {
+	    label: "s",
+	    min: 0,
+	    max: 59
+	  },
+	  responsive: true
+	});
 //Now Validation
 </script>
 
@@ -303,8 +341,7 @@ $('.clockpicker').clockpicker({donetext: 'Done'});
 	 $("#_Data_Inizio-time").hide();
 	 $("#_Data_Fine-date").hide();
 	 $("#_Data_Fine-time").hide();
-	 $("#_Tot_Ore-date").hide();
-	 $("#_Tot_Ore-time").hide();
+	 $("#_Tot_Ore").hide();
 	 $("#_Scadenza_Iscrizioni-date").hide();
 	 $("#_Scadenza_Iscrizioni-time").hide();
 	 $("#_Ammessi_al_corso").hide();
@@ -312,7 +349,7 @@ $('.clockpicker').clockpicker({donetext: 'Done'});
 	 $("#<portlet:namespace/>fm").closest('form').find("input[type=text] ").val("");
 	 $("#<portlet:namespace/>fm").closest('form').find("input[type=file]").val("");
 	 $("#Docente").val("<%=user.getFullName()%>");
-	 $("#Ammessi_al_corso").val(1);
+	 $("#Ammessi_al_corso").val("");
 	 $('#Visibile').bootstrapToggle('off')
 	 $('#Bloccato').bootstrapToggle('off')
 });  
@@ -450,7 +487,20 @@ function showAddNoteDialog(){
                                 	//alert(inputs[i].name);
                                   }
                                   
-                                  if(inputs[i].name=="<portlet:namespace/>Tot_Ore-date")
+                                  if(inputs[i].name=="<portlet:namespace/>Tot_Ore")
+                            	  {
+                                	  if(inputs[i].value==='0h,0m,0s')
+                                		  {
+                                		  $("#_Tot_Ore").text('Please Select Duration');
+                                		  $("#_Tot_Ore").show();
+                                		  }
+                                	  else{
+                                		  $("#_Tot_Ore").hide();
+                                	  }
+                                	
+                                	//alert(inputs[i].name);
+                                  }
+                                  /* if(inputs[i].name=="<portlet:namespace/>Tot_Ore-date")
                             	  {
                                 	  $("#_Tot_Ore-date").hide();
                                 	//alert(inputs[i].name);
@@ -460,7 +510,7 @@ function showAddNoteDialog(){
                             	  {
                                 	  $("#_Tot_Ore-time").hide();
                                 	//alert(inputs[i].name);
-                                  }
+                                  } */
                                   
                                   if(inputs[i].name=="<portlet:namespace/>Scadenza_Iscrizioni-date")
                             	  {
@@ -569,20 +619,25 @@ function showAddNoteDialog(){
                             	  flag=false;
                             	//alert(inputs[i].name);
                               }
-                              
-                              if(inputs[i].name=="<portlet:namespace/>Tot_Ore-date")
+                              if(inputs[i].name=="<portlet:namespace/>Tot_Ore")
+                        	  {
+                            	  $("#_Tot_Ore").show();
+                            	  flag=false;
+                            	//alert(inputs[i].name);
+                              }
+                              /*   if(inputs[i].name=="<portlet:namespace/>Tot_Ore-date")
                         	  {
                             	  $("#_Tot_Ore-date").show();
                             	  flag=false;
                             	//alert(inputs[i].name);
                               }
                               
-                              if(inputs[i].name=="<portlet:namespace/>Tot_Ore-time")
+                             if(inputs[i].name=="<portlet:namespace/>Tot_Ore-time")
                         	  {
                             	  $("#_Tot_Ore-time").show();
                             	  flag=false;
                             	//alert(inputs[i].name);
-                              }
+                              } */
                               
                               if(inputs[i].name=="<portlet:namespace/>Scadenza_Iscrizioni-date")
                         	  {
@@ -625,9 +680,11 @@ function showAddNoteDialog(){
                     		 $("#_Data_Inizio-time").hide();
                     		 $("#_Data_Fine-date").hide();
                     		 $("#_Data_Fine-time").hide();
-                    		 $("#_Tot_Ore-date").hide();
-                    		 $("#_Tot_Ore-time").hide();
-                    		 $("#_Scadenza_Iscrizioni-date").hide();
+                    		 $("#_Tot_Ore").hide();
+                    		 /* $("#_Tot_Ore-date").hide();
+                    		 $("#_Tot_Ore-time").hide(); 
+                    		  */
+                    		  $("#_Scadenza_Iscrizioni-date").hide();
                     		 $("#_Scadenza_Iscrizioni-time").hide();
                     		 $("#_Ammessi_al_corso").hide();
                     		 $("#_Dispensa_corso").hide();
@@ -658,7 +715,5 @@ function showAddNoteDialog(){
    );
     }
 
-
 </script>
-
 
