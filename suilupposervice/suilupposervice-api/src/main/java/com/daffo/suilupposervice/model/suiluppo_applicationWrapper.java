@@ -63,6 +63,7 @@ public class suiluppo_applicationWrapper implements suiluppo_application,
 		attributes.put("applicat_email", getApplicat_email());
 		attributes.put("applicat_phone", getApplicat_phone());
 		attributes.put("course_id", getCourse_id());
+		attributes.put("applicat_confirm", getApplicat_confirm());
 
 		return attributes;
 	}
@@ -97,6 +98,12 @@ public class suiluppo_applicationWrapper implements suiluppo_application,
 
 		if (course_id != null) {
 			setCourse_id(course_id);
+		}
+
+		String applicat_confirm = (String)attributes.get("applicat_confirm");
+
+		if (applicat_confirm != null) {
+			setApplicat_confirm(applicat_confirm);
 		}
 	}
 
@@ -154,6 +161,16 @@ public class suiluppo_applicationWrapper implements suiluppo_application,
 	@Override
 	public java.lang.Object clone() {
 		return new suiluppo_applicationWrapper((suiluppo_application)_suiluppo_application.clone());
+	}
+
+	/**
+	* Returns the applicat_confirm of this suiluppo_application.
+	*
+	* @return the applicat_confirm of this suiluppo_application
+	*/
+	@Override
+	public java.lang.String getApplicat_confirm() {
+		return _suiluppo_application.getApplicat_confirm();
 	}
 
 	/**
@@ -229,6 +246,16 @@ public class suiluppo_applicationWrapper implements suiluppo_application,
 	@Override
 	public void persist() {
 		_suiluppo_application.persist();
+	}
+
+	/**
+	* Sets the applicat_confirm of this suiluppo_application.
+	*
+	* @param applicat_confirm the applicat_confirm of this suiluppo_application
+	*/
+	@Override
+	public void setApplicat_confirm(java.lang.String applicat_confirm) {
+		_suiluppo_application.setApplicat_confirm(applicat_confirm);
 	}
 
 	/**

@@ -222,6 +222,18 @@ public class suiluppo_courseLocalServiceWrapper
 			end, orderByComparator);
 	}
 
+	@Override
+	public java.util.List<com.daffo.suilupposervice.model.suiluppo_course> getCourseNotUnderDocente(
+		java.lang.String Docente) {
+		return _suiluppo_courseLocalService.getCourseNotUnderDocente(Docente);
+	}
+
+	@Override
+	public java.util.List<com.daffo.suilupposervice.model.suiluppo_course> getCourseUnderDocente(
+		java.lang.String Docente) {
+		return _suiluppo_courseLocalService.getCourseUnderDocente(Docente);
+	}
+
 	/**
 	* Returns a range of all the suiluppo_courses.
 	*

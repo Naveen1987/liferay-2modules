@@ -29,6 +29,7 @@
         <column name="applicat_email" type="String"></column>
         <column name="applicat_phone" type="String"></column>
         <column name="course_id" type="long"></column>
+        <column name="applicat_confirm" type="String"></column>
          <finder name="course_id" return-type="Collection">
         <finder-column name="course_id" />
         </finder>

@@ -133,6 +133,21 @@ public interface suiluppo_applicationModel extends BaseModel<suiluppo_applicatio
 	 */
 	public void setCourse_id(long course_id);
 
+	/**
+	 * Returns the applicat_confirm of this suiluppo_application.
+	 *
+	 * @return the applicat_confirm of this suiluppo_application
+	 */
+	@AutoEscape
+	public String getApplicat_confirm();
+
+	/**
+	 * Sets the applicat_confirm of this suiluppo_application.
+	 *
+	 * @param applicat_confirm the applicat_confirm of this suiluppo_application
+	 */
+	public void setApplicat_confirm(String applicat_confirm);
+
 	@Override
 	public boolean isNew();
 

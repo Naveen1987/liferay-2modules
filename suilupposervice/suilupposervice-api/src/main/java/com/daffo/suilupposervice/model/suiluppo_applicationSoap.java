@@ -38,6 +38,7 @@ public class suiluppo_applicationSoap implements Serializable {
 		soapModel.setApplicat_email(model.getApplicat_email());
 		soapModel.setApplicat_phone(model.getApplicat_phone());
 		soapModel.setCourse_id(model.getCourse_id());
+		soapModel.setApplicat_confirm(model.getApplicat_confirm());
 
 		return soapModel;
 	}
@@ -133,9 +134,18 @@ public class suiluppo_applicationSoap implements Serializable {
 		_course_id = course_id;
 	}
 
+	public String getApplicat_confirm() {
+		return _applicat_confirm;
+	}
+
+	public void setApplicat_confirm(String applicat_confirm) {
+		_applicat_confirm = applicat_confirm;
+	}
+
 	private long _applicat_id;
 	private String _applicat_name;
 	private String _applicat_email;
 	private String _applicat_phone;
 	private long _course_id;
+	private String _applicat_confirm;
 }

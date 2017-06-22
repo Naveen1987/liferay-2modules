@@ -14,7 +14,8 @@
 <%@page import="com.daffo.suilupposervice.model.suiluppo_application"%>
 <%@page import="com.daffo.suilupposervice.service.suiluppo_courseLocalServiceUtil"%>
 <%@ include file="/init.jsp" %>
-<%
+<%@ include file="/listCourse.jsp" %>
+<%-- <%
 
 DynamicQuery userQuery = DynamicQueryFactoryUtil.forClass(suiluppo_course.class);
 List<suiluppo_course> suil=suiluppo_courseLocalServiceUtil.dynamicQuery(userQuery);
@@ -22,7 +23,7 @@ for(suiluppo_course su:suil)
 {
 	System.out.println(su);
 }
-%>
+%> --%>
 <%-- <%@include file="/listCourse.jsp" %>
  --%>
 <%--

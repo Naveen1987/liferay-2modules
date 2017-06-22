@@ -64,7 +64,7 @@ public class suiluppo_applicationCacheModel implements CacheModel<suiluppo_appli
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(11);
+		StringBundler sb = new StringBundler(13);
 
 		sb.append("{applicat_id=");
 		sb.append(applicat_id);
@@ -76,6 +76,8 @@ public class suiluppo_applicationCacheModel implements CacheModel<suiluppo_appli
 		sb.append(applicat_phone);
 		sb.append(", course_id=");
 		sb.append(course_id);
+		sb.append(", applicat_confirm=");
+		sb.append(applicat_confirm);
 		sb.append("}");
 
 		return sb.toString();
@@ -110,6 +112,13 @@ public class suiluppo_applicationCacheModel implements CacheModel<suiluppo_appli
 
 		suiluppo_applicationImpl.setCourse_id(course_id);
 
+		if (applicat_confirm == null) {
+			suiluppo_applicationImpl.setApplicat_confirm(StringPool.BLANK);
+		}
+		else {
+			suiluppo_applicationImpl.setApplicat_confirm(applicat_confirm);
+		}
+
 		suiluppo_applicationImpl.resetOriginalValues();
 
 		return suiluppo_applicationImpl;
@@ -123,6 +132,7 @@ public class suiluppo_applicationCacheModel implements CacheModel<suiluppo_appli
 		applicat_phone = objectInput.readUTF();
 
 		course_id = objectInput.readLong();
+		applicat_confirm = objectInput.readUTF();
 	}
 
 	@Override
@@ -152,6 +162,13 @@ public class suiluppo_applicationCacheModel implements CacheModel<suiluppo_appli
 		}
 
 		objectOutput.writeLong(course_id);
+
+		if (applicat_confirm == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(applicat_confirm);
+		}
 	}
 
 	public long applicat_id;
@@ -159,4 +176,5 @@ public class suiluppo_applicationCacheModel implements CacheModel<suiluppo_appli
 	public String applicat_email;
 	public String applicat_phone;
 	public long course_id;
+	public String applicat_confirm;
 }

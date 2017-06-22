@@ -65,7 +65,8 @@ public class suiluppo_applicationModelImpl extends BaseModelImpl<suiluppo_applic
 			{ "applicat_name", Types.VARCHAR },
 			{ "applicat_email", Types.VARCHAR },
 			{ "applicat_phone", Types.VARCHAR },
-			{ "course_id", Types.BIGINT }
+			{ "course_id", Types.BIGINT },
+			{ "applicat_confirm", Types.VARCHAR }
 		};
 	public static final Map<String, Integer> TABLE_COLUMNS_MAP = new HashMap<String, Integer>();
 
@@ -75,9 +76,10 @@ public class suiluppo_applicationModelImpl extends BaseModelImpl<suiluppo_applic
 		TABLE_COLUMNS_MAP.put("applicat_email", Types.VARCHAR);
 		TABLE_COLUMNS_MAP.put("applicat_phone", Types.VARCHAR);
 		TABLE_COLUMNS_MAP.put("course_id", Types.BIGINT);
+		TABLE_COLUMNS_MAP.put("applicat_confirm", Types.VARCHAR);
 	}
 
-	public static final String TABLE_SQL_CREATE = "create table suiluppo_application (applicat_id LONG not null primary key,applicat_name VARCHAR(75) null,applicat_email VARCHAR(75) null,applicat_phone VARCHAR(75) null,course_id LONG)";
+	public static final String TABLE_SQL_CREATE = "create table suiluppo_application (applicat_id LONG not null primary key,applicat_name VARCHAR(75) null,applicat_email VARCHAR(75) null,applicat_phone VARCHAR(75) null,course_id LONG,applicat_confirm VARCHAR(75) null)";
 	public static final String TABLE_SQL_DROP = "drop table suiluppo_application";
 	public static final String ORDER_BY_JPQL = " ORDER BY suiluppo_application.applicat_id ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY suiluppo_application.applicat_id ASC";
@@ -140,6 +142,7 @@ public class suiluppo_applicationModelImpl extends BaseModelImpl<suiluppo_applic
 		attributes.put("applicat_email", getApplicat_email());
 		attributes.put("applicat_phone", getApplicat_phone());
 		attributes.put("course_id", getCourse_id());
+		attributes.put("applicat_confirm", getApplicat_confirm());
 
 		attributes.put("entityCacheEnabled", isEntityCacheEnabled());
 		attributes.put("finderCacheEnabled", isFinderCacheEnabled());
@@ -177,6 +180,12 @@ public class suiluppo_applicationModelImpl extends BaseModelImpl<suiluppo_applic
 
 		if (course_id != null) {
 			setCourse_id(course_id);
+		}
+
+		String applicat_confirm = (String)attributes.get("applicat_confirm");
+
+		if (applicat_confirm != null) {
+			setApplicat_confirm(applicat_confirm);
 		}
 	}
 
@@ -257,6 +266,21 @@ public class suiluppo_applicationModelImpl extends BaseModelImpl<suiluppo_applic
 		return _originalCourse_id;
 	}
 
+	@Override
+	public String getApplicat_confirm() {
+		if (_applicat_confirm == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _applicat_confirm;
+		}
+	}
+
+	@Override
+	public void setApplicat_confirm(String applicat_confirm) {
+		_applicat_confirm = applicat_confirm;
+	}
+
 	public long getColumnBitmask() {
 		return _columnBitmask;
 	}
@@ -293,6 +317,7 @@ public class suiluppo_applicationModelImpl extends BaseModelImpl<suiluppo_applic
 		suiluppo_applicationImpl.setApplicat_email(getApplicat_email());
 		suiluppo_applicationImpl.setApplicat_phone(getApplicat_phone());
 		suiluppo_applicationImpl.setCourse_id(getCourse_id());
+		suiluppo_applicationImpl.setApplicat_confirm(getApplicat_confirm());
 
 		suiluppo_applicationImpl.resetOriginalValues();
 
@@ -394,12 +419,20 @@ public class suiluppo_applicationModelImpl extends BaseModelImpl<suiluppo_applic
 
 		suiluppo_applicationCacheModel.course_id = getCourse_id();
 
+		suiluppo_applicationCacheModel.applicat_confirm = getApplicat_confirm();
+
+		String applicat_confirm = suiluppo_applicationCacheModel.applicat_confirm;
+
+		if ((applicat_confirm != null) && (applicat_confirm.length() == 0)) {
+			suiluppo_applicationCacheModel.applicat_confirm = null;
+		}
+
 		return suiluppo_applicationCacheModel;
 	}
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(11);
+		StringBundler sb = new StringBundler(13);
 
 		sb.append("{applicat_id=");
 		sb.append(getApplicat_id());
@@ -411,6 +444,8 @@ public class suiluppo_applicationModelImpl extends BaseModelImpl<suiluppo_applic
 		sb.append(getApplicat_phone());
 		sb.append(", course_id=");
 		sb.append(getCourse_id());
+		sb.append(", applicat_confirm=");
+		sb.append(getApplicat_confirm());
 		sb.append("}");
 
 		return sb.toString();
@@ -418,7 +453,7 @@ public class suiluppo_applicationModelImpl extends BaseModelImpl<suiluppo_applic
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(19);
+		StringBundler sb = new StringBundler(22);
 
 		sb.append("<model><model-name>");
 		sb.append("com.daffo.suilupposervice.model.suiluppo_application");
@@ -444,6 +479,10 @@ public class suiluppo_applicationModelImpl extends BaseModelImpl<suiluppo_applic
 			"<column><column-name>course_id</column-name><column-value><![CDATA[");
 		sb.append(getCourse_id());
 		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>applicat_confirm</column-name><column-value><![CDATA[");
+		sb.append(getApplicat_confirm());
+		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -461,6 +500,7 @@ public class suiluppo_applicationModelImpl extends BaseModelImpl<suiluppo_applic
 	private long _course_id;
 	private long _originalCourse_id;
 	private boolean _setOriginalCourse_id;
+	private String _applicat_confirm;
 	private long _columnBitmask;
 	private suiluppo_application _escapedModel;
 }

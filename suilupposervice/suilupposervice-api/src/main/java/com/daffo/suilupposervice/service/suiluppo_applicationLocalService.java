@@ -60,6 +60,8 @@ public interface suiluppo_applicationLocalService extends BaseLocalService,
 	 *
 	 * Never modify or reference this interface directly. Always use {@link suiluppo_applicationLocalServiceUtil} to access the suiluppo_application local service. Add custom service methods to {@link com.daffo.suilupposervice.service.impl.suiluppo_applicationLocalServiceImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
+	public boolean checkApplicantUnderCourse(long courseId,
+		java.lang.String applicant);
 
 	/**
 	* Adds the suiluppo_application to the database. Also notifies the appropriate model listeners.
@@ -197,6 +199,9 @@ public interface suiluppo_applicationLocalService extends BaseLocalService,
 	*/
 	public <T> List<T> dynamicQuery(DynamicQuery dynamicQuery, int start,
 		int end, OrderByComparator<T> orderByComparator);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<suiluppo_application> getApplicantUnderCourse(long courseId);
 
 	/**
 	* Returns a range of all the suiluppo_applications.

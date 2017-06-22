@@ -34,6 +34,13 @@ public class suiluppo_applicationLocalServiceWrapper
 		_suiluppo_applicationLocalService = suiluppo_applicationLocalService;
 	}
 
+	@Override
+	public boolean checkApplicantUnderCourse(long courseId,
+		java.lang.String applicant) {
+		return _suiluppo_applicationLocalService.checkApplicantUnderCourse(courseId,
+			applicant);
+	}
+
 	/**
 	* Adds the suiluppo_application to the database. Also notifies the appropriate model listeners.
 	*
@@ -220,6 +227,12 @@ public class suiluppo_applicationLocalServiceWrapper
 		com.liferay.portal.kernel.util.OrderByComparator<T> orderByComparator) {
 		return _suiluppo_applicationLocalService.dynamicQuery(dynamicQuery,
 			start, end, orderByComparator);
+	}
+
+	@Override
+	public java.util.List<com.daffo.suilupposervice.model.suiluppo_application> getApplicantUnderCourse(
+		long courseId) {
+		return _suiluppo_applicationLocalService.getApplicantUnderCourse(courseId);
 	}
 
 	/**

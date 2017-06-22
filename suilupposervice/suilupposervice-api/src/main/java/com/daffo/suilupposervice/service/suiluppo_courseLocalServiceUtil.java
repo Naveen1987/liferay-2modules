@@ -212,6 +212,16 @@ public class suiluppo_courseLocalServiceUtil {
 				   .dynamicQuery(dynamicQuery, start, end, orderByComparator);
 	}
 
+	public static java.util.List<com.daffo.suilupposervice.model.suiluppo_course> getCourseNotUnderDocente(
+		java.lang.String Docente) {
+		return getService().getCourseNotUnderDocente(Docente);
+	}
+
+	public static java.util.List<com.daffo.suilupposervice.model.suiluppo_course> getCourseUnderDocente(
+		java.lang.String Docente) {
+		return getService().getCourseUnderDocente(Docente);
+	}
+
 	/**
 	* Returns a range of all the suiluppo_courses.
 	*

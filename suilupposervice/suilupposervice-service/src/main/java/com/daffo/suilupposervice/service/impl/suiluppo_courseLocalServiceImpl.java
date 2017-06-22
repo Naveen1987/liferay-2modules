@@ -24,6 +24,7 @@ import com.daffo.suilupposervice.service.base.suiluppo_courseLocalServiceBaseImp
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
+import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
 
 /**
  * The implementation of the suiluppo_course local service.
@@ -45,14 +46,14 @@ public class suiluppo_courseLocalServiceImpl
 	
 	public List<suiluppo_course> getCourseUnderDocente(String Docente)
 	{
-		DynamicQuery dyQuery = DynamicQueryFactoryUtil.forClass(suiluppo_course.class);
+		DynamicQuery dyQuery = DynamicQueryFactoryUtil.forClass(suiluppo_course.class,PortalClassLoaderUtil.getClassLoader());
 	    dyQuery.add(RestrictionsFactoryUtil.eq("Docente", Docente));
 	    return suiluppo_courseLocalServiceUtil.dynamicQuery(dyQuery);
 	    
 	}
 	public List<suiluppo_course> getCourseNotUnderDocente(String Docente)
 	{
-		DynamicQuery dyQuery = DynamicQueryFactoryUtil.forClass(suiluppo_course.class);
+		DynamicQuery dyQuery = DynamicQueryFactoryUtil.forClass(suiluppo_course.class,PortalClassLoaderUtil.getClassLoader());
 	    dyQuery.add(RestrictionsFactoryUtil.ne("Docente", Docente));
 	    return suiluppo_courseLocalServiceUtil.dynamicQuery(dyQuery);
 	    

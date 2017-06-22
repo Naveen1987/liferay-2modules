@@ -102,18 +102,10 @@ $(document).ready(function() {
     <tr class="warning no-result">
       <td colspan="10"><i class="fa fa-warning"></i> No result</td>
     </tr>
-  </thead>
+   </thead>
     <tbody>
-   <%--  <%
-    List<suiluppo_course> lsc=suiluppo_courseLocalServiceUtil.getsuiluppo_courses(0, suiluppo_courseLocalServiceUtil.getsuiluppo_coursesCount());			
-    %> --%>
-    
-    <%
-    
-   
-    DynamicQuery userQuery = DynamicQueryFactoryUtil.forClass(suiluppo_course.class);
-    userQuery.add(RestrictionsFactoryUtil.eq("Docente", user.getFullName()));
-    List<suiluppo_course> suil=suiluppo_courseLocalServiceUtil.dynamicQuery(userQuery);
+    <%    
+    List<suiluppo_course> suil=suiluppo_courseLocalServiceUtil.getCourseUnderDocente(user.getFullName());
     for(suiluppo_course su:suil)
     {%>
      <tr>
@@ -135,13 +127,13 @@ $(document).ready(function() {
     </tbody>
     </table>
     </td>
-    <td><span onclick="getCourseApplicants('<%=su.getCourse_id() +""%>')" class="btn btn-success btnview">list</span></td>
+    <td><span onclick="getCourseApplicants('<%=su.getCourse_id() +""%>')" class="btn btn-success btnlistOfApp"><%=
+    		suiluppo_applicationLocalServiceUtil.getApplicantUnderCourse(su.getCourse_id()).size()+""
+    %></span></td>
     </tr>
     <%}%>
-   
     </tbody>
     </table>
-
 </div>
 </div>
 
@@ -173,26 +165,13 @@ $(document).ready(function() {
   </thead>
     <tbody>
    <% 
-    DynamicQuery userVQuery = DynamicQueryFactoryUtil.forClass(suiluppo_course.class);
-    userVQuery.add(RestrictionsFactoryUtil.ne("Docente", user.getFullName()));
-    List<suiluppo_course> suil1=suiluppo_courseLocalServiceUtil.dynamicQuery(userVQuery);
+    List<suiluppo_course> suil1=suiluppo_courseLocalServiceUtil.getCourseNotUnderDocente(user.getFullName());
     for(suiluppo_course su:suil1)
     {
     if(su.getBloccato().equalsIgnoreCase("false"))
     {
-    	
-    	/* DynamicQuery courseCount = DynamicQueryFactoryUtil.forClass(suiluppo_application.class); 
-    	Projection projection =PropertyFactoryUtil.forName("applicat_name").count();
-    	courseCount.add(RestrictionsFactoryUtil.eq("course_id", su.getCourse_id()));
-    	userQuery.setProjection(projection); 
-    	try { 
-    		List<Object>list = suiluppo_applicationLocalServiceUtil.dynamicQuery(courseCount);
-    		
-    		System.out.println(su.getDispensa_corso()+"count user id=>"+list.get(0)); } 
-    		catch (Exception e2) 
-    		{  }
-    	 */
-    	 
+    	if(su.getAmmessi_al_corso()>suiluppo_applicationLocalServiceUtil.getApplicantUnderCourse(su.getCourse_id()).size())
+    	{
     	%>
         <tr>
         <td><%=su.getCourse_id() %></td> 
@@ -210,10 +189,7 @@ $(document).ready(function() {
        <tr>
        <td style="padding: 5px;"><span onclick="getCourseViewId('<%=su.getCourse_id() +""%>')" class="btn btn-primary btnview">View</span></td>
        <%
-       DynamicQuery appQuery = DynamicQueryFactoryUtil.forClass(suiluppo_application.class);
-       appQuery.add(RestrictionsFactoryUtil.and(RestrictionsFactoryUtil.eq("applicat_name", user.getFullName()), RestrictionsFactoryUtil.eq("course_id", su.getCourse_id())));
-       List<suiluppo_application> sp=suiluppo_applicationLocalServiceUtil.dynamicQuery(appQuery);
-       if(sp.size()>0){
+       if(suiluppo_applicationLocalServiceUtil.checkApplicantUnderCourse(su.getCourse_id(), user.getFullName())){
        	%>
        <td style="padding: 5px;"><span id="<%="btn_"+su.getCourse_id()%>"  onclick="getCourseApplyId('<%=su.getCourse_id() +""%>')" class="btn btn-warning btnedit">Applied</span></td>	
            <%
@@ -231,7 +207,38 @@ $(document).ready(function() {
        </tr>
        <%
     }
+    	
+	else if(su.getAmmessi_al_corso()==suiluppo_applicationLocalServiceUtil.getApplicantUnderCourse(su.getCourse_id()).size())
+    	{
+    	if(suiluppo_applicationLocalServiceUtil.checkApplicantUnderCourse(su.getCourse_id(), user.getFullName())){
+    	%>
+       <tr>
+       <td><%=su.getCourse_id() %></td> 
+       <td><%=su.getDocente() %></td> 
+       <td><%=su.getEvento_Progetto()%></td>
+       <td><%=su.getTitolo()%></td>
+       <td><%=su.getData_Inizio()%></td>
+       <td><%=su.getData_Fine()%></td>
+       <td><%=su.getTot_Ore()%></td>
+       <td><%=su.getVisibile()%></td>
+       <td><%=su.getBloccato()%></td>
+       <td>
+       <table>
+       <tbody>
+       <tr>
+       <td style="padding: 5px;"><span onclick="getCourseViewId('<%=su.getCourse_id() +""%>')" class="btn btn-primary btnview">View</span></td>
+       <td style="padding: 5px;"><span id="<%="btn_"+su.getCourse_id()%>"  onclick="getCourseApplyId('<%=su.getCourse_id() +""%>')" class="btn btn-warning btnedit">Applied</span></td>	
+       </tr>
+       </tbody>
+       </table>
+        </td>
+   		</tr>  
+    	<%	
+      	 }
+    	}   	
+   }
     }%>
+   
     </tbody>
     </table>
 
@@ -384,6 +391,37 @@ $("#btnNew").click(function(){
 	        });
 	    });
 });
+</script>
+<script>
+function getCourseApplicants(courseId){
+	 var portletURL = Liferay.PortletURL.createRenderURL();
+	 	portletURL.setWindowState('<%=LiferayWindowState.POP_UP.toString() %>');
+	    portletURL.setParameter('courseId', courseId);    
+	    portletURL.setPortletId("<%=themeDisplay.getPortletDisplay().getId() %>");
+	    portletURL.setParameter('mvcPath', '/listOfApplicants.jsp');
+	 
+	    YUI().ready(function(A) {
+	        YUI().use('aui-base','liferay-util-window', function(A) {
+	            Liferay.Util.Window.getWindow({
+	                title :'List Of Applicants',
+	                uri: portletURL,
+	                id:'<portlet:namespace/>ListOfApplicants',
+	                dialog: {
+	                	centered: true,
+	                	constrain2view: true,
+	                    destroyOnHide: true,
+	                    resizable: false,
+	                    cache: false,
+	                    modal: true,
+	                    width: 950
+	                }
+	            }).after('destroy', function(event) {
+	            	//It will refresh
+	            	//location.reload();
+	            });
+	        });
+	    });
+	}
 </script>
 <aui:script>
    Liferay.provide(window, 'closePopup', function(dialogId) {

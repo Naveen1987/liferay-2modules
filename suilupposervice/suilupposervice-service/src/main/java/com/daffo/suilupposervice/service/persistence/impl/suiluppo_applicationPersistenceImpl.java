@@ -860,6 +860,7 @@ public class suiluppo_applicationPersistenceImpl extends BasePersistenceImpl<sui
 		suiluppo_applicationImpl.setApplicat_email(suiluppo_application.getApplicat_email());
 		suiluppo_applicationImpl.setApplicat_phone(suiluppo_application.getApplicat_phone());
 		suiluppo_applicationImpl.setCourse_id(suiluppo_application.getCourse_id());
+		suiluppo_applicationImpl.setApplicat_confirm(suiluppo_application.getApplicat_confirm());
 
 		return suiluppo_applicationImpl;
 	}

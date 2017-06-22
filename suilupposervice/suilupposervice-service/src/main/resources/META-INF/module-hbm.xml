@@ -16,6 +16,7 @@
 		<property name="applicat_email" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="applicat_phone" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="course_id" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="applicat_confirm" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 	</class>
 	<class name="com.daffo.suilupposervice.model.impl.suiluppo_courseImpl" table="suiluppo_course">
 		<id name="course_id" type="long">

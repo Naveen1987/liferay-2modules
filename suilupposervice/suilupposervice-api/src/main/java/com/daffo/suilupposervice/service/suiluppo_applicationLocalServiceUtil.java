@@ -41,6 +41,10 @@ public class suiluppo_applicationLocalServiceUtil {
 	 *
 	 * Never modify this class directly. Add custom service methods to {@link com.daffo.suilupposervice.service.impl.suiluppo_applicationLocalServiceImpl} and rerun ServiceBuilder to regenerate this class.
 	 */
+	public static boolean checkApplicantUnderCourse(long courseId,
+		java.lang.String applicant) {
+		return getService().checkApplicantUnderCourse(courseId, applicant);
+	}
 
 	/**
 	* Adds the suiluppo_application to the database. Also notifies the appropriate model listeners.
@@ -210,6 +214,11 @@ public class suiluppo_applicationLocalServiceUtil {
 		com.liferay.portal.kernel.util.OrderByComparator<T> orderByComparator) {
 		return getService()
 				   .dynamicQuery(dynamicQuery, start, end, orderByComparator);
+	}
+
+	public static java.util.List<com.daffo.suilupposervice.model.suiluppo_application> getApplicantUnderCourse(
+		long courseId) {
+		return getService().getApplicantUnderCourse(courseId);
 	}
 
 	/**

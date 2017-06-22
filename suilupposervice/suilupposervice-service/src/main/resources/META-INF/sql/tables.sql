@@ -3,7 +3,8 @@ create table suiluppo_application (
 	applicat_name VARCHAR(75) null,
 	applicat_email VARCHAR(75) null,
 	applicat_phone VARCHAR(75) null,
-	course_id LONG
+	course_id LONG,
+	applicat_confirm VARCHAR(75) null
 );
 
 create table suiluppo_course (

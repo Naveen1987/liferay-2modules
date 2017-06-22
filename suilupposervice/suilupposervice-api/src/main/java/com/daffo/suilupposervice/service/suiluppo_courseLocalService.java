@@ -197,6 +197,13 @@ public interface suiluppo_courseLocalService extends BaseLocalService,
 	public <T> List<T> dynamicQuery(DynamicQuery dynamicQuery, int start,
 		int end, OrderByComparator<T> orderByComparator);
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<suiluppo_course> getCourseNotUnderDocente(
+		java.lang.String Docente);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<suiluppo_course> getCourseUnderDocente(java.lang.String Docente);
+
 	/**
 	* Returns a range of all the suiluppo_courses.
 	*

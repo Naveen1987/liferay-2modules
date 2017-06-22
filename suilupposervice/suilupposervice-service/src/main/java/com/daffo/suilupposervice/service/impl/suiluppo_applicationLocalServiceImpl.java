@@ -25,6 +25,7 @@ import com.daffo.suilupposervice.service.base.suiluppo_applicationLocalServiceBa
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
+import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
 
 /**
  * The implementation of the suiluppo_application local service.
@@ -44,18 +45,19 @@ import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 public class suiluppo_applicationLocalServiceImpl
 	extends suiluppo_applicationLocalServiceBaseImpl {
 	
-	public boolean checkApplicantUnderCourse(String courseId,String applicant)
+	public boolean checkApplicantUnderCourse(long courseId,String applicant)
 	{
-		   DynamicQuery appQuery = DynamicQueryFactoryUtil.forClass(suiluppo_application.class);
+		   DynamicQuery appQuery = DynamicQueryFactoryUtil.forClass(suiluppo_application.class,PortalClassLoaderUtil.getClassLoader());
 	       appQuery.add(RestrictionsFactoryUtil.and(RestrictionsFactoryUtil.eq("applicat_name", applicant), RestrictionsFactoryUtil.eq("course_id", courseId)));
 	       return (suiluppo_applicationLocalServiceUtil.dynamicQuery(appQuery).size()>0?true:false);
 	    
 	}
-	public List<suiluppo_application> getApplicantUnderCourse(String courseId)
+	public List<suiluppo_application> getApplicantUnderCourse(long courseId)
 	{
-		   DynamicQuery appQuery = DynamicQueryFactoryUtil.forClass(suiluppo_application.class);
+		   DynamicQuery appQuery = DynamicQueryFactoryUtil.forClass(suiluppo_application.class,PortalClassLoaderUtil.getClassLoader());
 	       appQuery.add(RestrictionsFactoryUtil.eq("course_id", courseId));
 	       return suiluppo_applicationLocalServiceUtil.dynamicQuery(appQuery);
 	    
 	}
+	
 }
