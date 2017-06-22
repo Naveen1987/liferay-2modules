@@ -18,7 +18,7 @@ import aQute.bnd.annotation.ProviderType;
 import com.liferay.portal.kernel.exception.NoSuchModelException;
 
 /**
- * @author Brian Wing Shun Chan
+ * @author Naveen
  */
 @ProviderType
 public class NoSuchsuiluppo_equipmentException extends NoSuchModelException {

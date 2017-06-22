@@ -28,7 +28,7 @@ import com.daffo.suilupposervice.service.base.suiluppo_room_allocationLocalServi
  * This is a local service. Methods of this service will not have security checks based on the propagated JAAS credentials because this service can only be accessed from within the same VM.
  * </p>
  *
- * @author Brian Wing Shun Chan
+ * @author Naveen
  * @see suiluppo_room_allocationLocalServiceBaseImpl
  * @see com.daffo.suilupposervice.service.suiluppo_room_allocationLocalServiceUtil
  */

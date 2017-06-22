@@ -198,8 +198,6 @@ public interface suiluppo_applicationLocalService extends BaseLocalService,
 	public <T> List<T> dynamicQuery(DynamicQuery dynamicQuery, int start,
 		int end, OrderByComparator<T> orderByComparator);
 
-	public List<suiluppo_application> findBycourse_id(long course_id);
-
 	/**
 	* Returns a range of all the suiluppo_applications.
 	*

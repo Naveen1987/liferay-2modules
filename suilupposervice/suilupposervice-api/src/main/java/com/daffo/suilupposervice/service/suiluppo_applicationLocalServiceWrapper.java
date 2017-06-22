@@ -222,12 +222,6 @@ public class suiluppo_applicationLocalServiceWrapper
 			start, end, orderByComparator);
 	}
 
-	@Override
-	public java.util.List<com.daffo.suilupposervice.model.suiluppo_application> findBycourse_id(
-		long course_id) {
-		return _suiluppo_applicationLocalService.findBycourse_id(course_id);
-	}
-
 	/**
 	* Returns a range of all the suiluppo_applications.
 	*

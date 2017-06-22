@@ -1,3 +1,7 @@
+<%@page import="com.liferay.portal.kernel.bean.PortletBeanLocatorUtil"%>
+<%@page import="com.liferay.portal.kernel.dao.orm.PropertyFactoryUtil"%>
+<%@page import="com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil"%>
+<%@page import="com.liferay.portal.kernel.dao.orm.Projection"%>
 <%@page import="com.liferay.portal.kernel.model.User"%>
 <%@page import="com.daffo.suilupposervice.service.suiluppo_applicationLocalServiceUtil"%>
 <%@page import="com.daffo.suilupposervice.model.suiluppo_application"%>
@@ -92,7 +96,8 @@ $(document).ready(function() {
     <th><b>Tot Ore</b></th>
     <th><b>Visibile</b></th>
     <th><b>Bloccato</b></th>
-     <th><b>Action</b></th>
+    <th><b>Action</b></th>
+    <th><b>Applications</b></th>
     </tr>
     <tr class="warning no-result">
       <td colspan="10"><i class="fa fa-warning"></i> No result</td>
@@ -105,6 +110,7 @@ $(document).ready(function() {
     
     <%
     
+   
     DynamicQuery userQuery = DynamicQueryFactoryUtil.forClass(suiluppo_course.class);
     userQuery.add(RestrictionsFactoryUtil.eq("Docente", user.getFullName()));
     List<suiluppo_course> suil=suiluppo_courseLocalServiceUtil.dynamicQuery(userQuery);
@@ -129,6 +135,7 @@ $(document).ready(function() {
     </tbody>
     </table>
     </td>
+    <td><span onclick="getCourseApplicants('<%=su.getCourse_id() +""%>')" class="btn btn-success btnview">list</span></td>
     </tr>
     <%}%>
    
@@ -137,6 +144,8 @@ $(document).ready(function() {
 
 </div>
 </div>
+
+
 
 <div id="listApply" class="row">
 <div class="col-md-12">
@@ -168,46 +177,61 @@ $(document).ready(function() {
     userVQuery.add(RestrictionsFactoryUtil.ne("Docente", user.getFullName()));
     List<suiluppo_course> suil1=suiluppo_courseLocalServiceUtil.dynamicQuery(userVQuery);
     for(suiluppo_course su:suil1)
-    {%>
-     <tr>
-     <td><%=su.getCourse_id() %></td> 
-     <td><%=su.getDocente() %></td> 
-    <td><%=su.getEvento_Progetto()%></td>
-    <td><%=su.getTitolo()%></td>
-    <td><%=su.getData_Inizio()%></td>
-    <td><%=su.getData_Fine()%></td>
-    <td><%=su.getTot_Ore()%></td>
-    <td><%=su.getVisibile()%></td>
-    <td><%=su.getBloccato()%></td>
-    <td>
-    <table>
-    <tbody>
-    <tr>
-    <td style="padding: 5px;"><span onclick="getCourseViewId('<%=su.getCourse_id() +""%>')" class="btn btn-primary btnview">View</span></td>
-    <%
-    DynamicQuery appQuery = DynamicQueryFactoryUtil.forClass(suiluppo_application.class);
-    appQuery.add(RestrictionsFactoryUtil.and(RestrictionsFactoryUtil.eq("applicat_name", user.getFullName()), RestrictionsFactoryUtil.eq("course_id", su.getCourse_id())));
-    List<suiluppo_application> sp=suiluppo_applicationLocalServiceUtil.dynamicQuery(appQuery);
-    if(sp.size()>0){
-    	System.out.println("found");
+    {
+    if(su.getBloccato().equalsIgnoreCase("false"))
+    {
+    	
+    	/* DynamicQuery courseCount = DynamicQueryFactoryUtil.forClass(suiluppo_application.class); 
+    	Projection projection =PropertyFactoryUtil.forName("applicat_name").count();
+    	courseCount.add(RestrictionsFactoryUtil.eq("course_id", su.getCourse_id()));
+    	userQuery.setProjection(projection); 
+    	try { 
+    		List<Object>list = suiluppo_applicationLocalServiceUtil.dynamicQuery(courseCount);
+    		
+    		System.out.println(su.getDispensa_corso()+"count user id=>"+list.get(0)); } 
+    		catch (Exception e2) 
+    		{  }
+    	 */
+    	 
     	%>
-    <td style="padding: 5px;"><span id="<%="btn_"+su.getCourse_id()%>"  onclick="getCourseApplyId('<%=su.getCourse_id() +""%>')" class="btn btn-warning btnedit">Applied</span></td>	
-        <%
+        <tr>
+        <td><%=su.getCourse_id() %></td> 
+        <td><%=su.getDocente() %></td> 
+       <td><%=su.getEvento_Progetto()%></td>
+       <td><%=su.getTitolo()%></td>
+       <td><%=su.getData_Inizio()%></td>
+       <td><%=su.getData_Fine()%></td>
+       <td><%=su.getTot_Ore()%></td>
+       <td><%=su.getVisibile()%></td>
+       <td><%=su.getBloccato()%></td>
+       <td>
+       <table>
+       <tbody>
+       <tr>
+       <td style="padding: 5px;"><span onclick="getCourseViewId('<%=su.getCourse_id() +""%>')" class="btn btn-primary btnview">View</span></td>
+       <%
+       DynamicQuery appQuery = DynamicQueryFactoryUtil.forClass(suiluppo_application.class);
+       appQuery.add(RestrictionsFactoryUtil.and(RestrictionsFactoryUtil.eq("applicat_name", user.getFullName()), RestrictionsFactoryUtil.eq("course_id", su.getCourse_id())));
+       List<suiluppo_application> sp=suiluppo_applicationLocalServiceUtil.dynamicQuery(appQuery);
+       if(sp.size()>0){
+       	%>
+       <td style="padding: 5px;"><span id="<%="btn_"+su.getCourse_id()%>"  onclick="getCourseApplyId('<%=su.getCourse_id() +""%>')" class="btn btn-warning btnedit">Applied</span></td>	
+           <%
+       }
+       else{
+       	%>
+       <td style="padding: 5px;"><span id="<%="btn_"+su.getCourse_id()%>"  onclick="getCourseApplyId('<%=su.getCourse_id() +""%>','<%=user.getFullName()%>')" class="btn btn-warning btnedit">Apply</span></td>	
+       <%
+       }
+       %>      
+       </tr>
+       </tbody>
+       </table>
+       </td>
+       </tr>
+       <%
     }
-    else{
-    	%>
-    <td style="padding: 5px;"><span id="<%="btn_"+su.getCourse_id()%>"  onclick="getCourseApplyId('<%=su.getCourse_id() +""%>','<%=user.getFullName()%>')" class="btn btn-warning btnedit">Apply</span></td>	
-    <%
-    }
-    %>
-    
-    
-    </tr>
-    </tbody>
-    </table>
-    </td>
-    </tr>
-    <%}%>
+    }%>
     </tbody>
     </table>
 

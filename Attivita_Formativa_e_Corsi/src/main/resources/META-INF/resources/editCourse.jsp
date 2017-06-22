@@ -307,6 +307,27 @@ $("#Tot_Ore").durationPicker({
 $("#duration-hours").val('<%=sh%>');
 $("#duration-minutes").val('<%=sm%>');
 $("#duration-seconds").val('<%=ss%>');
+
+ $("#duration-minutes").keydown(function(event){
+	var v = parseFloat(this.value + String.fromCharCode(event.which));
+	if (v>0&&v<60)
+	{ return true;}
+	else{
+		alert('Minute Not valid');
+          return false;
+        }
+});
+ $("#duration-seconds").keydown(function(event){
+		var v = parseFloat(this.value + String.fromCharCode(event.which));
+		if (v>0&&v<60)
+		{ return true;}
+		else{
+			alert('Seconds Not valid');
+	          return false;
+	        }
+	});
+
+
 </script>
 
 <div class="yui3-skin-sam">

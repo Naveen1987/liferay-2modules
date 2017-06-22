@@ -23,7 +23,7 @@ import aQute.bnd.annotation.ProviderType;
  * Helper methods and all application logic should be put in this class. Whenever methods are added, rerun ServiceBuilder to copy their definitions into the {@link com.daffo.suilupposervice.model.suiluppo_equipment} interface.
  * </p>
  *
- * @author Brian Wing Shun Chan
+ * @author Naveen
  */
 @ProviderType
 public class suiluppo_equipmentImpl extends suiluppo_equipmentBaseImpl {

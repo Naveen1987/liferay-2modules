@@ -19,9 +19,12 @@ import aQute.bnd.annotation.ProviderType;
 import java.util.List;
 
 import com.daffo.suilupposervice.model.suiluppo_application;
-import com.daffo.suilupposervice.model.suiluppo_equip_allocation;
+import com.daffo.suilupposervice.model.suiluppo_course;
+import com.daffo.suilupposervice.service.suiluppo_applicationLocalServiceUtil;
 import com.daffo.suilupposervice.service.base.suiluppo_applicationLocalServiceBaseImpl;
-import com.liferay.portal.kernel.dao.orm.QueryUtil;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 
 /**
  * The implementation of the suiluppo_application local service.
@@ -33,15 +36,26 @@ import com.liferay.portal.kernel.dao.orm.QueryUtil;
  * This is a local service. Methods of this service will not have security checks based on the propagated JAAS credentials because this service can only be accessed from within the same VM.
  * </p>
  *
- * @author Brian Wing Shun Chan
+ * @author Naveen
  * @see suiluppo_applicationLocalServiceBaseImpl
  * @see com.daffo.suilupposervice.service.suiluppo_applicationLocalServiceUtil
  */
 @ProviderType
 public class suiluppo_applicationLocalServiceImpl
 	extends suiluppo_applicationLocalServiceBaseImpl {
-	@Override
-	public List<suiluppo_application> findBycourse_id(long course_id) {
-		return this.suiluppo_applicationPersistence.findBycourse_id(course_id);
+	
+	public boolean checkApplicantUnderCourse(String courseId,String applicant)
+	{
+		   DynamicQuery appQuery = DynamicQueryFactoryUtil.forClass(suiluppo_application.class);
+	       appQuery.add(RestrictionsFactoryUtil.and(RestrictionsFactoryUtil.eq("applicat_name", applicant), RestrictionsFactoryUtil.eq("course_id", courseId)));
+	       return (suiluppo_applicationLocalServiceUtil.dynamicQuery(appQuery).size()>0?true:false);
+	    
+	}
+	public List<suiluppo_application> getApplicantUnderCourse(String courseId)
+	{
+		   DynamicQuery appQuery = DynamicQueryFactoryUtil.forClass(suiluppo_application.class);
+	       appQuery.add(RestrictionsFactoryUtil.eq("course_id", courseId));
+	       return suiluppo_applicationLocalServiceUtil.dynamicQuery(appQuery);
+	    
 	}
 }

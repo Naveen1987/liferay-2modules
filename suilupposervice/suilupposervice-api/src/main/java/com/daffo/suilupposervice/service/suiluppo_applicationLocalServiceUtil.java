@@ -212,11 +212,6 @@ public class suiluppo_applicationLocalServiceUtil {
 				   .dynamicQuery(dynamicQuery, start, end, orderByComparator);
 	}
 
-	public static java.util.List<com.daffo.suilupposervice.model.suiluppo_application> findBycourse_id(
-		long course_id) {
-		return getService().findBycourse_id(course_id);
-	}
-
 	/**
 	* Returns a range of all the suiluppo_applications.
 	*

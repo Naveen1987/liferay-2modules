@@ -16,7 +16,14 @@ package com.daffo.suilupposervice.service.impl;
 
 import aQute.bnd.annotation.ProviderType;
 
+import java.util.List;
+
+import com.daffo.suilupposervice.model.suiluppo_course;
+import com.daffo.suilupposervice.service.suiluppo_courseLocalServiceUtil;
 import com.daffo.suilupposervice.service.base.suiluppo_courseLocalServiceBaseImpl;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 
 /**
  * The implementation of the suiluppo_course local service.
@@ -28,16 +35,28 @@ import com.daffo.suilupposervice.service.base.suiluppo_courseLocalServiceBaseImp
  * This is a local service. Methods of this service will not have security checks based on the propagated JAAS credentials because this service can only be accessed from within the same VM.
  * </p>
  *
- * @author Brian Wing Shun Chan
+ * @author Naveen
  * @see suiluppo_courseLocalServiceBaseImpl
  * @see com.daffo.suilupposervice.service.suiluppo_courseLocalServiceUtil
  */
 @ProviderType
 public class suiluppo_courseLocalServiceImpl
 	extends suiluppo_courseLocalServiceBaseImpl {
-	/*
-	 * NOTE FOR DEVELOPERS:
-	 *
-	 * Never reference this class directly. Always use {@link com.daffo.suilupposervice.service.suiluppo_courseLocalServiceUtil} to access the suiluppo_course local service.
-	 */
+	
+	public List<suiluppo_course> getCourseUnderDocente(String Docente)
+	{
+		DynamicQuery dyQuery = DynamicQueryFactoryUtil.forClass(suiluppo_course.class);
+	    dyQuery.add(RestrictionsFactoryUtil.eq("Docente", Docente));
+	    return suiluppo_courseLocalServiceUtil.dynamicQuery(dyQuery);
+	    
+	}
+	public List<suiluppo_course> getCourseNotUnderDocente(String Docente)
+	{
+		DynamicQuery dyQuery = DynamicQueryFactoryUtil.forClass(suiluppo_course.class);
+	    dyQuery.add(RestrictionsFactoryUtil.ne("Docente", Docente));
+	    return suiluppo_courseLocalServiceUtil.dynamicQuery(dyQuery);
+	    
+	}
+	
+	
 }
