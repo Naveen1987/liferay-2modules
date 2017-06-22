@@ -209,5 +209,13 @@ public class Attivita_Formativa_e_CorsiPortlet extends MVCPortlet {
 		log.info("New Applicant Added");
 		SessionMessages.add(actionRequest, "successApply");
 	}
+	@ProcessAction(name="addConfirmApplicant")
+	 public void addConfirmApplicant(ActionRequest actionRequest, ActionResponse actionResponse)
+	   throws IOException, PortletException, PortalException {
+		log.info("Applicant Confirimg ............");
+		System.out.println("ApplicantId-"+ParamUtil.getString(actionRequest, "appId"));
+		log.info("Applicant Confirimed");
+		
+	}
 
 }

@@ -95,36 +95,30 @@ $(document).ready(function() {
 </div>
 </div>
 </div>
-<portlet:actionURL name="addApplicant" var="addApplicant">
-<portlet:param name="mvcPath" value="/listCourse.jsp"/> 
+<portlet:actionURL name="addConfirmApplicant" var="addConfirmApplicant">
+<portlet:param name="mvcPath" value="/listOfApplicants.jsp"/> 
 </portlet:actionURL>
-<script type="text/javascript">
-function formSubmiting(courseId,userName){
-	var ID="#btn_"+courseId;
-	AUI().use('aui-base','aui-io-request', function(A){
-		//aui ajax call to get updated content
-		A.io.request('<%=addApplicant%>',{
-  		dataType: 'json',
-  		method: 'POST',
-  		data:{'<portlet:namespace/>courseId':courseId,'<portlet:namespace/>Applicant_Name':userName,'<portlet:namespace/>email':'<%=user.getEmailAddress()%>'},
-  		on: {
-   			 success: function() {
-   			 $(ID).text('Applied');
-   			alert("Successfully Applied for course!")
-    		}
-  		}
-		});
-		});
-	    //aui ajax call to get updated content
-}
-</script>
+
 
 <script>
 function confirmationApplicant(appId){
+	alert(appId);
 	var ach=$("#confirm_ch").prop('checked');
 	if(ach){
 		//alert(appId);	
-		
+		AUI().use('aui-base','aui-io-request', function(A){
+			//aui ajax call to get updated content
+			A.io.request('<%=addConfirmApplicant%>',{
+	  		dataType: 'json',
+	  		method: 'POST',
+	  		data:{'<portlet:namespace/>appId':appId},
+	  		on: {
+	   			 success: function() {
+	   			 alert("Successfully Confirmed!");
+	    		}
+	  		}
+			});
+			});
 	}
 	
 }
