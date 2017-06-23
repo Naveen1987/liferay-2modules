@@ -213,7 +213,7 @@
 <tr>
 <td>Visibile<span style="font-size:20px;color:red"><b>*</b></span></td><td>
 <input type="hidden" name="<portlet:namespace/>Visibile_data" id="Visibile_data">
-<input type="checkbox" id="Visibile" name="<portlet:namespace/>Visibile" data-toggle="toggle" data-on="SI" data-off="NO" data-size="large" data-onstyle="success" data-offstyle="info">
+<input type="checkbox" id="Visibile" name="<portlet:namespace/>Visibile" data-toggle="toggle" data-on="SI" data-off="NO" data-size="large" data-onstyle="success" data-offstyle="info" checked>
 </td>
 </tr>
 <tr>
