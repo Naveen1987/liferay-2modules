@@ -102,7 +102,14 @@ $(document).ready(function() {
        <td><%=su.getTitolo()%></td>
        <td><%=su.getData_Inizio()%></td>
        <td><%=su.getData_Fine()%></td>
-       <td><%=su.getTot_Ore()%></td>
+      <td><%
+    String duration[]=su.getTot_Ore().split(",");
+    String sh=duration[0].substring(0,duration[0].length()-1);
+    String sm=duration[1].substring(0,duration[1].length()-1);
+    String ss=duration[2].substring(0,duration[2].length()-1);
+    %>
+    <%=sh+":"+sm+":"+ss+"  Hrs"%>
+    </td>
        <td><%=su.getVisibile()%></td>
        <td><%=su.getBloccato()%></td>
        <td>
@@ -141,7 +148,14 @@ $(document).ready(function() {
        <td><%=su.getTitolo()%></td>
        <td><%=su.getData_Inizio()%></td>
        <td><%=su.getData_Fine()%></td>
-       <td><%=su.getTot_Ore()%></td>
+       <td><%
+    String duration[]=su.getTot_Ore().split(",");
+    String sh=duration[0].substring(0,duration[0].length()-1);
+    String sm=duration[1].substring(0,duration[1].length()-1);
+    String ss=duration[2].substring(0,duration[2].length()-1);
+    %>
+    <%=sh+":"+sm+":"+ss+"  Hrs"%>
+    </td>
        <td><%=su.getVisibile()%></td>
        <td><%=su.getBloccato()%></td>
        <td>
