@@ -50,9 +50,10 @@
 		<field name="roomID" type="long" />
 		<field name="course_id" type="long" />
 		<field name="room_allocat_date" type="String" />
-		<field name="room_allocat_duration" type="long" />
+		<field name="room_allocat_startTime" type="String" />
 		<field name="room_allocat_start" type="String" />
 		<field name="room_allocat_end" type="String" />
 		<field name="room_allocat_status" type="String" />
+		<field name="room_allocat_endTime" type="String" />
 	</model>
 </model-hints>

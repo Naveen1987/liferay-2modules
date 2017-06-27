@@ -52,8 +52,9 @@ create table suiluppo_room_allocation (
 	roomID LONG,
 	course_id LONG,
 	room_allocat_date VARCHAR(75) null,
-	room_allocat_duration LONG,
+	room_allocat_startTime VARCHAR(75) null,
 	room_allocat_start VARCHAR(75) null,
 	room_allocat_end VARCHAR(75) null,
-	room_allocat_status VARCHAR(75) null
+	room_allocat_status VARCHAR(75) null,
+	room_allocat_endTime VARCHAR(75) null
 );

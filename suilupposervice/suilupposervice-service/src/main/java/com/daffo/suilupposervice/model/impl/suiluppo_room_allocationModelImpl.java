@@ -65,10 +65,11 @@ public class suiluppo_room_allocationModelImpl extends BaseModelImpl<suiluppo_ro
 			{ "roomID", Types.BIGINT },
 			{ "course_id", Types.BIGINT },
 			{ "room_allocat_date", Types.VARCHAR },
-			{ "room_allocat_duration", Types.BIGINT },
+			{ "room_allocat_startTime", Types.VARCHAR },
 			{ "room_allocat_start", Types.VARCHAR },
 			{ "room_allocat_end", Types.VARCHAR },
-			{ "room_allocat_status", Types.VARCHAR }
+			{ "room_allocat_status", Types.VARCHAR },
+			{ "room_allocat_endTime", Types.VARCHAR }
 		};
 	public static final Map<String, Integer> TABLE_COLUMNS_MAP = new HashMap<String, Integer>();
 
@@ -77,13 +78,14 @@ public class suiluppo_room_allocationModelImpl extends BaseModelImpl<suiluppo_ro
 		TABLE_COLUMNS_MAP.put("roomID", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("course_id", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("room_allocat_date", Types.VARCHAR);
-		TABLE_COLUMNS_MAP.put("room_allocat_duration", Types.BIGINT);
+		TABLE_COLUMNS_MAP.put("room_allocat_startTime", Types.VARCHAR);
 		TABLE_COLUMNS_MAP.put("room_allocat_start", Types.VARCHAR);
 		TABLE_COLUMNS_MAP.put("room_allocat_end", Types.VARCHAR);
 		TABLE_COLUMNS_MAP.put("room_allocat_status", Types.VARCHAR);
+		TABLE_COLUMNS_MAP.put("room_allocat_endTime", Types.VARCHAR);
 	}
 
-	public static final String TABLE_SQL_CREATE = "create table suiluppo_room_allocation (room_allocat_id LONG not null primary key,roomID LONG,course_id LONG,room_allocat_date VARCHAR(75) null,room_allocat_duration LONG,room_allocat_start VARCHAR(75) null,room_allocat_end VARCHAR(75) null,room_allocat_status VARCHAR(75) null)";
+	public static final String TABLE_SQL_CREATE = "create table suiluppo_room_allocation (room_allocat_id LONG not null primary key,roomID LONG,course_id LONG,room_allocat_date VARCHAR(75) null,room_allocat_startTime VARCHAR(75) null,room_allocat_start VARCHAR(75) null,room_allocat_end VARCHAR(75) null,room_allocat_status VARCHAR(75) null,room_allocat_endTime VARCHAR(75) null)";
 	public static final String TABLE_SQL_DROP = "drop table suiluppo_room_allocation";
 	public static final String ORDER_BY_JPQL = " ORDER BY suiluppo_room_allocation.room_allocat_id ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY suiluppo_room_allocation.room_allocat_id ASC";
@@ -146,10 +148,11 @@ public class suiluppo_room_allocationModelImpl extends BaseModelImpl<suiluppo_ro
 		attributes.put("roomID", getRoomID());
 		attributes.put("course_id", getCourse_id());
 		attributes.put("room_allocat_date", getRoom_allocat_date());
-		attributes.put("room_allocat_duration", getRoom_allocat_duration());
+		attributes.put("room_allocat_startTime", getRoom_allocat_startTime());
 		attributes.put("room_allocat_start", getRoom_allocat_start());
 		attributes.put("room_allocat_end", getRoom_allocat_end());
 		attributes.put("room_allocat_status", getRoom_allocat_status());
+		attributes.put("room_allocat_endTime", getRoom_allocat_endTime());
 
 		attributes.put("entityCacheEnabled", isEntityCacheEnabled());
 		attributes.put("finderCacheEnabled", isFinderCacheEnabled());
@@ -183,11 +186,11 @@ public class suiluppo_room_allocationModelImpl extends BaseModelImpl<suiluppo_ro
 			setRoom_allocat_date(room_allocat_date);
 		}
 
-		Long room_allocat_duration = (Long)attributes.get(
-				"room_allocat_duration");
+		String room_allocat_startTime = (String)attributes.get(
+				"room_allocat_startTime");
 
-		if (room_allocat_duration != null) {
-			setRoom_allocat_duration(room_allocat_duration);
+		if (room_allocat_startTime != null) {
+			setRoom_allocat_startTime(room_allocat_startTime);
 		}
 
 		String room_allocat_start = (String)attributes.get("room_allocat_start");
@@ -207,6 +210,13 @@ public class suiluppo_room_allocationModelImpl extends BaseModelImpl<suiluppo_ro
 
 		if (room_allocat_status != null) {
 			setRoom_allocat_status(room_allocat_status);
+		}
+
+		String room_allocat_endTime = (String)attributes.get(
+				"room_allocat_endTime");
+
+		if (room_allocat_endTime != null) {
+			setRoom_allocat_endTime(room_allocat_endTime);
 		}
 	}
 
@@ -280,13 +290,18 @@ public class suiluppo_room_allocationModelImpl extends BaseModelImpl<suiluppo_ro
 	}
 
 	@Override
-	public long getRoom_allocat_duration() {
-		return _room_allocat_duration;
+	public String getRoom_allocat_startTime() {
+		if (_room_allocat_startTime == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _room_allocat_startTime;
+		}
 	}
 
 	@Override
-	public void setRoom_allocat_duration(long room_allocat_duration) {
-		_room_allocat_duration = room_allocat_duration;
+	public void setRoom_allocat_startTime(String room_allocat_startTime) {
+		_room_allocat_startTime = room_allocat_startTime;
 	}
 
 	@Override
@@ -334,6 +349,21 @@ public class suiluppo_room_allocationModelImpl extends BaseModelImpl<suiluppo_ro
 		_room_allocat_status = room_allocat_status;
 	}
 
+	@Override
+	public String getRoom_allocat_endTime() {
+		if (_room_allocat_endTime == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _room_allocat_endTime;
+		}
+	}
+
+	@Override
+	public void setRoom_allocat_endTime(String room_allocat_endTime) {
+		_room_allocat_endTime = room_allocat_endTime;
+	}
+
 	public long getColumnBitmask() {
 		return _columnBitmask;
 	}
@@ -369,10 +399,11 @@ public class suiluppo_room_allocationModelImpl extends BaseModelImpl<suiluppo_ro
 		suiluppo_room_allocationImpl.setRoomID(getRoomID());
 		suiluppo_room_allocationImpl.setCourse_id(getCourse_id());
 		suiluppo_room_allocationImpl.setRoom_allocat_date(getRoom_allocat_date());
-		suiluppo_room_allocationImpl.setRoom_allocat_duration(getRoom_allocat_duration());
+		suiluppo_room_allocationImpl.setRoom_allocat_startTime(getRoom_allocat_startTime());
 		suiluppo_room_allocationImpl.setRoom_allocat_start(getRoom_allocat_start());
 		suiluppo_room_allocationImpl.setRoom_allocat_end(getRoom_allocat_end());
 		suiluppo_room_allocationImpl.setRoom_allocat_status(getRoom_allocat_status());
+		suiluppo_room_allocationImpl.setRoom_allocat_endTime(getRoom_allocat_endTime());
 
 		suiluppo_room_allocationImpl.resetOriginalValues();
 
@@ -464,7 +495,14 @@ public class suiluppo_room_allocationModelImpl extends BaseModelImpl<suiluppo_ro
 			suiluppo_room_allocationCacheModel.room_allocat_date = null;
 		}
 
-		suiluppo_room_allocationCacheModel.room_allocat_duration = getRoom_allocat_duration();
+		suiluppo_room_allocationCacheModel.room_allocat_startTime = getRoom_allocat_startTime();
+
+		String room_allocat_startTime = suiluppo_room_allocationCacheModel.room_allocat_startTime;
+
+		if ((room_allocat_startTime != null) &&
+				(room_allocat_startTime.length() == 0)) {
+			suiluppo_room_allocationCacheModel.room_allocat_startTime = null;
+		}
 
 		suiluppo_room_allocationCacheModel.room_allocat_start = getRoom_allocat_start();
 
@@ -491,12 +529,21 @@ public class suiluppo_room_allocationModelImpl extends BaseModelImpl<suiluppo_ro
 			suiluppo_room_allocationCacheModel.room_allocat_status = null;
 		}
 
+		suiluppo_room_allocationCacheModel.room_allocat_endTime = getRoom_allocat_endTime();
+
+		String room_allocat_endTime = suiluppo_room_allocationCacheModel.room_allocat_endTime;
+
+		if ((room_allocat_endTime != null) &&
+				(room_allocat_endTime.length() == 0)) {
+			suiluppo_room_allocationCacheModel.room_allocat_endTime = null;
+		}
+
 		return suiluppo_room_allocationCacheModel;
 	}
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(17);
+		StringBundler sb = new StringBundler(19);
 
 		sb.append("{room_allocat_id=");
 		sb.append(getRoom_allocat_id());
@@ -506,14 +553,16 @@ public class suiluppo_room_allocationModelImpl extends BaseModelImpl<suiluppo_ro
 		sb.append(getCourse_id());
 		sb.append(", room_allocat_date=");
 		sb.append(getRoom_allocat_date());
-		sb.append(", room_allocat_duration=");
-		sb.append(getRoom_allocat_duration());
+		sb.append(", room_allocat_startTime=");
+		sb.append(getRoom_allocat_startTime());
 		sb.append(", room_allocat_start=");
 		sb.append(getRoom_allocat_start());
 		sb.append(", room_allocat_end=");
 		sb.append(getRoom_allocat_end());
 		sb.append(", room_allocat_status=");
 		sb.append(getRoom_allocat_status());
+		sb.append(", room_allocat_endTime=");
+		sb.append(getRoom_allocat_endTime());
 		sb.append("}");
 
 		return sb.toString();
@@ -521,7 +570,7 @@ public class suiluppo_room_allocationModelImpl extends BaseModelImpl<suiluppo_ro
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(28);
+		StringBundler sb = new StringBundler(31);
 
 		sb.append("<model><model-name>");
 		sb.append("com.daffo.suilupposervice.model.suiluppo_room_allocation");
@@ -544,8 +593,8 @@ public class suiluppo_room_allocationModelImpl extends BaseModelImpl<suiluppo_ro
 		sb.append(getRoom_allocat_date());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>room_allocat_duration</column-name><column-value><![CDATA[");
-		sb.append(getRoom_allocat_duration());
+			"<column><column-name>room_allocat_startTime</column-name><column-value><![CDATA[");
+		sb.append(getRoom_allocat_startTime());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>room_allocat_start</column-name><column-value><![CDATA[");
@@ -558,6 +607,10 @@ public class suiluppo_room_allocationModelImpl extends BaseModelImpl<suiluppo_ro
 		sb.append(
 			"<column><column-name>room_allocat_status</column-name><column-value><![CDATA[");
 		sb.append(getRoom_allocat_status());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>room_allocat_endTime</column-name><column-value><![CDATA[");
+		sb.append(getRoom_allocat_endTime());
 		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
@@ -577,10 +630,11 @@ public class suiluppo_room_allocationModelImpl extends BaseModelImpl<suiluppo_ro
 	private long _originalCourse_id;
 	private boolean _setOriginalCourse_id;
 	private String _room_allocat_date;
-	private long _room_allocat_duration;
+	private String _room_allocat_startTime;
 	private String _room_allocat_start;
 	private String _room_allocat_end;
 	private String _room_allocat_status;
+	private String _room_allocat_endTime;
 	private long _columnBitmask;
 	private suiluppo_room_allocation _escapedModel;
 }

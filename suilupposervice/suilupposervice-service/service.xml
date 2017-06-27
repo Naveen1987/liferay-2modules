@@ -65,10 +65,11 @@
         <column name="roomID" type="long"></column>
         <column name="course_id" type="long"></column>
         <column name="room_allocat_date" type="String"></column>
-        <column name="room_allocat_duration" type="long"></column>
+        <column name="room_allocat_startTime" type="String"></column>
         <column name="room_allocat_start" type="String"></column>
         <column name="room_allocat_end" type="String"></column>
         <column name="room_allocat_status" type="String"></column>
+        <column name="room_allocat_endTime" type="String"></column>
          <finder name="course_id" return-type="Collection">
         <finder-column name="course_id" />
         </finder>

@@ -118,18 +118,19 @@ public interface suiluppo_room_allocationModel extends BaseModel<suiluppo_room_a
 	public void setRoom_allocat_date(String room_allocat_date);
 
 	/**
-	 * Returns the room_allocat_duration of this suiluppo_room_allocation.
+	 * Returns the room_allocat_start time of this suiluppo_room_allocation.
 	 *
-	 * @return the room_allocat_duration of this suiluppo_room_allocation
+	 * @return the room_allocat_start time of this suiluppo_room_allocation
 	 */
-	public long getRoom_allocat_duration();
+	@AutoEscape
+	public String getRoom_allocat_startTime();
 
 	/**
-	 * Sets the room_allocat_duration of this suiluppo_room_allocation.
+	 * Sets the room_allocat_start time of this suiluppo_room_allocation.
 	 *
-	 * @param room_allocat_duration the room_allocat_duration of this suiluppo_room_allocation
+	 * @param room_allocat_startTime the room_allocat_start time of this suiluppo_room_allocation
 	 */
-	public void setRoom_allocat_duration(long room_allocat_duration);
+	public void setRoom_allocat_startTime(String room_allocat_startTime);
 
 	/**
 	 * Returns the room_allocat_start of this suiluppo_room_allocation.
@@ -175,6 +176,21 @@ public interface suiluppo_room_allocationModel extends BaseModel<suiluppo_room_a
 	 * @param room_allocat_status the room_allocat_status of this suiluppo_room_allocation
 	 */
 	public void setRoom_allocat_status(String room_allocat_status);
+
+	/**
+	 * Returns the room_allocat_end time of this suiluppo_room_allocation.
+	 *
+	 * @return the room_allocat_end time of this suiluppo_room_allocation
+	 */
+	@AutoEscape
+	public String getRoom_allocat_endTime();
+
+	/**
+	 * Sets the room_allocat_end time of this suiluppo_room_allocation.
+	 *
+	 * @param room_allocat_endTime the room_allocat_end time of this suiluppo_room_allocation
+	 */
+	public void setRoom_allocat_endTime(String room_allocat_endTime);
 
 	@Override
 	public boolean isNew();

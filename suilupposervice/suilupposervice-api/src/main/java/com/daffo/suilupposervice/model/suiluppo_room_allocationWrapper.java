@@ -62,10 +62,11 @@ public class suiluppo_room_allocationWrapper implements suiluppo_room_allocation
 		attributes.put("roomID", getRoomID());
 		attributes.put("course_id", getCourse_id());
 		attributes.put("room_allocat_date", getRoom_allocat_date());
-		attributes.put("room_allocat_duration", getRoom_allocat_duration());
+		attributes.put("room_allocat_startTime", getRoom_allocat_startTime());
 		attributes.put("room_allocat_start", getRoom_allocat_start());
 		attributes.put("room_allocat_end", getRoom_allocat_end());
 		attributes.put("room_allocat_status", getRoom_allocat_status());
+		attributes.put("room_allocat_endTime", getRoom_allocat_endTime());
 
 		return attributes;
 	}
@@ -96,11 +97,11 @@ public class suiluppo_room_allocationWrapper implements suiluppo_room_allocation
 			setRoom_allocat_date(room_allocat_date);
 		}
 
-		Long room_allocat_duration = (Long)attributes.get(
-				"room_allocat_duration");
+		String room_allocat_startTime = (String)attributes.get(
+				"room_allocat_startTime");
 
-		if (room_allocat_duration != null) {
-			setRoom_allocat_duration(room_allocat_duration);
+		if (room_allocat_startTime != null) {
+			setRoom_allocat_startTime(room_allocat_startTime);
 		}
 
 		String room_allocat_start = (String)attributes.get("room_allocat_start");
@@ -120,6 +121,13 @@ public class suiluppo_room_allocationWrapper implements suiluppo_room_allocation
 
 		if (room_allocat_status != null) {
 			setRoom_allocat_status(room_allocat_status);
+		}
+
+		String room_allocat_endTime = (String)attributes.get(
+				"room_allocat_endTime");
+
+		if (room_allocat_endTime != null) {
+			setRoom_allocat_endTime(room_allocat_endTime);
 		}
 	}
 
@@ -200,6 +208,16 @@ public class suiluppo_room_allocationWrapper implements suiluppo_room_allocation
 	}
 
 	/**
+	* Returns the room_allocat_end time of this suiluppo_room_allocation.
+	*
+	* @return the room_allocat_end time of this suiluppo_room_allocation
+	*/
+	@Override
+	public java.lang.String getRoom_allocat_endTime() {
+		return _suiluppo_room_allocation.getRoom_allocat_endTime();
+	}
+
+	/**
 	* Returns the room_allocat_start of this suiluppo_room_allocation.
 	*
 	* @return the room_allocat_start of this suiluppo_room_allocation
@@ -207,6 +225,16 @@ public class suiluppo_room_allocationWrapper implements suiluppo_room_allocation
 	@Override
 	public java.lang.String getRoom_allocat_start() {
 		return _suiluppo_room_allocation.getRoom_allocat_start();
+	}
+
+	/**
+	* Returns the room_allocat_start time of this suiluppo_room_allocation.
+	*
+	* @return the room_allocat_start time of this suiluppo_room_allocation
+	*/
+	@Override
+	public java.lang.String getRoom_allocat_startTime() {
+		return _suiluppo_room_allocation.getRoom_allocat_startTime();
 	}
 
 	/**
@@ -257,16 +285,6 @@ public class suiluppo_room_allocationWrapper implements suiluppo_room_allocation
 	@Override
 	public long getRoomID() {
 		return _suiluppo_room_allocation.getRoomID();
-	}
-
-	/**
-	* Returns the room_allocat_duration of this suiluppo_room_allocation.
-	*
-	* @return the room_allocat_duration of this suiluppo_room_allocation
-	*/
-	@Override
-	public long getRoom_allocat_duration() {
-		return _suiluppo_room_allocation.getRoom_allocat_duration();
 	}
 
 	/**
@@ -356,16 +374,6 @@ public class suiluppo_room_allocationWrapper implements suiluppo_room_allocation
 	}
 
 	/**
-	* Sets the room_allocat_duration of this suiluppo_room_allocation.
-	*
-	* @param room_allocat_duration the room_allocat_duration of this suiluppo_room_allocation
-	*/
-	@Override
-	public void setRoom_allocat_duration(long room_allocat_duration) {
-		_suiluppo_room_allocation.setRoom_allocat_duration(room_allocat_duration);
-	}
-
-	/**
 	* Sets the room_allocat_end of this suiluppo_room_allocation.
 	*
 	* @param room_allocat_end the room_allocat_end of this suiluppo_room_allocation
@@ -373,6 +381,16 @@ public class suiluppo_room_allocationWrapper implements suiluppo_room_allocation
 	@Override
 	public void setRoom_allocat_end(java.lang.String room_allocat_end) {
 		_suiluppo_room_allocation.setRoom_allocat_end(room_allocat_end);
+	}
+
+	/**
+	* Sets the room_allocat_end time of this suiluppo_room_allocation.
+	*
+	* @param room_allocat_endTime the room_allocat_end time of this suiluppo_room_allocation
+	*/
+	@Override
+	public void setRoom_allocat_endTime(java.lang.String room_allocat_endTime) {
+		_suiluppo_room_allocation.setRoom_allocat_endTime(room_allocat_endTime);
 	}
 
 	/**
@@ -393,6 +411,17 @@ public class suiluppo_room_allocationWrapper implements suiluppo_room_allocation
 	@Override
 	public void setRoom_allocat_start(java.lang.String room_allocat_start) {
 		_suiluppo_room_allocation.setRoom_allocat_start(room_allocat_start);
+	}
+
+	/**
+	* Sets the room_allocat_start time of this suiluppo_room_allocation.
+	*
+	* @param room_allocat_startTime the room_allocat_start time of this suiluppo_room_allocation
+	*/
+	@Override
+	public void setRoom_allocat_startTime(
+		java.lang.String room_allocat_startTime) {
+		_suiluppo_room_allocation.setRoom_allocat_startTime(room_allocat_startTime);
 	}
 
 	/**

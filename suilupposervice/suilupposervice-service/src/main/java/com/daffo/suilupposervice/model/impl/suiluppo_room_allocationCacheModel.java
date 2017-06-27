@@ -64,7 +64,7 @@ public class suiluppo_room_allocationCacheModel implements CacheModel<suiluppo_r
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(17);
+		StringBundler sb = new StringBundler(19);
 
 		sb.append("{room_allocat_id=");
 		sb.append(room_allocat_id);
@@ -74,14 +74,16 @@ public class suiluppo_room_allocationCacheModel implements CacheModel<suiluppo_r
 		sb.append(course_id);
 		sb.append(", room_allocat_date=");
 		sb.append(room_allocat_date);
-		sb.append(", room_allocat_duration=");
-		sb.append(room_allocat_duration);
+		sb.append(", room_allocat_startTime=");
+		sb.append(room_allocat_startTime);
 		sb.append(", room_allocat_start=");
 		sb.append(room_allocat_start);
 		sb.append(", room_allocat_end=");
 		sb.append(room_allocat_end);
 		sb.append(", room_allocat_status=");
 		sb.append(room_allocat_status);
+		sb.append(", room_allocat_endTime=");
+		sb.append(room_allocat_endTime);
 		sb.append("}");
 
 		return sb.toString();
@@ -102,7 +104,12 @@ public class suiluppo_room_allocationCacheModel implements CacheModel<suiluppo_r
 			suiluppo_room_allocationImpl.setRoom_allocat_date(room_allocat_date);
 		}
 
-		suiluppo_room_allocationImpl.setRoom_allocat_duration(room_allocat_duration);
+		if (room_allocat_startTime == null) {
+			suiluppo_room_allocationImpl.setRoom_allocat_startTime(StringPool.BLANK);
+		}
+		else {
+			suiluppo_room_allocationImpl.setRoom_allocat_startTime(room_allocat_startTime);
+		}
 
 		if (room_allocat_start == null) {
 			suiluppo_room_allocationImpl.setRoom_allocat_start(StringPool.BLANK);
@@ -125,6 +132,13 @@ public class suiluppo_room_allocationCacheModel implements CacheModel<suiluppo_r
 			suiluppo_room_allocationImpl.setRoom_allocat_status(room_allocat_status);
 		}
 
+		if (room_allocat_endTime == null) {
+			suiluppo_room_allocationImpl.setRoom_allocat_endTime(StringPool.BLANK);
+		}
+		else {
+			suiluppo_room_allocationImpl.setRoom_allocat_endTime(room_allocat_endTime);
+		}
+
 		suiluppo_room_allocationImpl.resetOriginalValues();
 
 		return suiluppo_room_allocationImpl;
@@ -138,11 +152,11 @@ public class suiluppo_room_allocationCacheModel implements CacheModel<suiluppo_r
 
 		course_id = objectInput.readLong();
 		room_allocat_date = objectInput.readUTF();
-
-		room_allocat_duration = objectInput.readLong();
+		room_allocat_startTime = objectInput.readUTF();
 		room_allocat_start = objectInput.readUTF();
 		room_allocat_end = objectInput.readUTF();
 		room_allocat_status = objectInput.readUTF();
+		room_allocat_endTime = objectInput.readUTF();
 	}
 
 	@Override
@@ -161,7 +175,12 @@ public class suiluppo_room_allocationCacheModel implements CacheModel<suiluppo_r
 			objectOutput.writeUTF(room_allocat_date);
 		}
 
-		objectOutput.writeLong(room_allocat_duration);
+		if (room_allocat_startTime == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(room_allocat_startTime);
+		}
 
 		if (room_allocat_start == null) {
 			objectOutput.writeUTF(StringPool.BLANK);
@@ -183,14 +202,22 @@ public class suiluppo_room_allocationCacheModel implements CacheModel<suiluppo_r
 		else {
 			objectOutput.writeUTF(room_allocat_status);
 		}
+
+		if (room_allocat_endTime == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(room_allocat_endTime);
+		}
 	}
 
 	public long room_allocat_id;
 	public long roomID;
 	public long course_id;
 	public String room_allocat_date;
-	public long room_allocat_duration;
+	public String room_allocat_startTime;
 	public String room_allocat_start;
 	public String room_allocat_end;
 	public String room_allocat_status;
+	public String room_allocat_endTime;
 }

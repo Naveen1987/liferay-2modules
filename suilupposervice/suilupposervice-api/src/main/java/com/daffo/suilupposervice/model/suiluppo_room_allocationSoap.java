@@ -37,10 +37,11 @@ public class suiluppo_room_allocationSoap implements Serializable {
 		soapModel.setRoomID(model.getRoomID());
 		soapModel.setCourse_id(model.getCourse_id());
 		soapModel.setRoom_allocat_date(model.getRoom_allocat_date());
-		soapModel.setRoom_allocat_duration(model.getRoom_allocat_duration());
+		soapModel.setRoom_allocat_startTime(model.getRoom_allocat_startTime());
 		soapModel.setRoom_allocat_start(model.getRoom_allocat_start());
 		soapModel.setRoom_allocat_end(model.getRoom_allocat_end());
 		soapModel.setRoom_allocat_status(model.getRoom_allocat_status());
+		soapModel.setRoom_allocat_endTime(model.getRoom_allocat_endTime());
 
 		return soapModel;
 	}
@@ -128,12 +129,12 @@ public class suiluppo_room_allocationSoap implements Serializable {
 		_room_allocat_date = room_allocat_date;
 	}
 
-	public long getRoom_allocat_duration() {
-		return _room_allocat_duration;
+	public String getRoom_allocat_startTime() {
+		return _room_allocat_startTime;
 	}
 
-	public void setRoom_allocat_duration(long room_allocat_duration) {
-		_room_allocat_duration = room_allocat_duration;
+	public void setRoom_allocat_startTime(String room_allocat_startTime) {
+		_room_allocat_startTime = room_allocat_startTime;
 	}
 
 	public String getRoom_allocat_start() {
@@ -160,12 +161,21 @@ public class suiluppo_room_allocationSoap implements Serializable {
 		_room_allocat_status = room_allocat_status;
 	}
 
+	public String getRoom_allocat_endTime() {
+		return _room_allocat_endTime;
+	}
+
+	public void setRoom_allocat_endTime(String room_allocat_endTime) {
+		_room_allocat_endTime = room_allocat_endTime;
+	}
+
 	private long _room_allocat_id;
 	private long _roomID;
 	private long _course_id;
 	private String _room_allocat_date;
-	private long _room_allocat_duration;
+	private String _room_allocat_startTime;
 	private String _room_allocat_start;
 	private String _room_allocat_end;
 	private String _room_allocat_status;
+	private String _room_allocat_endTime;
 }

@@ -1395,10 +1395,11 @@ public class suiluppo_room_allocationPersistenceImpl extends BasePersistenceImpl
 		suiluppo_room_allocationImpl.setRoomID(suiluppo_room_allocation.getRoomID());
 		suiluppo_room_allocationImpl.setCourse_id(suiluppo_room_allocation.getCourse_id());
 		suiluppo_room_allocationImpl.setRoom_allocat_date(suiluppo_room_allocation.getRoom_allocat_date());
-		suiluppo_room_allocationImpl.setRoom_allocat_duration(suiluppo_room_allocation.getRoom_allocat_duration());
+		suiluppo_room_allocationImpl.setRoom_allocat_startTime(suiluppo_room_allocation.getRoom_allocat_startTime());
 		suiluppo_room_allocationImpl.setRoom_allocat_start(suiluppo_room_allocation.getRoom_allocat_start());
 		suiluppo_room_allocationImpl.setRoom_allocat_end(suiluppo_room_allocation.getRoom_allocat_end());
 		suiluppo_room_allocationImpl.setRoom_allocat_status(suiluppo_room_allocation.getRoom_allocat_status());
+		suiluppo_room_allocationImpl.setRoom_allocat_endTime(suiluppo_room_allocation.getRoom_allocat_endTime());
 
 		return suiluppo_room_allocationImpl;
 	}
