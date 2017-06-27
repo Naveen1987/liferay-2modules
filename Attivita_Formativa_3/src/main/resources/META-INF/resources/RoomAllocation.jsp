@@ -1,7 +1,7 @@
 <%@page import="com.liferay.portal.kernel.portlet.LiferayWindowState"%>
 <%@page import="com.liferay.portal.kernel.log.LogFactoryUtil"%>
 <%@page import="com.liferay.portal.kernel.log.Log"%>
-<%@page import="com.daffo.Attivita_Formativa_2.portlet.CourseStatusChk"%>
+<%@page import="com.daffo.Attivita_Formativa_3.portlet.CourseStatusChk"%>
 <%@page import="com.daffo.suilupposervice.model.suiluppo_room_allocation"%>
 <%@page import="com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil"%>
 <%@page import="com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil"%>

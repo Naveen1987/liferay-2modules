@@ -1,7 +1,7 @@
 package com.daffo.Attivita_Formativa_3.portlet;
 
 
-import com.daffo.Attivita_Formativa_3.portlet.FileUpload_ServiceClass;
+
 import com.daffo.suilupposervice.model.suiluppo_application;
 import com.daffo.suilupposervice.model.suiluppo_course;
 import com.daffo.suilupposervice.model.suiluppo_room_allocation;
@@ -47,7 +47,7 @@ import org.osgi.service.component.annotations.Component;
 	property = {
 		"com.liferay.portlet.display-category=Naveen Apps-UnitaOperative",
 		"com.liferay.portlet.instanceable=true",
-		"javax.portlet.display-name=Attivita_Formativa_3 Portlet",
+		"javax.portlet.display-name=Attivita_Formativa_3Portlet",
 		"javax.portlet.init-param.template-path=/",
 		"javax.portlet.init-param.view-template=/view.jsp",
 		"javax.portlet.resource-bundle=content.Language",
@@ -248,7 +248,7 @@ public class Attivita_Formativa_3Portlet extends MVCPortlet {
 					resourceResponse.getWriter().println(obj.toJSONString());
 				}
 			} catch (NumberFormatException | PortalException e) {
-				// TODO Auto-generated catch block
+				
 				e.printStackTrace();
 			}
 		log.info("Room Confirimed");
@@ -262,7 +262,7 @@ public class Attivita_Formativa_3Portlet extends MVCPortlet {
 				return;
 			}
 		} catch (NumberFormatException | PortalException e) {
-			// TODO Auto-generated catch block
+		
 			e.printStackTrace();
 		}
 		if(ch.checkAlreadBooked(new Long(ParamUtil.getString(resourceRequest, "courseId")).longValue(), new Long(ParamUtil.getString(resourceRequest, "roomID")).longValue()))
