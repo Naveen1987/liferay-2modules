@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+<!DOCTYPE service-builder PUBLIC "-//Liferay//DTD Service Builder 7.0.0//EN" "http://www.liferay.com/dtd/liferay-service-builder_7_0_0.dtd">
+
+<service-builder package-path="com.roomservice">
+	<namespace>RoomService</namespace>
+	<!--<entity data-source="sampleDataSource" local-service="true" name="Foo" 
+		remote-service="false" session-factory="sampleSessionFactory" table="foo" 
+		tx-manager="sampleTransactionManager uuid="true""> -->
+	<entity local-service="true" name="room" remote-service="true"
+		uuid="true"  table="room">
+		<column name="room_id" type="long" primary="true"></column>
+		<column name="room_number" type="int"></column>
+		<column name="room_capacity" type="int"></column>
+		<column name="equpiment_id" type="long"></column>
+		<column name="course_id" type="long"></column>
+		<column name="room_status" type="boolean"></column>
+				<!-- References -->
+		<reference entity="AssetEntry" package-path="com.liferay.portlet.asset" />
+		<reference entity="AssetTag" package-path="com.liferay.portlet.asset" />
+	</entity>
+
+
+<entity local-service="true" name="roominfo" remote-service="true"
+		 table="roominfo">
+		<column name="roominfo_id" type="long" primary="true"></column>
+		<column name="roominfo_number" type="int"></column>
+		<column name="roominfo_capacity" type="int"></column>
+		<column name="roominfo_status" type="boolean"></column>
+				<!-- References -->
+
+		<reference entity="AssetEntry" package-path="com.liferay.portlet.asset" />
+		<reference entity="AssetTag" package-path="com.liferay.portlet.asset" />
+	</entity>
+	
+	
+	<entity name="Equipment" local-service="true" remote-service="false" table="equipment">
+		<column name="equip_id" type="long" primary="true"></column>
+		<column name="equipment_name" type="String"></column>
+		<column name="equip_quantity" type="int"></column>
+		<column name="equip_description" type="String"></column>
+		<column name="equip_status" type="boolean"></column>
+
+		<!-- References -->
+		<reference entity="AssetEntry" package-path="com.liferay.portlet.asset" />
+		<reference entity="AssetTag" package-path="com.liferay.portlet.asset" />
+	</entity>
+
+<entity name="BookedEquipment" local-service="true" remote-service="false" table="bookedequipment">
+		<column name="booked_equip_id" type="long" primary="true"></column>
+		<column name="equip_id" type="long"></column>
+		<column name="room_id" type="long"></column>
+		<column name="booked_equip_status" type="boolean"></column>
+
+		<!-- References -->
+		<reference entity="AssetEntry" package-path="com.liferay.portlet.asset" />
+		<reference entity="AssetTag" package-path="com.liferay.portlet.asset" />
+	</entity>
+	
+
+</service-builder>

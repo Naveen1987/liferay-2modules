@@ -9,6 +9,8 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@page import="java.util.List"%>
+<%@page import="com.daffo.suilupposervice.service.suiluppo_equipmentLocalServiceUtil"%>
+<%@page import="com.daffo.suilupposervice.model.suiluppo_equipment"%>
 <%@page import="com.daffo.suilupposervice.service.suiluppo_roomLocalServiceUtil"%>
 <%@page import="com.daffo.suilupposervice.model.suiluppo_room"%>
 <%@page import="com.daffo.suilupposervice.service.suiluppo_room_allocationLocalServiceUtil"%>
@@ -110,11 +112,37 @@ for(suiluppo_room st:sr){
 <div  class="row">
 <div class="col-xs-12">
 <h1>Equipment Details</h1>
+<div class="row">
+<div class="col-xs-12">
+<table  class="table table-hover table-bordered results">
+<thead>
+<tr  class="bg-primary">
+<td><b>Name</b></td>
+<td><b>Required</b></td>
+</tr>
+</thead>
+<tbody>
+<%
+List<suiluppo_equipment> su=suiluppo_equipmentLocalServiceUtil.getsuiluppo_equipments(0, suiluppo_equipmentLocalServiceUtil.getsuiluppo_equipmentsCount());
+int counte=0;
+for(suiluppo_equipment sp:su){
+	++counte;
+%>
+<tr>
+	<td><%=sp.getEquip_name()%></td>
+	<td><input type="hidden" id="<%="hid_"+(counte)%>" value="<%=sp.getEquip_id() %>"><input id="<%="txt_"+(counte)%>" type="number" value="0" class="form-control"/></td>
+</tr>
+<%
+}
+%>
+</tbody>
+</table>
+</div>
+</div>
+<%--This is end --%>
 </div>
 </div>
 </div>
-
-
 <portlet:resourceURL var="updateRoomBookInfo" id="updateRoomBookInfo">
 </portlet:resourceURL>
 <script>
@@ -150,13 +178,26 @@ function getRoomBooked(roomId){
 }
 function getRoomBookInfo(roomId){
 	var div_id="#div_"+roomId;
-	var courseId='<%=request.getParameter("courseId")%>';
+	var count=<%=counte%>
+	var dataTxt="";
+	for(i=1;i<=count;i++){
+		var hid="#hid_"+i;
+		var txt="#txt_"+i;
+		dataTxt+="["+$(hid).val()+"="+$(txt).val()+"]";
+		//alert(dataTxt);
+	} 
+	if(dataTxt==""){
+		alert('Please Fill equipments');
+		return;
+	}
+	//alert(count);
+	  var courseId='<%=request.getParameter("courseId")%>';
 	AUI().use('aui-base','aui-io-request', function(A){
 		//aui ajax call to get updated content
 		A.io.request('<%=updateRoomBookInfo%>',{
   		dataType: 'json',
   		method: 'POST',
-  		data:{'<portlet:namespace/>roomID':roomId,'<portlet:namespace/>courseId':courseId},
+  		data:{'<portlet:namespace/>roomID':roomId,'<portlet:namespace/>courseId':courseId,'<portlet:namespace/>DataValue':dataTxt},
   		on: {
    			 success: function() {
    			var data=this.get('responseData');
@@ -178,7 +219,7 @@ function getRoomBookInfo(roomId){
     		}
   		}
 		});
-		});
+		});  
 }
 
 </script>

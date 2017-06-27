@@ -102,7 +102,7 @@ $(document).ready(function() {
 
 <script>
 function confirmationApplicant(appId){
-	alert(appId);
+	//alert(appId);
 	var ach=$("#confirm_ch").prop('checked');
 	if(ach){
 		//alert(appId);	

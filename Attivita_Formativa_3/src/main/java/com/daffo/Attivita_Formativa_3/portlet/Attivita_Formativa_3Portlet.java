@@ -4,9 +4,12 @@ package com.daffo.Attivita_Formativa_3.portlet;
 
 import com.daffo.suilupposervice.model.suiluppo_application;
 import com.daffo.suilupposervice.model.suiluppo_course;
+import com.daffo.suilupposervice.model.suiluppo_equip_allocation;
 import com.daffo.suilupposervice.model.suiluppo_room_allocation;
 import com.daffo.suilupposervice.service.suiluppo_applicationLocalServiceUtil;
 import com.daffo.suilupposervice.service.suiluppo_courseLocalServiceUtil;
+import com.daffo.suilupposervice.service.suiluppo_equip_allocationLocalServiceUtil;
+import com.daffo.suilupposervice.service.suiluppo_equipmentLocalServiceUtil;
 import com.daffo.suilupposervice.service.suiluppo_room_allocationLocalServiceUtil;
 import com.liferay.counter.kernel.service.CounterLocalServiceUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
@@ -28,6 +31,7 @@ import com.liferay.portal.kernel.util.WebKeys;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.StringTokenizer;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
@@ -286,6 +290,21 @@ public class Attivita_Formativa_3Portlet extends MVCPortlet {
 		su.setCourse_id(new Long(ParamUtil.getString(resourceRequest, "courseId")).longValue());
 		su.setRoomID(new Long(ParamUtil.getString(resourceRequest, "roomID")).longValue());
 		suiluppo_room_allocationLocalServiceUtil.updatesuiluppo_room_allocation(su);
+		
+		StringTokenizer st=new StringTokenizer(ParamUtil.getString(resourceRequest, "DataValue"),"[]");
+		while(st.hasMoreElements()){
+			//System.out.println(st.nextElement());
+			String data=st.nextElement().toString();
+			log.info("Inserting into equipment table.....");
+			suiluppo_equip_allocation se=suiluppo_equip_allocationLocalServiceUtil.createsuiluppo_equip_allocation(CounterLocalServiceUtil.increment());
+			se.setCourse_id(new Long(ParamUtil.getString(resourceRequest, "courseId")).longValue());
+			se.setEquip_id(new Long(data.split("=")[0]).longValue());
+			se.setEquip_allocat_quantity(new Long(data.split("=")[1]).longValue());
+			suiluppo_equip_allocationLocalServiceUtil.updatesuiluppo_equip_allocation(se);
+			//suiluppo_equip_allocationLocalServiceUtil.addsuiluppo_equip_allocation(se);
+			log.info("Inserted into equipment table");
+			System.out.println(se);
+		}
 		resourceResponse.getWriter().print(JSONFactoryUtil.createJSONObject().put("flag", "suc").toJSONString());
 		log.info("Room Confirimed");
 	break;

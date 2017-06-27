@@ -7,4 +7,5 @@ dependencies {
 	compileOnly group: "org.osgi", name: "osgi.cmpn", version: "6.0.0"
 	compile project(":modules:suilupposervice:suilupposervice-api")
 	compile project(":modules:suilupposervice:suilupposervice-service")
+	
 }
