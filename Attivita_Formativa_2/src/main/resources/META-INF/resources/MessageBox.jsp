@@ -1,12 +1,23 @@
 <%@page import="com.daffo.suilupposervice.service.suiluppo_courseLocalServiceUtil"%>
 <%@page import="com.daffo.suilupposervice.model.suiluppo_course"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@page import="com.daffo.suilupposervice.service.suiluppo_room_allocationLocalServiceUtil"%>
+<%@page import="java.util.List"%>
+<%@page import="com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil"%>
+<%@page import="com.daffo.suilupposervice.model.suiluppo_room_allocation"%>
+<%@page import="com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil"%>
+<%@page import="com.liferay.portal.kernel.dao.orm.DynamicQuery"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
 <%@ include file="/init.jsp" %>
-<%-- <%=request.getParameter("courseId") %> --%>
+
 <%
-suiluppo_course ls=suiluppo_courseLocalServiceUtil.getsuiluppo_course(new Long(request.getParameter("courseId")).longValue());			
-%>  
+long roomId=new Long(request.getParameter("roomId")).longValue();
+DynamicQuery dq=DynamicQueryFactoryUtil.forClass(suiluppo_room_allocation.class);
+dq.add(RestrictionsFactoryUtil.eq("roomID", roomId));
+List<suiluppo_room_allocation>su=suiluppo_room_allocationLocalServiceUtil.dynamicQuery(dq);
+long courseId =su.get(0).getCourse_id();
+suiluppo_course ls=suiluppo_courseLocalServiceUtil.getsuiluppo_course(courseId);
+%>
 <div class="container-fluid-1280">
 <div class="row" style="margin-left:15px">
 <div class="col-md-12">
