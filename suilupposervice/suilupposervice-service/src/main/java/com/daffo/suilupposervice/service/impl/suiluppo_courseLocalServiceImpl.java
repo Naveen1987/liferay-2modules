@@ -46,14 +46,17 @@ public class suiluppo_courseLocalServiceImpl
 	
 	public List<suiluppo_course> getCourseUnderDocente(String Docente)
 	{
-		DynamicQuery dyQuery = DynamicQueryFactoryUtil.forClass(suiluppo_course.class,PortalClassLoaderUtil.getClassLoader());
-	    dyQuery.add(RestrictionsFactoryUtil.eq("Docente", Docente));
-	    return suiluppo_courseLocalServiceUtil.dynamicQuery(dyQuery);
+//		 = DynamicQueryFactoryUtil.forClass(suiluppo_course.class,PortalClassLoaderUtil.getClassLoader());
+//	    
+		DynamicQuery dyQuery=suiluppo_courseLocalServiceUtil.dynamicQuery();
+		dyQuery.add(RestrictionsFactoryUtil.eq("Docente", Docente));
+		return suiluppo_courseLocalServiceUtil.dynamicQuery(dyQuery);
 	    
 	}
 	public List<suiluppo_course> getCourseNotUnderDocente(String Docente)
 	{
-		DynamicQuery dyQuery = DynamicQueryFactoryUtil.forClass(suiluppo_course.class,PortalClassLoaderUtil.getClassLoader());
+		//DynamicQuery dyQuery = DynamicQueryFactoryUtil.forClass(suiluppo_course.class,PortalClassLoaderUtil.getClassLoader());
+		DynamicQuery dyQuery=suiluppo_courseLocalServiceUtil.dynamicQuery();
 	    dyQuery.add(RestrictionsFactoryUtil.ne("Docente", Docente));
 	    return suiluppo_courseLocalServiceUtil.dynamicQuery(dyQuery);
 	    

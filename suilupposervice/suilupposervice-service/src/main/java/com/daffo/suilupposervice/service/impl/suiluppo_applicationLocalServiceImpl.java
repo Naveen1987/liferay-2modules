@@ -47,15 +47,17 @@ public class suiluppo_applicationLocalServiceImpl
 	
 	public boolean checkApplicantUnderCourse(long courseId,String applicant)
 	{
-		   DynamicQuery appQuery = DynamicQueryFactoryUtil.forClass(suiluppo_application.class,PortalClassLoaderUtil.getClassLoader());
+		   //DynamicQuery appQuery = DynamicQueryFactoryUtil.forClass(suiluppo_application.class,PortalClassLoaderUtil.getClassLoader());
+		   DynamicQuery appQuery = suiluppo_applicationLocalServiceUtil.dynamicQuery();
 	       appQuery.add(RestrictionsFactoryUtil.and(RestrictionsFactoryUtil.eq("applicat_name", applicant), RestrictionsFactoryUtil.eq("course_id", courseId)));
 	       return (suiluppo_applicationLocalServiceUtil.dynamicQuery(appQuery).size()>0?true:false);
 	    
 	}
 	public List<suiluppo_application> getApplicantUnderCourse(long courseId)
 	{
-		   DynamicQuery appQuery = DynamicQueryFactoryUtil.forClass(suiluppo_application.class,PortalClassLoaderUtil.getClassLoader());
-	       appQuery.add(RestrictionsFactoryUtil.eq("course_id", courseId));
+		   //DynamicQuery appQuery = DynamicQueryFactoryUtil.forClass(suiluppo_application.class,PortalClassLoaderUtil.getClassLoader());
+		 DynamicQuery appQuery =suiluppo_applicationLocalServiceUtil.dynamicQuery();
+		   appQuery.add(RestrictionsFactoryUtil.eq("course_id", courseId));
 	       return suiluppo_applicationLocalServiceUtil.dynamicQuery(appQuery);
 	    
 	}
