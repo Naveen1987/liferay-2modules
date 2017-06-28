@@ -313,6 +313,7 @@ private final static Log log=LogFactoryUtil.getLog(Attivita_Formativa_ExtraPortl
 	public void update_room_allocationTable(){
 		//Updating the course_allocation Table
 		//DynamicQuery userQuery = DynamicQueryFactoryUtil.forClass(suiluppo_room_allocation.class);
+		//next line is solution of dynamic query error
 		DynamicQuery userQuery =suiluppo_room_allocationLocalServiceUtil.dynamicQuery();
 		userQuery.add(RestrictionsFactoryUtil.eq("room_allocat_status", "Booked"));
 		List<suiluppo_room_allocation> sur=suiluppo_room_allocationLocalServiceUtil.dynamicQuery(userQuery);

@@ -12,7 +12,8 @@
 
 <%
 long roomId=new Long(request.getParameter("roomId")).longValue();
-DynamicQuery dq=DynamicQueryFactoryUtil.forClass(suiluppo_room_allocation.class);
+//DynamicQuery dq=DynamicQueryFactoryUtil.forClass(suiluppo_room_allocation.class);
+DynamicQuery dq=suiluppo_room_allocationLocalServiceUtil.dynamicQuery();
 dq.add(RestrictionsFactoryUtil.eq("roomID", roomId));
 List<suiluppo_room_allocation>su=suiluppo_room_allocationLocalServiceUtil.dynamicQuery(dq);
 long courseId =su.get(0).getCourse_id();

@@ -54,8 +54,8 @@ public class CourseStatusChk {
 		}else{
 			newDate+=""+minute;
 		}
-		System.out.println(cDate);
-		System.out.println(newDate);
+		//System.out.println(cDate);
+		//System.out.println(newDate);
 		if(new Long(cDate).longValue()>new Long(newDate).longValue()){
 			return false;
 		}
