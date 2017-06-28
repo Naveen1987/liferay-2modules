@@ -219,13 +219,13 @@ private final static Log log=LogFactoryUtil.getLog(Attivita_Formativa_ExtraPortl
 	@ProcessAction(name="addConfirmApplicant")
 	 public void addConfirmApplicant(ActionRequest actionRequest, ActionResponse actionResponse)
 	   throws IOException, PortletException, PortalException {
+		
 		log.info("Applicant Confirimg ............");
 		System.out.println("ApplicantId-"+ParamUtil.getString(actionRequest, "appId"));
+		actionResponse.setRenderParameter("courseId", ParamUtil.getString(actionRequest, "courseId"));
 		log.info("Applicant Confirimed");
 		
 	}
-	
-	
 	private CourseStatusChk ch=new CourseStatusChk();
 	@Override
 	public void serveResource(ResourceRequest resourceRequest,ResourceResponse resourceResponse)throws  IOException, PortletException {
@@ -343,6 +343,7 @@ private final static Log log=LogFactoryUtil.getLog(Attivita_Formativa_ExtraPortl
 		
 		//Updating Course Allocation Table
 	}
+	
 	//Manish COde
 	public void EquipmentSubmit(ActionRequest request, ActionResponse response) throws IOException, PortalException {
 		response.setRenderParameter("courseId", ParamUtil.getLong(request, "courseId")+"");
@@ -367,7 +368,6 @@ private final static Log log=LogFactoryUtil.getLog(Attivita_Formativa_ExtraPortl
 	
 	public void BookedEquipmentSubmit(ActionRequest request, ActionResponse response) throws IOException, PortalException {
 		response.setRenderParameter("courseId", ParamUtil.getLong(request, "course_Id")+"");
-		System.out.println("SET");
 		List<Equipment> equipList = EquipmentLocalServiceUtil.getEquipments(-1, -1);
 		for(Equipment eq : equipList){
 				int equip_quantit = ParamUtil.getInteger(request, eq.getEquipment_name());

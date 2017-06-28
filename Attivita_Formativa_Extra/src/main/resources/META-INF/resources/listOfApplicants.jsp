@@ -75,7 +75,6 @@ $(document).ready(function() {
   </thead>
     <tbody>
     <%
-    
    List<suiluppo_application>sa= suiluppo_applicationLocalServiceUtil.getApplicantUnderCourse(new Long(request.getParameter("courseId")).longValue());
     		for(suiluppo_application ap:sa){
     			%>
@@ -103,6 +102,7 @@ $(document).ready(function() {
 <script>
 function confirmationApplicant(appId){
 	/* alert(appId); */
+	var courseId='<%=request.getParameter("courseId") %>';
 	var ach=$("#confirm_ch").prop('checked');
 	if(ach){
 		//alert(appId);	
@@ -111,7 +111,7 @@ function confirmationApplicant(appId){
 			A.io.request('<%=addConfirmApplicant%>',{
 	  		dataType: 'json',
 	  		method: 'POST',
-	  		data:{'<portlet:namespace/>appId':appId},
+	  		data:{'<portlet:namespace/>appId':appId,'<portlet:namespace/>courseId':courseId},
 	  		on: {
 	   			 success: function() {
 	   			 alert("Successfully Confirmed!");

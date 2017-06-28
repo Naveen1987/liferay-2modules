@@ -26,7 +26,7 @@ public class CourseStatusChk {
 		while(st.hasMoreElements()){
 			cDate+=st.nextElement();
 		}
-		Calendar c=new GregorianCalendar();
+		Calendar c=GregorianCalendar.getInstance();
 		String newDate="";
 		if(c.get(Calendar.DATE)<10){
 			newDate+="0"+c.get(Calendar.DATE);
@@ -54,8 +54,6 @@ public class CourseStatusChk {
 		}else{
 			newDate+=""+minute;
 		}
-		//System.out.println(cDate);
-		//System.out.println(newDate);
 		if(new Long(cDate).longValue()>new Long(newDate).longValue()){
 			return false;
 		}
