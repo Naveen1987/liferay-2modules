@@ -149,11 +149,12 @@ for(suiluppo_room st:sr){
 </tbody>
 </table>
 </div>
-
-
 <br/>
 </div>
-<div  class="row">
+<div class="row">
+<br/>
+</div>
+<div  class="row  rowdiv">
 <div class="col-xs-12">
 <h1>Equipment Details
 </h1>
@@ -161,6 +162,7 @@ for(suiluppo_room st:sr){
 <jsp:param value="<%=courseId%>" name="courseId"/>
 </jsp:include>
 </div>
+<br/>
 </div>
 </div>
 

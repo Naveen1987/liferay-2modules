@@ -17,7 +17,6 @@
 <%@ include file="/init.jsp" %>
 <%--Message area --%>
 <liferay-ui:success key="successApply" message="Successfully applied for Course!"/>
-
 <style>
 .results tr[visible='false'],
 .no-result{

@@ -65,8 +65,7 @@ public class CourseStatusChk {
 		return true;
 	}
 	
-	public boolean checkAlreadBooked(long cid,long rid){
-	
+	public boolean checkAlreadBooked(long cid,long rid){	
 		DynamicQuery userQuery = suiluppo_room_allocationLocalServiceUtil.dynamicQuery();
 		userQuery.add(RestrictionsFactoryUtil.eq("room_allocat_status", "Booked"));
 		userQuery.add(RestrictionsFactoryUtil.eq("roomID", rid));

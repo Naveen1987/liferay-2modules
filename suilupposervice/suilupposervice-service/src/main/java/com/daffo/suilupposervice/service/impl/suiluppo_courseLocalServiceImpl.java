@@ -46,8 +46,6 @@ public class suiluppo_courseLocalServiceImpl
 	
 	public List<suiluppo_course> getCourseUnderDocente(String Docente)
 	{
-//		 = DynamicQueryFactoryUtil.forClass(suiluppo_course.class,PortalClassLoaderUtil.getClassLoader());
-//	    
 		DynamicQuery dyQuery=suiluppo_courseLocalServiceUtil.dynamicQuery();
 		dyQuery.add(RestrictionsFactoryUtil.eq("Docente", Docente));
 		return suiluppo_courseLocalServiceUtil.dynamicQuery(dyQuery);
