@@ -58,3 +58,16 @@ create table suiluppo_room_allocation (
 	room_allocat_status VARCHAR(75) null,
 	room_allocat_endTime VARCHAR(75) null
 );
+
+create table suiluppo_room_allocation_archive (
+	room_allocat_archive_id LONG not null primary key,
+	roomID LONG,
+	course_id LONG,
+	room_allocat_date VARCHAR(75) null,
+	room_allocat_startTime VARCHAR(75) null,
+	room_allocat_start VARCHAR(75) null,
+	room_allocat_end VARCHAR(75) null,
+	room_allocat_status VARCHAR(75) null,
+	room_allocat_endTime VARCHAR(75) null,
+	room_archive_date VARCHAR(75) null
+);

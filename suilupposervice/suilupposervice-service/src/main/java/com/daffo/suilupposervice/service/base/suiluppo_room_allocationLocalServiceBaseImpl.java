@@ -23,6 +23,7 @@ import com.daffo.suilupposervice.service.persistence.suiluppo_equip_allocationPe
 import com.daffo.suilupposervice.service.persistence.suiluppo_equipmentPersistence;
 import com.daffo.suilupposervice.service.persistence.suiluppo_roomPersistence;
 import com.daffo.suilupposervice.service.persistence.suiluppo_room_allocationPersistence;
+import com.daffo.suilupposervice.service.persistence.suiluppo_room_allocation_archivePersistence;
 import com.daffo.suilupposervice.service.suiluppo_room_allocationLocalService;
 
 import com.liferay.portal.kernel.bean.BeanReference;
@@ -554,6 +555,44 @@ public abstract class suiluppo_room_allocationLocalServiceBaseImpl
 	}
 
 	/**
+	 * Returns the suiluppo_room_allocation_archive local service.
+	 *
+	 * @return the suiluppo_room_allocation_archive local service
+	 */
+	public com.daffo.suilupposervice.service.suiluppo_room_allocation_archiveLocalService getsuiluppo_room_allocation_archiveLocalService() {
+		return suiluppo_room_allocation_archiveLocalService;
+	}
+
+	/**
+	 * Sets the suiluppo_room_allocation_archive local service.
+	 *
+	 * @param suiluppo_room_allocation_archiveLocalService the suiluppo_room_allocation_archive local service
+	 */
+	public void setsuiluppo_room_allocation_archiveLocalService(
+		com.daffo.suilupposervice.service.suiluppo_room_allocation_archiveLocalService suiluppo_room_allocation_archiveLocalService) {
+		this.suiluppo_room_allocation_archiveLocalService = suiluppo_room_allocation_archiveLocalService;
+	}
+
+	/**
+	 * Returns the suiluppo_room_allocation_archive persistence.
+	 *
+	 * @return the suiluppo_room_allocation_archive persistence
+	 */
+	public suiluppo_room_allocation_archivePersistence getsuiluppo_room_allocation_archivePersistence() {
+		return suiluppo_room_allocation_archivePersistence;
+	}
+
+	/**
+	 * Sets the suiluppo_room_allocation_archive persistence.
+	 *
+	 * @param suiluppo_room_allocation_archivePersistence the suiluppo_room_allocation_archive persistence
+	 */
+	public void setsuiluppo_room_allocation_archivePersistence(
+		suiluppo_room_allocation_archivePersistence suiluppo_room_allocation_archivePersistence) {
+		this.suiluppo_room_allocation_archivePersistence = suiluppo_room_allocation_archivePersistence;
+	}
+
+	/**
 	 * Returns the counter local service.
 	 *
 	 * @return the counter local service
@@ -742,6 +781,10 @@ public abstract class suiluppo_room_allocationLocalServiceBaseImpl
 	protected suiluppo_room_allocationLocalService suiluppo_room_allocationLocalService;
 	@BeanReference(type = suiluppo_room_allocationPersistence.class)
 	protected suiluppo_room_allocationPersistence suiluppo_room_allocationPersistence;
+	@BeanReference(type = com.daffo.suilupposervice.service.suiluppo_room_allocation_archiveLocalService.class)
+	protected com.daffo.suilupposervice.service.suiluppo_room_allocation_archiveLocalService suiluppo_room_allocation_archiveLocalService;
+	@BeanReference(type = suiluppo_room_allocation_archivePersistence.class)
+	protected suiluppo_room_allocation_archivePersistence suiluppo_room_allocation_archivePersistence;
 	@ServiceReference(type = com.liferay.counter.kernel.service.CounterLocalService.class)
 	protected com.liferay.counter.kernel.service.CounterLocalService counterLocalService;
 	@ServiceReference(type = com.liferay.portal.kernel.service.ClassNameLocalService.class)

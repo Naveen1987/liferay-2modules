@@ -3,13 +3,16 @@ package com.daffo.Attivita_Formativa_Extra_new.portlet;
 
 import com.daffo.suilupposervice.model.suiluppo_application;
 import com.daffo.suilupposervice.model.suiluppo_course;
+import com.daffo.suilupposervice.model.suiluppo_room;
 import com.daffo.suilupposervice.model.suiluppo_room_allocation;
 import com.daffo.suilupposervice.service.suiluppo_applicationLocalServiceUtil;
 import com.daffo.suilupposervice.service.suiluppo_courseLocalServiceUtil;
+import com.daffo.suilupposervice.service.suiluppo_roomLocalServiceUtil;
 import com.daffo.suilupposervice.service.suiluppo_room_allocationLocalServiceUtil;
 import com.liferay.counter.kernel.service.CounterLocalServiceUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.Session;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
@@ -62,6 +65,35 @@ public class Attivita_Formativa_Extra_newPortlet extends MVCPortlet {
 	private final static Log log=LogFactoryUtil.getLog(Attivita_Formativa_Extra_newPortlet.class);
 	
 	private FileUpload_ServiceClass fus=new FileUpload_ServiceClass();
+	@ProcessAction(name="newRoom")
+	 public void newRoom(ActionRequest actionRequest, ActionResponse actionResponse)
+	   throws IOException, PortletException, PortalException {
+		String txt_room=ParamUtil.getString(actionRequest, "txt-room");
+		String txt_des=ParamUtil.getString(actionRequest, "txt-des");
+		suiluppo_room sr=suiluppo_roomLocalServiceUtil.createsuiluppo_room(CounterLocalServiceUtil.increment());
+		sr.setRoom_name(txt_room);
+		sr.setRoom_description(txt_des);
+		suiluppo_roomLocalServiceUtil.updatesuiluppo_room(sr);
+		SessionMessages.add(actionRequest, "success");
+	}
+	
+	public void EquipmentSubmit(ActionRequest request, ActionResponse response) throws IOException, PortalException {
+		int quantity = ParamUtil.getInteger(request, "quantity");
+		String equipment_name = ParamUtil.getString(request, "equipment_name");
+		String equipDesc = ParamUtil.getString(request, "equipDesc");
+		try {
+			Equipment equip= EquipmentLocalServiceUtil.createEquipment(CounterLocalServiceUtil.increment());
+			equip.setEquip_quantity(quantity);
+			equip.setEquipment_name(equipment_name);
+			equip.setEquip_description(equipDesc);
+			EquipmentLocalServiceUtil.addEquipment(equip);
+			SessionMessages.add(request, "success");
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
 	@ProcessAction(name="formSubmit")
 	 public void formSubmit(ActionRequest actionRequest, ActionResponse actionResponse)
 	   throws IOException, PortletException, PortalException {
@@ -310,28 +342,7 @@ public class Attivita_Formativa_Extra_newPortlet extends MVCPortlet {
 		//Updating Course Allocation Table
 	}
 	
-	//Manish COde
-	public void EquipmentSubmit(ActionRequest request, ActionResponse response) throws IOException, PortalException {
-		response.setRenderParameter("courseId", ParamUtil.getLong(request, "courseId")+"");
-		int quantity = ParamUtil.getInteger(request, "quantity");
-		String equipment_name = ParamUtil.getString(request, "equipment_name");
-		String equipDesc = ParamUtil.getString(request, "equipDesc");
-		try {
-			Equipment equip= EquipmentLocalServiceUtil.createEquipment(CounterLocalServiceUtil.increment());
-			equip.setEquip_quantity(quantity);
-			equip.setEquipment_name(equipment_name);
-			equip.setEquip_description(equipDesc);
-			EquipmentLocalServiceUtil.addEquipment(equip);
-			System.out.println("Success!!");
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		System.out.println("quantity= " + quantity +"equipment_name= "+equipment_name);
-	}
-	
-	
-	
+//Manish Code
 	public void BookedEquipmentSubmit(ActionRequest request, ActionResponse response) throws IOException, PortalException {
 		response.setRenderParameter("courseId", ParamUtil.getLong(request, "course_Id")+"");
 		List<Equipment> equipList = EquipmentLocalServiceUtil.getEquipments(-1, -1);

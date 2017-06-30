@@ -56,4 +56,16 @@
 		<field name="room_allocat_status" type="String" />
 		<field name="room_allocat_endTime" type="String" />
 	</model>
+	<model name="com.daffo.suilupposervice.model.suiluppo_room_allocation_archive">
+		<field name="room_allocat_archive_id" type="long" />
+		<field name="roomID" type="long" />
+		<field name="course_id" type="long" />
+		<field name="room_allocat_date" type="String" />
+		<field name="room_allocat_startTime" type="String" />
+		<field name="room_allocat_start" type="String" />
+		<field name="room_allocat_end" type="String" />
+		<field name="room_allocat_status" type="String" />
+		<field name="room_allocat_endTime" type="String" />
+		<field name="room_archive_date" type="String" />
+	</model>
 </model-hints>

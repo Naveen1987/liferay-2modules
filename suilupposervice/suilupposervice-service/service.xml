@@ -77,5 +77,20 @@
         <finder-column name="roomID" />
         </finder>
     </entity>
+    <entity name="suiluppo_room_allocation_archive" local-service="true" remote-service="false" table="suiluppo_room_allocation_archive" cache-enabled="false">
+        <column name="room_allocat_archive_id" primary="true" type="long"></column>
+        <column name="roomID" type="long"></column>
+        <column name="course_id" type="long"></column>
+        <column name="room_allocat_date" type="String"></column>
+        <column name="room_allocat_startTime" type="String"></column>
+        <column name="room_allocat_start" type="String"></column>
+        <column name="room_allocat_end" type="String"></column>
+        <column name="room_allocat_status" type="String"></column>
+        <column name="room_allocat_endTime" type="String"></column>
+        <column name="room_archive_date" type="String"></column>
+         
+    </entity>
+    
+    
 	
 </service-builder>

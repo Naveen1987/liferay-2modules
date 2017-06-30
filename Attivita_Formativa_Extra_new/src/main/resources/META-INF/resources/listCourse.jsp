@@ -73,8 +73,9 @@ $(document).ready(function() {
           <span class="glyphicon glyphicon-refresh"></span> Refresh
         </a></td> -->
     <td style="padding: 10px;"><span id="btnNew" class="btn btn-warning">New Course</span></td>
-    <%--<td style="padding: 10px;"><span id="btnOwn" class="btn btn-warning">Own Course</span></td> --%>
     <td style="padding: 10px;"><span id="btnOther" class="btn btn-warning">Course for Apply</span></td>
+    <td style="padding: 10px;"><span id="btnNewRoom" class="btn btn-warning">New Room</span></td>
+    <td style="padding: 10px;"><span id="btnNewEquip" class="btn btn-warning">New Equipment</span></td>
     </tr>
     </tbody>
     </table>
@@ -162,6 +163,69 @@ $("#btnOther").click(function(){
 	$("#listApply").show();
 	$("#listOwn").hide();
 });*/
+
+$("#btnNewEquip").click(function(){
+	 var portletURL = Liferay.PortletURL.createRenderURL();
+	 	portletURL.setWindowState('<%=LiferayWindowState.POP_UP.toString() %>'); 
+	    portletURL.setPortletId("<%=themeDisplay.getPortletDisplay().getId() %>");
+	    portletURL.setParameter('mvcPath', '/NewEquip.jsp');
+	    YUI().ready(function(A) {
+	        YUI().use('aui-base','liferay-util-window', function(A) {
+	            Liferay.Util.Window.getWindow({
+	                title :'New Equipment',
+	                uri: portletURL,
+	                id:'<portlet:namespace/>New_Equipment',
+	                dialog: {
+	                	centered: true,
+	                	constrain2view: true,
+	                    destroyOnHide: true,
+	                    resizable: false,
+	                    cache: false,
+	                    modal: true,
+	                    width: 700,
+	                    height:400
+	                }
+	            }).after('destroy', function(event) {
+	            	//It will refresh
+	            	location.reload();
+	            });
+	        });
+	    });
+
+	
+});
+
+$("#btnNewRoom").click(function(){
+	 var portletURL = Liferay.PortletURL.createRenderURL();
+	 	portletURL.setWindowState('<%=LiferayWindowState.POP_UP.toString() %>'); 
+	    portletURL.setPortletId("<%=themeDisplay.getPortletDisplay().getId() %>");
+	    portletURL.setParameter('mvcPath', '/NewRoom.jsp');
+	    YUI().ready(function(A) {
+	        YUI().use('aui-base','liferay-util-window', function(A) {
+	            Liferay.Util.Window.getWindow({
+	                title :'New Room',
+	                uri: portletURL,
+	                id:'<portlet:namespace/>NewRoom',
+	                dialog: {
+	                	centered: true,
+	                	constrain2view: true,
+	                    destroyOnHide: true,
+	                    resizable: false,
+	                    cache: false,
+	                    modal: true,
+	                    width: 700,
+	                    height:300
+	                }
+	            }).after('destroy', function(event) {
+	            	//It will refresh
+	            	location.reload();
+	            });
+	        });
+	    });
+
+	
+});
+
 
 $("#btnOther").click(function(){
 	

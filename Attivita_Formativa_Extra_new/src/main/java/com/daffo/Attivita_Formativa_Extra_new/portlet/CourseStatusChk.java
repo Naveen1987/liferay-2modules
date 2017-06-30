@@ -11,8 +11,11 @@ import java.util.StringTokenizer;
 
 import com.daffo.suilupposervice.model.suiluppo_course;
 import com.daffo.suilupposervice.model.suiluppo_room_allocation;
+import com.daffo.suilupposervice.model.suiluppo_room_allocation_archive;
 import com.daffo.suilupposervice.service.suiluppo_courseLocalServiceUtil;
 import com.daffo.suilupposervice.service.suiluppo_room_allocationLocalServiceUtil;
+import com.daffo.suilupposervice.service.suiluppo_room_allocation_archiveLocalServiceUtil;
+import com.liferay.counter.kernel.service.CounterLocalServiceUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
@@ -29,7 +32,13 @@ public class CourseStatusChk {
 	suiluppo_course sc=suiluppo_courseLocalServiceUtil.getsuiluppo_course(courseId);
 	String cDate="";
 	String newDate="";
-	if(sc.getBloccato().equalsIgnoreCase("false")&&sc.getVisibile().equalsIgnoreCase("true")){
+	if(sc.getBloccato().equalsIgnoreCase("true")){
+		return true;
+	}
+	else if(sc.getVisibile().equalsIgnoreCase("false")){
+		return true;
+	}
+	else if(sc.getBloccato().equalsIgnoreCase("false")&&sc.getVisibile().equalsIgnoreCase("true")){
 		Date c_date=null;
 		Date new_date=null;
 		try{
@@ -52,16 +61,24 @@ public class CourseStatusChk {
 			return true;
 		}
 	}
-	else{
-		return true;
-	}
-	
+	return false;
 }
 	public boolean UpdateRoomAllocation(long roomalloID) throws PortalException {
-//		suiluppo_room_allocation su=suiluppo_room_allocationLocalServiceUtil.getsuiluppo_room_allocation(roomalloID);
-//		su.setRoom_allocat_status("Not Booked");
-//		suiluppo_room_allocationLocalServiceUtil.updatesuiluppo_room_allocation(su);
+		
+		suiluppo_room_allocation su=suiluppo_room_allocationLocalServiceUtil.getsuiluppo_room_allocation(roomalloID);
+		suiluppo_room_allocation_archive sm=suiluppo_room_allocation_archiveLocalServiceUtil.createsuiluppo_room_allocation_archive(CounterLocalServiceUtil.increment());
+		sm.setCourse_id(su.getCourse_id());
+		sm.setRoomID(su.getRoomID());
+		sm.setRoom_allocat_date(su.getRoom_allocat_date());
+		sm.setRoom_allocat_start(su.getRoom_allocat_start());
+		sm.setRoom_allocat_startTime(su.getRoom_allocat_startTime());
+		sm.setRoom_allocat_endTime(su.getRoom_allocat_endTime());
+		sm.setRoom_allocat_status("Now This Room free and Booking Invalidate");
+		sm.setRoom_allocat_end(su.getRoom_allocat_end());
+		sm.setRoom_archive_date(new SimpleDateFormat("dd/MM/yyyy HH:mm").format(new Date()).toString());
+		suiluppo_room_allocation_archiveLocalServiceUtil.updatesuiluppo_room_allocation_archive(sm);
 		suiluppo_room_allocationLocalServiceUtil.deletesuiluppo_room_allocation(roomalloID);
+		
 		return true;
 	}
 	

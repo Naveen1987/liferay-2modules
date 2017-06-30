@@ -13,4 +13,6 @@
 	<bean class="com.daffo.suilupposervice.service.persistence.impl.suiluppo_roomPersistenceImpl" id="com.daffo.suilupposervice.service.persistence.suiluppo_roomPersistence" parent="basePersistence" />
 	<bean class="com.daffo.suilupposervice.service.impl.suiluppo_room_allocationLocalServiceImpl" id="com.daffo.suilupposervice.service.suiluppo_room_allocationLocalService" />
 	<bean class="com.daffo.suilupposervice.service.persistence.impl.suiluppo_room_allocationPersistenceImpl" id="com.daffo.suilupposervice.service.persistence.suiluppo_room_allocationPersistence" parent="basePersistence" />
+	<bean class="com.daffo.suilupposervice.service.impl.suiluppo_room_allocation_archiveLocalServiceImpl" id="com.daffo.suilupposervice.service.suiluppo_room_allocation_archiveLocalService" />
+	<bean class="com.daffo.suilupposervice.service.persistence.impl.suiluppo_room_allocation_archivePersistenceImpl" id="com.daffo.suilupposervice.service.persistence.suiluppo_room_allocation_archivePersistence" parent="basePersistence" />
 </beans>

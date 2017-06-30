@@ -8,6 +8,7 @@
 	<import class="com.daffo.suilupposervice.model.suiluppo_equipment" />
 	<import class="com.daffo.suilupposervice.model.suiluppo_room" />
 	<import class="com.daffo.suilupposervice.model.suiluppo_room_allocation" />
+	<import class="com.daffo.suilupposervice.model.suiluppo_room_allocation_archive" />
 	<class name="com.daffo.suilupposervice.model.impl.suiluppo_applicationImpl" table="suiluppo_application">
 		<id name="applicat_id" type="long">
 			<generator class="assigned" />
@@ -74,5 +75,19 @@
 		<property name="room_allocat_end" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="room_allocat_status" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="room_allocat_endTime" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+	</class>
+	<class name="com.daffo.suilupposervice.model.impl.suiluppo_room_allocation_archiveImpl" table="suiluppo_room_allocation_archive">
+		<id name="room_allocat_archive_id" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="roomID" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="course_id" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="room_allocat_date" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="room_allocat_startTime" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="room_allocat_start" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="room_allocat_end" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="room_allocat_status" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="room_allocat_endTime" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="room_archive_date" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 	</class>
 </hibernate-mapping>
