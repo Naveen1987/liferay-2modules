@@ -338,7 +338,7 @@ function getRoomAllowId(courseId){
    					 alert('Already room booked for this course');
    				 }
    				 else if(data.flag=='cv'){
-   					 alert('This course is invalid Please Check Course {Bloccato/Visibile/Data Fine}');
+   					 alert('This course is invalid Please Check Course { Bloccato/Visibile/Data Fine }');
    					//location.reload();
    					 return;
    				 }
@@ -378,19 +378,6 @@ function getRoomAllowId(courseId){
 
 	}
 </script>
-
-<aui:script>
-   Liferay.provide(window, 'closePopup', function(dialogId) {
-        var A = AUI();
-        /*  var dialog = Liferay.Util.Window.getById(dialogId);
-        dialog.destroy(); */
-        Liferay.fire('closeWindow',{
-        	id:dialogId
-        });
-    },
-    ['liferay-util-window']
-    );
-</aui:script>
 
 
 
