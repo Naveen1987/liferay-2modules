@@ -37,6 +37,7 @@ public class BookedEquipmentSoap implements Serializable {
 		soapModel.setCourse_id(model.getCourse_id());
 		soapModel.setEquip_quantity(model.getEquip_quantity());
 		soapModel.setBooked_equip_status(model.getBooked_equip_status());
+		soapModel.setBooked_equip_date(model.getBooked_equip_date());
 
 		return soapModel;
 	}
@@ -135,9 +136,18 @@ public class BookedEquipmentSoap implements Serializable {
 		_booked_equip_status = booked_equip_status;
 	}
 
+	public String getBooked_equip_date() {
+		return _booked_equip_date;
+	}
+
+	public void setBooked_equip_date(String booked_equip_date) {
+		_booked_equip_date = booked_equip_date;
+	}
+
 	private long _booked_equip_id;
 	private long _equip_id;
 	private long _course_id;
 	private int _equip_quantity;
 	private boolean _booked_equip_status;
+	private String _booked_equip_date;
 }

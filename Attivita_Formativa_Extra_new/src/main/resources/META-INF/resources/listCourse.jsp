@@ -1,3 +1,4 @@
+<%@page import="com.liferay.portal.kernel.model.Role"%>
 <%@page import="com.liferay.portal.kernel.bean.PortletBeanLocatorUtil"%>
 <%@page import="com.liferay.portal.kernel.dao.orm.PropertyFactoryUtil"%>
 <%@page import="com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil"%>
@@ -74,9 +75,19 @@ $(document).ready(function() {
         </a></td> -->
     <td style="padding: 10px;"><span id="btnNew" class="btn btn-warning">New Course</span></td>
     <td style="padding: 10px;"><span id="btnOther" class="btn btn-warning">Course for Apply</span></td>
-    <td style="padding: 10px;"><span id="btnNewRoom" class="btn btn-warning">New Room</span></td>
-    <td style="padding: 10px;"><span id="btnNewEquip" class="btn btn-warning">New Equipment</span></td>
-    </tr>
+<%
+for(Role r:user.getRoles()){
+if(r.getName().equalsIgnoreCase("Administrator")||r.getName().equalsIgnoreCase("Power User"))
+{
+%>
+<td style="padding: 10px;"><span id="btnNewRoom" class="btn btn-warning">New Room</span></td>
+<td style="padding: 10px;"><span id="btnNewEquip" class="btn btn-warning">New Equipment</span></td>
+<%
+break;
+}
+}
+%>
+     </tr>
     </tbody>
     </table>
 </div>

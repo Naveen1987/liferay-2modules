@@ -26,6 +26,7 @@ import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ProxyUtil;
 import com.liferay.portal.kernel.util.StringBundler;
+import com.liferay.portal.kernel.util.StringPool;
 
 import com.roomservice.model.BookedEquipment;
 import com.roomservice.model.BookedEquipmentModel;
@@ -64,7 +65,8 @@ public class BookedEquipmentModelImpl extends BaseModelImpl<BookedEquipment>
 			{ "equip_id", Types.BIGINT },
 			{ "course_id", Types.BIGINT },
 			{ "equip_quantity", Types.INTEGER },
-			{ "booked_equip_status", Types.BOOLEAN }
+			{ "booked_equip_status", Types.BOOLEAN },
+			{ "booked_equip_date", Types.VARCHAR }
 		};
 	public static final Map<String, Integer> TABLE_COLUMNS_MAP = new HashMap<String, Integer>();
 
@@ -74,9 +76,10 @@ public class BookedEquipmentModelImpl extends BaseModelImpl<BookedEquipment>
 		TABLE_COLUMNS_MAP.put("course_id", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("equip_quantity", Types.INTEGER);
 		TABLE_COLUMNS_MAP.put("booked_equip_status", Types.BOOLEAN);
+		TABLE_COLUMNS_MAP.put("booked_equip_date", Types.VARCHAR);
 	}
 
-	public static final String TABLE_SQL_CREATE = "create table bookedequipment (booked_equip_id LONG not null primary key,equip_id LONG,course_id LONG,equip_quantity INTEGER,booked_equip_status BOOLEAN)";
+	public static final String TABLE_SQL_CREATE = "create table bookedequipment (booked_equip_id LONG not null primary key,equip_id LONG,course_id LONG,equip_quantity INTEGER,booked_equip_status BOOLEAN,booked_equip_date VARCHAR(75) null)";
 	public static final String TABLE_SQL_DROP = "drop table bookedequipment";
 	public static final String ORDER_BY_JPQL = " ORDER BY bookedEquipment.booked_equip_id ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY bookedequipment.booked_equip_id ASC";
@@ -85,10 +88,10 @@ public class BookedEquipmentModelImpl extends BaseModelImpl<BookedEquipment>
 	public static final String TX_MANAGER = "liferayTransactionManager";
 	public static final boolean ENTITY_CACHE_ENABLED = GetterUtil.getBoolean(com.roomservice.service.util.ServiceProps.get(
 				"value.object.entity.cache.enabled.com.roomservice.model.BookedEquipment"),
-			true);
+			false);
 	public static final boolean FINDER_CACHE_ENABLED = GetterUtil.getBoolean(com.roomservice.service.util.ServiceProps.get(
 				"value.object.finder.cache.enabled.com.roomservice.model.BookedEquipment"),
-			true);
+			false);
 	public static final boolean COLUMN_BITMASK_ENABLED = false;
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(com.roomservice.service.util.ServiceProps.get(
 				"lock.expiration.time.com.roomservice.model.BookedEquipment"));
@@ -135,6 +138,7 @@ public class BookedEquipmentModelImpl extends BaseModelImpl<BookedEquipment>
 		attributes.put("course_id", getCourse_id());
 		attributes.put("equip_quantity", getEquip_quantity());
 		attributes.put("booked_equip_status", getBooked_equip_status());
+		attributes.put("booked_equip_date", getBooked_equip_date());
 
 		attributes.put("entityCacheEnabled", isEntityCacheEnabled());
 		attributes.put("finderCacheEnabled", isFinderCacheEnabled());
@@ -173,6 +177,12 @@ public class BookedEquipmentModelImpl extends BaseModelImpl<BookedEquipment>
 
 		if (booked_equip_status != null) {
 			setBooked_equip_status(booked_equip_status);
+		}
+
+		String booked_equip_date = (String)attributes.get("booked_equip_date");
+
+		if (booked_equip_date != null) {
+			setBooked_equip_date(booked_equip_date);
 		}
 	}
 
@@ -232,6 +242,21 @@ public class BookedEquipmentModelImpl extends BaseModelImpl<BookedEquipment>
 	}
 
 	@Override
+	public String getBooked_equip_date() {
+		if (_booked_equip_date == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _booked_equip_date;
+		}
+	}
+
+	@Override
+	public void setBooked_equip_date(String booked_equip_date) {
+		_booked_equip_date = booked_equip_date;
+	}
+
+	@Override
 	public ExpandoBridge getExpandoBridge() {
 		return ExpandoBridgeFactoryUtil.getExpandoBridge(0,
 			BookedEquipment.class.getName(), getPrimaryKey());
@@ -263,6 +288,7 @@ public class BookedEquipmentModelImpl extends BaseModelImpl<BookedEquipment>
 		bookedEquipmentImpl.setCourse_id(getCourse_id());
 		bookedEquipmentImpl.setEquip_quantity(getEquip_quantity());
 		bookedEquipmentImpl.setBooked_equip_status(getBooked_equip_status());
+		bookedEquipmentImpl.setBooked_equip_date(getBooked_equip_date());
 
 		bookedEquipmentImpl.resetOriginalValues();
 
@@ -339,12 +365,20 @@ public class BookedEquipmentModelImpl extends BaseModelImpl<BookedEquipment>
 
 		bookedEquipmentCacheModel.booked_equip_status = getBooked_equip_status();
 
+		bookedEquipmentCacheModel.booked_equip_date = getBooked_equip_date();
+
+		String booked_equip_date = bookedEquipmentCacheModel.booked_equip_date;
+
+		if ((booked_equip_date != null) && (booked_equip_date.length() == 0)) {
+			bookedEquipmentCacheModel.booked_equip_date = null;
+		}
+
 		return bookedEquipmentCacheModel;
 	}
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(11);
+		StringBundler sb = new StringBundler(13);
 
 		sb.append("{booked_equip_id=");
 		sb.append(getBooked_equip_id());
@@ -356,6 +390,8 @@ public class BookedEquipmentModelImpl extends BaseModelImpl<BookedEquipment>
 		sb.append(getEquip_quantity());
 		sb.append(", booked_equip_status=");
 		sb.append(getBooked_equip_status());
+		sb.append(", booked_equip_date=");
+		sb.append(getBooked_equip_date());
 		sb.append("}");
 
 		return sb.toString();
@@ -363,7 +399,7 @@ public class BookedEquipmentModelImpl extends BaseModelImpl<BookedEquipment>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(19);
+		StringBundler sb = new StringBundler(22);
 
 		sb.append("<model><model-name>");
 		sb.append("com.roomservice.model.BookedEquipment");
@@ -389,6 +425,10 @@ public class BookedEquipmentModelImpl extends BaseModelImpl<BookedEquipment>
 			"<column><column-name>booked_equip_status</column-name><column-value><![CDATA[");
 		sb.append(getBooked_equip_status());
 		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>booked_equip_date</column-name><column-value><![CDATA[");
+		sb.append(getBooked_equip_date());
+		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -404,5 +444,6 @@ public class BookedEquipmentModelImpl extends BaseModelImpl<BookedEquipment>
 	private long _course_id;
 	private int _equip_quantity;
 	private boolean _booked_equip_status;
+	private String _booked_equip_date;
 	private BookedEquipment _escapedModel;
 }

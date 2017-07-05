@@ -81,7 +81,7 @@ $(document).ready(function() {
     			<tr>
     			<td><%=ap.getApplicat_name() %></td><td><%=ap.getApplicat_email() %></td>
     			<td>
-    			<input type="checkbox" id="confirm_ch" name="<portlet:namespace/>confirm_ch" data-toggle="toggle" data-on="SI" data-off="NO" data-size="large" data-onstyle="success" data-offstyle="info" onChange="confirmationApplicant('<%=ap.getApplicat_id() %>')">
+    			<input type="checkbox" id="confirm_ch" name="<portlet:namespace/>confirm_ch" data-toggle="toggle" data-on="SI" data-off="NO" data-size="large" data-onstyle="success" data-offstyle="info" onChange="confirmationApplicant('<%=ap.getApplicat_id() %>')" <%=ap.getApplicat_confirm().equalsIgnoreCase("yes")?"checked":""%>>
     			</td>
     			</tr>
     			<%

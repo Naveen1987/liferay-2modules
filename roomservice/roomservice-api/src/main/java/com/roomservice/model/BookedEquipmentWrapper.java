@@ -62,6 +62,7 @@ public class BookedEquipmentWrapper implements BookedEquipment,
 		attributes.put("course_id", getCourse_id());
 		attributes.put("equip_quantity", getEquip_quantity());
 		attributes.put("booked_equip_status", getBooked_equip_status());
+		attributes.put("booked_equip_date", getBooked_equip_date());
 
 		return attributes;
 	}
@@ -97,6 +98,12 @@ public class BookedEquipmentWrapper implements BookedEquipment,
 
 		if (booked_equip_status != null) {
 			setBooked_equip_status(booked_equip_status);
+		}
+
+		String booked_equip_date = (String)attributes.get("booked_equip_date");
+
+		if (booked_equip_date != null) {
+			setBooked_equip_date(booked_equip_date);
 		}
 	}
 
@@ -185,6 +192,16 @@ public class BookedEquipmentWrapper implements BookedEquipment,
 		return new BookedEquipmentWrapper((BookedEquipment)_bookedEquipment.clone());
 	}
 
+	/**
+	* Returns the booked_equip_date of this booked equipment.
+	*
+	* @return the booked_equip_date of this booked equipment
+	*/
+	@Override
+	public java.lang.String getBooked_equip_date() {
+		return _bookedEquipment.getBooked_equip_date();
+	}
+
 	@Override
 	public java.lang.String toString() {
 		return _bookedEquipment.toString();
@@ -238,6 +255,16 @@ public class BookedEquipmentWrapper implements BookedEquipment,
 	@Override
 	public void persist() {
 		_bookedEquipment.persist();
+	}
+
+	/**
+	* Sets the booked_equip_date of this booked equipment.
+	*
+	* @param booked_equip_date the booked_equip_date of this booked equipment
+	*/
+	@Override
+	public void setBooked_equip_date(java.lang.String booked_equip_date) {
+		_bookedEquipment.setBooked_equip_date(booked_equip_date);
 	}
 
 	/**

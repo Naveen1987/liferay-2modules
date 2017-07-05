@@ -18,6 +18,7 @@ import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.expando.kernel.model.ExpandoBridge;
 
+import com.liferay.portal.kernel.bean.AutoEscape;
 import com.liferay.portal.kernel.model.BaseModel;
 import com.liferay.portal.kernel.model.CacheModel;
 import com.liferay.portal.kernel.service.ServiceContext;
@@ -135,6 +136,21 @@ public interface BookedEquipmentModel extends BaseModel<BookedEquipment> {
 	 * @param booked_equip_status the booked_equip_status of this booked equipment
 	 */
 	public void setBooked_equip_status(boolean booked_equip_status);
+
+	/**
+	 * Returns the booked_equip_date of this booked equipment.
+	 *
+	 * @return the booked_equip_date of this booked equipment
+	 */
+	@AutoEscape
+	public String getBooked_equip_date();
+
+	/**
+	 * Sets the booked_equip_date of this booked equipment.
+	 *
+	 * @param booked_equip_date the booked_equip_date of this booked equipment
+	 */
+	public void setBooked_equip_date(String booked_equip_date);
 
 	@Override
 	public boolean isNew();

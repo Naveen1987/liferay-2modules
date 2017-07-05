@@ -324,6 +324,7 @@ public class BookedEquipmentPersistenceImpl extends BasePersistenceImpl<BookedEq
 		bookedEquipmentImpl.setCourse_id(bookedEquipment.getCourse_id());
 		bookedEquipmentImpl.setEquip_quantity(bookedEquipment.getEquip_quantity());
 		bookedEquipmentImpl.setBooked_equip_status(bookedEquipment.isBooked_equip_status());
+		bookedEquipmentImpl.setBooked_equip_date(bookedEquipment.getBooked_equip_date());
 
 		return bookedEquipmentImpl;
 	}

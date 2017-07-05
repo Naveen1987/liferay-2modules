@@ -31,7 +31,9 @@ import com.roomservice.service.BookedEquipmentLocalServiceUtil;
 import com.roomservice.service.EquipmentLocalServiceUtil;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
 
@@ -225,6 +227,14 @@ public class Attivita_Formativa_Extra_newPortlet extends MVCPortlet {
 		
 		log.info("Applicant Confirimg ............");
 		System.out.println("ApplicantId-"+ParamUtil.getString(actionRequest, "appId"));
+		suiluppo_application suap=suiluppo_applicationLocalServiceUtil.getsuiluppo_application(new Long(ParamUtil.getString(actionRequest, "appId")).longValue());
+		if(suap.getApplicat_confirm().equalsIgnoreCase("yes")){
+			suap.setApplicat_confirm("no");
+		}
+		else{
+			suap.setApplicat_confirm("yes");
+		}
+		suiluppo_applicationLocalServiceUtil.updatesuiluppo_application(suap);
 		actionResponse.setRenderParameter("courseId", ParamUtil.getString(actionRequest, "courseId"));
 		log.info("Applicant Confirimed");
 		
@@ -306,10 +316,10 @@ public class Attivita_Formativa_Extra_newPortlet extends MVCPortlet {
 		
 		su.setRoomID(new Long(ParamUtil.getString(resourceRequest, "roomID")).longValue());
 		suiluppo_room_allocationLocalServiceUtil.updatesuiluppo_room_allocation(su);
+		resourceRequest.setAttribute("courseId",ParamUtil.getString(resourceRequest, "courseId"));
 		resourceResponse.getWriter().print(JSONFactoryUtil.createJSONObject().put("flag", "suc").toJSONString());
 		log.info("Room Confirimed");
-	break;
-		
+	break;	
 	}
 	
 	}
@@ -358,6 +368,7 @@ public class Attivita_Formativa_Extra_newPortlet extends MVCPortlet {
 					equip.setEquip_id(equip_id);
 					equip.setEquip_quantity(equip_quantity);
 					equip.setCourse_id(course_id);
+					equip.setBooked_equip_date(new SimpleDateFormat("dd/MM/yyyy HH:mm").format(new Date()));
 					BookedEquipmentLocalServiceUtil.addBookedEquipment(equip);
 					System.out.println("Success!!");
 				} catch (Exception e) {
@@ -365,10 +376,7 @@ public class Attivita_Formativa_Extra_newPortlet extends MVCPortlet {
 				}
 		
 			
-			}
-			
-			
-			
+			}		
 			
 		}
 		

@@ -7,6 +7,7 @@
 		<field name="course_id" type="long" />
 		<field name="equip_quantity" type="int" />
 		<field name="booked_equip_status" type="boolean" />
+		<field name="booked_equip_date" type="String" />
 	</model>
 	<model name="com.roomservice.model.Equipment">
 		<field name="equip_id" type="long" />

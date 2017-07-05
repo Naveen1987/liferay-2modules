@@ -19,6 +19,7 @@ import aQute.bnd.annotation.ProviderType;
 import com.liferay.portal.kernel.model.CacheModel;
 import com.liferay.portal.kernel.util.HashUtil;
 import com.liferay.portal.kernel.util.StringBundler;
+import com.liferay.portal.kernel.util.StringPool;
 
 import com.roomservice.model.BookedEquipment;
 
@@ -63,7 +64,7 @@ public class BookedEquipmentCacheModel implements CacheModel<BookedEquipment>,
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(11);
+		StringBundler sb = new StringBundler(13);
 
 		sb.append("{booked_equip_id=");
 		sb.append(booked_equip_id);
@@ -75,6 +76,8 @@ public class BookedEquipmentCacheModel implements CacheModel<BookedEquipment>,
 		sb.append(equip_quantity);
 		sb.append(", booked_equip_status=");
 		sb.append(booked_equip_status);
+		sb.append(", booked_equip_date=");
+		sb.append(booked_equip_date);
 		sb.append("}");
 
 		return sb.toString();
@@ -89,6 +92,13 @@ public class BookedEquipmentCacheModel implements CacheModel<BookedEquipment>,
 		bookedEquipmentImpl.setCourse_id(course_id);
 		bookedEquipmentImpl.setEquip_quantity(equip_quantity);
 		bookedEquipmentImpl.setBooked_equip_status(booked_equip_status);
+
+		if (booked_equip_date == null) {
+			bookedEquipmentImpl.setBooked_equip_date(StringPool.BLANK);
+		}
+		else {
+			bookedEquipmentImpl.setBooked_equip_date(booked_equip_date);
+		}
 
 		bookedEquipmentImpl.resetOriginalValues();
 
@@ -106,6 +116,7 @@ public class BookedEquipmentCacheModel implements CacheModel<BookedEquipment>,
 		equip_quantity = objectInput.readInt();
 
 		booked_equip_status = objectInput.readBoolean();
+		booked_equip_date = objectInput.readUTF();
 	}
 
 	@Override
@@ -120,6 +131,13 @@ public class BookedEquipmentCacheModel implements CacheModel<BookedEquipment>,
 		objectOutput.writeInt(equip_quantity);
 
 		objectOutput.writeBoolean(booked_equip_status);
+
+		if (booked_equip_date == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(booked_equip_date);
+		}
 	}
 
 	public long booked_equip_id;
@@ -127,4 +145,5 @@ public class BookedEquipmentCacheModel implements CacheModel<BookedEquipment>,
 	public long course_id;
 	public int equip_quantity;
 	public boolean booked_equip_status;
+	public String booked_equip_date;
 }

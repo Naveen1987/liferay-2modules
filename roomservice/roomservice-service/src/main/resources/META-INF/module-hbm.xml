@@ -12,6 +12,7 @@
 		<property name="course_id" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="equip_quantity" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
 		<property name="booked_equip_status" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property name="booked_equip_date" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 	</class>
 	<class name="com.roomservice.model.impl.EquipmentImpl" table="equipment">
 		<id name="equip_id" type="long">

@@ -14,7 +14,13 @@
 <%@page import="com.daffo.suilupposervice.service.suiluppo_room_allocationLocalServiceUtil"%>
 <%@ include file="/init.jsp" %>
 <%
-String courseId=request.getParameter("courseId");
+String courseId="";
+courseId=request.getParameter("courseId");
+if(courseId==null){
+	System.out.println("getting value from Attribute");
+	courseId=request.getAttribute("courseId").toString();
+}
+System.out.println("RoomAllocation.jsp:"+courseId);
 %>
 
     <style>
@@ -234,7 +240,7 @@ $('#btn-booked').click(function(){
                 }
             }).after('destroy', function(event) {
             	//It will refresh
-            	location.reload();
+            	//location.reload();
             });
         });
     });
