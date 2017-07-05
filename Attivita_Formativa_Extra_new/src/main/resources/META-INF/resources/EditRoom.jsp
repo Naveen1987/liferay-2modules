@@ -1,31 +1,40 @@
+<%@page import="com.daffo.suilupposervice.model.suiluppo_room"%>
+<%@page import="com.daffo.suilupposervice.service.suiluppo_roomLocalServiceUtil"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@ include file="/init.jsp" %>
-<liferay-ui:success key="success" message="New Room Inserted successfully!"/>
-<portlet:actionURL name="newRoom" var="formSubmit">
-<portlet:param name="mvcPath" value="/NewRoom.jsp"/> 
+<%
+suiluppo_room sr=suiluppo_roomLocalServiceUtil.getsuiluppo_room(new Long(request.getParameter("roomId")).longValue());
+
+%>
+<liferay-ui:success key="success" message="Room Updated successfully!"/>
+<portlet:actionURL name="editRoom" var="formSubmit">
+<portlet:param name="mvcPath" value="/EditRoom.jsp"/> 
 </portlet:actionURL>
 <aui:form action="${formSubmit}" method="post" id="fm" name="fm">
 <div class="container-fluid-1280">
 <div class="row" style="margin-left:15px">
 <div class="col-md-12">
+<input type="hidden" name="<portlet:namespace/>roomId" value="<%=request.getParameter("roomId") %>"/>
 <table class="table table-hover table-bordered results" style="width:100%">
 <tbody>
 <tr>
 <td><b>Room Name<span style="color:red">*</span></b></td><td>
-<input name="<portlet:namespace/>txt-room" id="txt-room" class="form-control"/>
+<input name="<portlet:namespace/>txt-room" id="txt-room" value="<%=sr.getRoom_name() %>" class="form-control"/>
 <span id="_txt-room" style="color:red; display:none">Please Enter Room Name</span>
 </td>
 </tr>
 <tr>
 <td><b>Description<!-- <span style="color:red">*</span> --></b></td><td>
-<textarea name="<portlet:namespace/>txt-des" id="txt-des" class="form-control"></textarea>
+<textarea name="<portlet:namespace/>txt-des" id="txt-des"  class="form-control">
+<%=sr.getRoom_description() %>
+</textarea>
 <span id="_txt-des"  style="color:red; display:none">Please Enter Room Description</span>
 </td>
 </tr>
 <tr>
-<td colspan="2" style="text-align:right"><span id="submit" class="btn btn-success" onClick="showAddNoteDialog()" style="width:100px">   Submit   </span>     
-    <span id="reset" class="btn btn-warning" style="width:100px">   Reset   </span>
+<td colspan="2" style="text-align:right"><span id="submit" class="btn btn-success" onClick="showAddNoteDialog()" style="width:100px">   Update   </span>     
+  
 </td>
 </tr>
 </tbody>

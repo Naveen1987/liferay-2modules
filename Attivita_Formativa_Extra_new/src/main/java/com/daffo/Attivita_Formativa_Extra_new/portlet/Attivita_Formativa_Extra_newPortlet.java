@@ -79,6 +79,22 @@ public class Attivita_Formativa_Extra_newPortlet extends MVCPortlet {
 		SessionMessages.add(actionRequest, "success");
 	}
 	
+	
+	@ProcessAction(name="editRoom")
+	 public void editRoom(ActionRequest actionRequest, ActionResponse actionResponse)
+	   throws IOException, PortletException, PortalException {
+		long roomId=ParamUtil.getLong(actionRequest, "roomId");
+		String txt_room=ParamUtil.getString(actionRequest, "txt-room");
+		String txt_des=ParamUtil.getString(actionRequest, "txt-des");
+		suiluppo_room sr=suiluppo_roomLocalServiceUtil.getsuiluppo_room(roomId);
+		sr.setRoom_name(txt_room);
+		sr.setRoom_description(txt_des);
+		suiluppo_roomLocalServiceUtil.updatesuiluppo_room(sr);
+		SessionMessages.add(actionRequest, "success");
+		actionResponse.setRenderParameter("roomId", ParamUtil.getString(actionRequest, "roomId"));
+		
+	}
+	
 	public void EquipmentSubmit(ActionRequest request, ActionResponse response) throws IOException, PortalException {
 		int quantity = ParamUtil.getInteger(request, "quantity");
 		String equipment_name = ParamUtil.getString(request, "equipment_name");
@@ -95,6 +111,48 @@ public class Attivita_Formativa_Extra_newPortlet extends MVCPortlet {
 			e.printStackTrace();
 		}
 	}
+	
+	public void EquipmentEdit(ActionRequest request, ActionResponse response) throws IOException, PortalException {
+		long equipId=ParamUtil.getLong(request, "equipId");
+		int quantity = ParamUtil.getInteger(request, "quantity");
+		String equipment_name = ParamUtil.getString(request, "equipment_name");
+		String equipDesc = ParamUtil.getString(request, "equipDesc");
+		try {
+			Equipment equip= EquipmentLocalServiceUtil.getEquipment(equipId);
+			equip.setEquip_quantity(quantity);
+			equip.setEquipment_name(equipment_name);
+			equip.setEquip_description(equipDesc);
+			EquipmentLocalServiceUtil.updateEquipment(equip);
+			response.setRenderParameter("equipId", ParamUtil.getString(request, "equipId"));
+			SessionMessages.add(request, "success");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+
+	}
+	
+	@ProcessAction(name="equipDelete")
+	public void equipDelete(ActionRequest request, ActionResponse response) throws IOException, PortalException {
+		long equipId = ParamUtil.getLong(request, "equipId");
+		try {
+			EquipmentLocalServiceUtil.deleteEquipment(equipId);
+			log.info("Equipment Deleted Successfully");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	@ProcessAction(name="roomDelete")
+	public void roomDelete(ActionRequest request, ActionResponse response) throws IOException, PortalException {
+		long roomID = ParamUtil.getLong(request, "roomID");
+		try {
+			suiluppo_roomLocalServiceUtil.deletesuiluppo_room(roomID);
+			log.info("Room Deleted Successfully");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
 	
 	@ProcessAction(name="formSubmit")
 	 public void formSubmit(ActionRequest actionRequest, ActionResponse actionResponse)

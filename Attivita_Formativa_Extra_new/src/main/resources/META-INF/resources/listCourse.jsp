@@ -80,8 +80,8 @@ for(Role r:user.getRoles()){
 if(r.getName().equalsIgnoreCase("Administrator")||r.getName().equalsIgnoreCase("Power User"))
 {
 %>
-<td style="padding: 10px;"><span id="btnNewRoom" class="btn btn-warning">New Room</span></td>
-<td style="padding: 10px;"><span id="btnNewEquip" class="btn btn-warning">New Equipment</span></td>
+<td style="padding: 10px;"><span id="btnNewRoom" class="btn btn-warning">Manage Room</span></td>
+<td style="padding: 10px;"><span id="btnNewEquip" class="btn btn-warning">Manage Equipment</span></td>
 <%
 break;
 }
@@ -179,13 +179,13 @@ $("#btnNewEquip").click(function(){
 	 var portletURL = Liferay.PortletURL.createRenderURL();
 	 	portletURL.setWindowState('<%=LiferayWindowState.POP_UP.toString() %>'); 
 	    portletURL.setPortletId("<%=themeDisplay.getPortletDisplay().getId() %>");
-	    portletURL.setParameter('mvcPath', '/NewEquip.jsp');
+	    portletURL.setParameter('mvcPath', '/ListEquip.jsp');
 	    YUI().ready(function(A) {
 	        YUI().use('aui-base','liferay-util-window', function(A) {
 	            Liferay.Util.Window.getWindow({
-	                title :'New Equipment',
+	                title :'Equipment Management',
 	                uri: portletURL,
-	                id:'<portlet:namespace/>New_Equipment',
+	                id:'<portlet:namespace/>Equipment_management',
 	                dialog: {
 	                	centered: true,
 	                	constrain2view: true,
@@ -193,8 +193,8 @@ $("#btnNewEquip").click(function(){
 	                    resizable: false,
 	                    cache: false,
 	                    modal: true,
-	                    width: 700,
-	                    height:400
+	                    width:1600,
+	                   
 	                }
 	            }).after('destroy', function(event) {
 	            	//It will refresh
@@ -210,13 +210,13 @@ $("#btnNewRoom").click(function(){
 	 var portletURL = Liferay.PortletURL.createRenderURL();
 	 	portletURL.setWindowState('<%=LiferayWindowState.POP_UP.toString() %>'); 
 	    portletURL.setPortletId("<%=themeDisplay.getPortletDisplay().getId() %>");
-	    portletURL.setParameter('mvcPath', '/NewRoom.jsp');
+	    portletURL.setParameter('mvcPath', '/ListRoom.jsp');
 	    YUI().ready(function(A) {
 	        YUI().use('aui-base','liferay-util-window', function(A) {
 	            Liferay.Util.Window.getWindow({
-	                title :'New Room',
+	                title :'Room Management',
 	                uri: portletURL,
-	                id:'<portlet:namespace/>NewRoom',
+	                id:'<portlet:namespace/>Room_manage',
 	                dialog: {
 	                	centered: true,
 	                	constrain2view: true,
@@ -224,8 +224,7 @@ $("#btnNewRoom").click(function(){
 	                    resizable: false,
 	                    cache: false,
 	                    modal: true,
-	                    width: 700,
-	                    height:300
+	                    width:1600,
 	                }
 	            }).after('destroy', function(event) {
 	            	//It will refresh

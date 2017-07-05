@@ -298,6 +298,8 @@ $('.Date-creator').datepicker({
 });  
 
 $('.clockpicker').clockpicker({donetext: 'Done'});
+$("#duration-minutes").val('00');
+$("#duration-seconds").val('00');
 });
 
 
@@ -321,23 +323,55 @@ $("#Tot_Ore").durationPicker({
 	  responsive: true
 	});
 //Now Validation
+ 
  $("#duration-minutes").keydown(function(event){
-	var v = parseFloat(this.value + String.fromCharCode(event.which));
-	if (v>0&&v<60)
-	{ return true;}
-	else{
-		alert('Minute Not valid');
-          return false;
-        }
-});
- $("#duration-seconds").keydown(function(event){
-		var v = parseFloat(this.value + String.fromCharCode(event.which));
-		if (v>0&&v<60)
+	   if (this.value.length > 2) {
+       this.value = this.value.slice(0,1); 
+       return false;
+ 		}
+	 var v = parseInt(this.value + String.fromCharCode(event.which));
+     if (v>=0&&v<60)
 		{ return true;}
-		else{
-			alert('Seconds Not valid');
-	          return false;
-	        }
+     else if(v<0 || v>=60){
+     if(this.value.length==2){
+     this.value = this.value.slice(0,2); }
+     else{this.value = "0"+this.value.slice(0,2); }
+     return false;
+     }
+     else{
+     return false;
+     }
+	});
+  
+  $("#duration-minutes").focusout(function(event){
+     if(this.value.length==2){
+     this.value = this.value.slice(0,2); }
+     else{this.value = "0"+this.value.slice(0,1); }  
+	});
+ 
+  $("#duration-seconds").keydown(function(event){
+	   if (this.value.length > 2) {
+       this.value = this.value.slice(0,1); 
+       return false;
+		}
+	var v = parseInt(this.value + String.fromCharCode(event.which));
+    if (v>=0&&v<60)
+		{ return true;}
+    else if(v<0 || v>=60){
+    if(this.value.length==2){
+    this.value = this.value.slice(0,2); }
+    else{this.value = "0"+this.value.slice(0,2); }
+    return false;
+    }
+    else{
+    return false;
+    }
+	});
+ 
+ $("#duration-seconds").focusout(function(event){
+    if(this.value.length==2){
+    this.value = this.value.slice(0,2); }
+    else{this.value = "0"+this.value.slice(0,1); }  
 	});
 </script>
 
