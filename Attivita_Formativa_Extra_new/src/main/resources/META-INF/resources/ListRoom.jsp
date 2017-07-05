@@ -120,9 +120,9 @@ $(document).ready(function() {
     			<tr>
     			<td><%=sr.getRoom_name() %></td>
     			<td><%=sr.getRoom_description() %></td>
-    			<td style="text-align:center;">
-    			<table width="60%"><tr><td><span class="glyphicon glyphicon-edit" onClick="onRoomEdit('<%=sr.getRoomID()%>')"></span>
-    			</td><td><span class="glyphicon glyphicon-trash" onClick="onRoomDelete('<%=sr.getRoomID()%>')"></span></td></tr></table>
+    			<td>
+    			<span class="glyphicon glyphicon-edit" onClick="onRoomEdit('<%=sr.getRoomID()%>')"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    			<span class="glyphicon glyphicon-trash" onClick="onRoomDelete('<%=sr.getRoomID()%>')"></span>
     			</td>
     			</tr>
     			<%

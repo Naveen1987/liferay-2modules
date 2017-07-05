@@ -126,9 +126,9 @@ $(document).ready(function() {
     			<td><%=sr.getEquipment_name() %></td>
     			<td><%=sr.getEquip_description() %></td>
     			<td><%=sr.getEquip_quantity() %></td>
-    			<td style="text-align:center;">
-    			<table width="60%"><tr><td><span class="glyphicon glyphicon-edit" onClick="onEquipEdit('<%=sr.getEquip_id()%>')"></span>
-    			</td><td><span class="glyphicon glyphicon-trash" onClick="onEquipDelete('<%=sr.getEquip_id()%>')"></span></td></tr></table>
+    			<td>
+    			<span class="glyphicon glyphicon-edit" onClick="onEquipEdit('<%=sr.getEquip_id()%>')"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    			<span class="glyphicon glyphicon-trash" onClick="onEquipDelete('<%=sr.getEquip_id()%>')"></span>
     			</td>
     			</tr>
     			<%
