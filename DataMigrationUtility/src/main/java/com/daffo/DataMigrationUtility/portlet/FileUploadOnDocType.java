@@ -61,6 +61,7 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.dynamic.data.mapping.storage.Field;
 import com.liferay.dynamic.data.mapping.storage.Fields;
 import com.liferay.dynamic.data.mapping.util.DDMFormFactory;
+import com.liferay.dynamic.data.mapping.util.DDMUtil;
 import com.liferay.dynamic.data.mapping.util.FieldsToDDMFormValuesConverter;
 import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.repository.model.FileVersion;
@@ -325,11 +326,12 @@ public boolean uploadInfo(ThemeDisplay themeDisplay, String folderId,String fold
 	return true;
 }
 
-protected DDMFormValues toDDMFormValues(Fields fields,long structure_id)
+protected DDMFormValues toDDMFormValues(Fields fields,long structureId)
 		throws PortalException {
-		FieldsToDDMFormValuesConverter _fieldsToDDMFormValuesConverter= DDM	
-	 _fieldsToDDMFormValuesConverter.convert(
-			DDMStructureLocalServiceUtil.getDDMStructure(structure_id),fields);
-	}
 
+		return _fieldsToDDMFormValuesConverter.convert(
+			DDMStructureLocalServiceUtil.getDDMStructure(
+				structureId),
+			fields);
+	}
 }
