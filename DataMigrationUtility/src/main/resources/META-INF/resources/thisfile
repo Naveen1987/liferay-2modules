@@ -96,3 +96,65 @@ Map<String, Fields> fieldsMap = new HashMap<String, Fields>();
 
 
 --------------------------------------------------------------
+
+
+
+
+		
+				
+//				FileServiceFileLib l=new FileServiceFileLib();
+//				for(FileLibInfo lm:l.getRecords(folderName, themeDisplay, themeDisplay.getLocale())){
+//					//System.out.println(lm.getFileName()+" "+DLFileEntryTypeLocalServiceUtil.getDLFileEntryType(DLFileEntryLocalServiceUtil.fetchDLFileEntry(new Long(lm.getFileEntryId()).longValue()).getFileEntryId()));
+//					DLFileEntry dlFileEntry = DLFileEntryLocalServiceUtil.fetchDLFileEntry(new Long(lm.getFileEntryId()).longValue());
+//					DLFileVersion fileVersion =dlFileEntry.getFileVersion();
+//						//out.println("["+d.getStructureId()+":"+d.getName()+":"+d.getFieldNames()+"]");
+//					DLFileEntryMetadata fileEntryMetadata = DLFileEntryMetadataLocalServiceUtil
+//				                .getFileEntryMetadata(ddm.getStructureId(),fileVersion.getFileVersionId());
+//					
+//					DDMFormValues vals = StorageEngineManagerUtil.getDDMFormValues(fileEntryMetadata.getDDMStorageId());
+//						List<DDMFormFieldValue> fieldValueList = vals.getDDMFormFieldValues(); 
+//						for(DDMFormFieldValue fieldVal : fieldValueList){
+//							System.out.println(fieldVal.getName()+" "+fieldVal.getValue());
+//						}
+//					}
+//				
+				
+				ServiceContext serviceContext = ServiceContextFactory.getInstance(DLAppService.class.getName(), uploadPortletRequest);
+				Map<String, Fields> fieldsMap = new HashMap<String, Fields>();
+				Fields fieldm = new Fields();
+				fieldsMap.put(ddm.getStructureKey(), fieldm);
+				serviceContext.setExpandoBridgeAttributes();
+				InputStream is =fileItem.getInputStream();
+				try {
+					FileEntry fmt=DLAppServiceUtil.addFileEntry(repositoryId,
+							dlFolder.getFolderId(), 
+							title, 
+							mimeType, title, 
+							description, 
+							changeLog, is, 
+							file.getTotalSpace(), 
+							serviceContext);
+							
+//				DLFileEntry dlFileEntry=null;
+//		        try {
+				  
+//					DLFileEntry dlFileEntry = DLFileEntryLocalServiceUtil.fetchDLFileEntry(fmt.getFileEntryId());
+//					FileVersion fileVersion = fmt.getLatestFileVersion();
+//					List<com.liferay.dynamic.data.mapping.kernel.DDMStructure> ddmStructures	=dlFileEntry.getDLFileEntryType().getDDMStructures();
+//					System.out.println(ddmStructures.size());
+//					for(com.liferay.dynamic.data.mapping.kernel.DDMStructure d:ddmStructures){
+//						//out.println("["+d.getStructureId()+":"+d.getName()+":"+d.getFieldNames()+"]");
+//					DLFileEntryMetadata fileEntryMetadata = DLFileEntryMetadataLocalServiceUtil
+//				                .getFileEntryMetadata(d.getStructureId(),fileVersion.getFileVersionId());
+//						DDMFormValues vals = StorageEngineManagerUtil.getDDMFormValues(fileEntryMetadata.getDDMStorageId());
+//						List<DDMFormFieldValue> fieldValueList = vals.getDDMFormFieldValues(); 
+//						for(DDMFormFieldValue fieldVal : fieldValueList){
+//							System.out.println(fieldVal.getName().toString()+" "+fieldVal.getValue().getString(themeDisplay.getLocale()));
+//							
+//						}
+//					}
+				} 
+				catch (Exception e) 
+				{
+					System.out.println(e.getMessage()); e.printStackTrace(); 
+				}

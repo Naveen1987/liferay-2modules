@@ -16,6 +16,7 @@ import javax.portlet.ActionRequest;
 
 import org.omg.CORBA.portable.ValueFactory;
 
+import com.liferay.counter.kernel.service.CounterLocalServiceUtil;
 import com.liferay.document.library.kernel.model.DLFileEntry;
 import com.liferay.document.library.kernel.model.DLFileEntryMetadata;
 import com.liferay.document.library.kernel.model.DLFileEntryType;
@@ -25,7 +26,9 @@ import com.liferay.document.library.kernel.service.DLAppLocalServiceUtil;
 import com.liferay.document.library.kernel.service.DLAppService;
 import com.liferay.document.library.kernel.service.DLAppServiceUtil;
 import com.liferay.document.library.kernel.service.DLFileEntryLocalServiceUtil;
+import com.liferay.document.library.kernel.service.DLFileEntryMetadataLocalService;
 import com.liferay.document.library.kernel.service.DLFileEntryMetadataLocalServiceUtil;
+import com.liferay.document.library.kernel.service.DLFileEntryTypeLocalService;
 import com.liferay.document.library.kernel.service.DLFileEntryTypeLocalServiceUtil;
 import com.liferay.document.library.kernel.service.DLFolderLocalServiceUtil;
 import com.liferay.document.library.kernel.service.persistence.DLFileEntryFinderUtil;
@@ -50,6 +53,7 @@ import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.upgrade.util.ValueMapperUtil;
 import com.liferay.portal.kernel.upload.FileItem;
 import com.liferay.portal.kernel.upload.UploadPortletRequest;
+import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.MimeTypesUtil;
 import com.liferay.portal.kernel.util.StringPool;
 
@@ -57,9 +61,11 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.dynamic.data.mapping.storage.Field;
 import com.liferay.dynamic.data.mapping.storage.Fields;
 import com.liferay.dynamic.data.mapping.util.DDMFormFactory;
+import com.liferay.dynamic.data.mapping.util.FieldsToDDMFormValuesConverter;
 import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.repository.model.FileVersion;
 import com.liferay.portal.kernel.repository.model.Folder;
+import com.liferay.portal.kernel.service.ClassNameLocalService;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.service.ServiceContextFactory;
 
@@ -132,6 +138,7 @@ public boolean uploadInfo(ThemeDisplay themeDisplay, String folderId,String fold
 				
 				DLFolder dlFolder = DLFolderLocalServiceUtil.getFolder(new Long(folderId).longValue());
 		        long fileEntryTypeId = dlFolder.getDefaultFileEntryTypeId();
+		       System.out.println("fileEntryTypeId:-"+fileEntryTypeId);
 		        long userId = themeDisplay.getUserId();
 				long groupId = themeDisplay.getScopeGroupId();
 				long repositoryId = themeDisplay.getScopeGroupId();				
@@ -141,40 +148,188 @@ public boolean uploadInfo(ThemeDisplay themeDisplay, String folderId,String fold
 				File file = fileItem.getStoreLocation();
 				String changeLog = "This is By Prgram";
 				
-//				FileServiceFileLib l=new FileServiceFileLib();
-//				for(FileLibInfo lm:l.getRecords(folderName, themeDisplay, themeDisplay.getLocale())){
-//					//System.out.println(lm.getFileName()+" "+DLFileEntryTypeLocalServiceUtil.getDLFileEntryType(DLFileEntryLocalServiceUtil.fetchDLFileEntry(new Long(lm.getFileEntryId()).longValue()).getFileEntryId()));
-//					DLFileEntry dlFileEntry = DLFileEntryLocalServiceUtil.fetchDLFileEntry(new Long(lm.getFileEntryId()).longValue());
-//					DLFileVersion fileVersion =dlFileEntry.getFileVersion();
-//						//out.println("["+d.getStructureId()+":"+d.getName()+":"+d.getFieldNames()+"]");
-//					DLFileEntryMetadata fileEntryMetadata = DLFileEntryMetadataLocalServiceUtil
-//				                .getFileEntryMetadata(ddm.getStructureId(),fileVersion.getFileVersionId());
-//					
-//					DDMFormValues vals = StorageEngineManagerUtil.getDDMFormValues(fileEntryMetadata.getDDMStorageId());
-//						List<DDMFormFieldValue> fieldValueList = vals.getDDMFormFieldValues(); 
-//						for(DDMFormFieldValue fieldVal : fieldValueList){
-//							System.out.println(fieldVal.getName()+" "+fieldVal.getValue());
-//						}
-//					}
+//		//Again R&D start
+//				DDMForm fm=new DDMForm();
+//				for(String s:fieldsName){
+//					DDMFormField ft=new DDMFormField(s,"");
+//					ft.setDataType(ddm.getFieldDataType(s));
+//					fm.addDDMFormField(ft);
+//				}
+//				for(DDMFormField d:fm.getDDMFormFields()){
+//					System.out.println(d.getName()+" "+d.getDataType());
+//				}
 //				
 				
-				ServiceContext serviceContext = ServiceContextFactory.getInstance(DLFileEntry.class.getName(),actionRequest);
-				//serviceContext.getExpandoBridgeAttributes().put("structureId", ddm.getStructureId());
-				try {
-					
+//				DDF
+//				fv.setName("COD");
+//				Value v= (Value) new UnlocalizedValue("109");
+//				fv.setValue(v);
+//				
+//				DDMFormFieldValue fv1=new DDMFormFieldValue();
+//				fv1.setName("Titolo");
+//				Value v1= (Value) new UnlocalizedValue("Hello");
+//				fv1.setValue(v1);
+//				System.out.println(fv1.getDDMFormField());
+//				DDMFormFieldValue fv2=new DDMFormFieldValue();
+//				fv2.setName("REV");
+//				Value v2= (Value) new UnlocalizedValue("Go");
+//				fv2.setValue(v2);
+//				System.out.println(fv2.getDDMFormField());
+//				DDMFormFieldValue fv3=new DDMFormFieldValue();
+//				fv3.setName("Lingua");
+//				Value v3= (Value) new UnlocalizedValue("IT");
+//				fv3.setValue(v3);
+//				System.out.println(fv3.getDDMFormField());
+//				
+//				DDMFormValues fvt=new DDMFormValues(fm);
+//				fvt.addDDMFormFieldValue(fv);
+//				fvt.addDDMFormFieldValue(fv1);
+//				fvt.addDDMFormFieldValue(fv2);
+//				fvt.addDDMFormFieldValue(fv3);
+//				
+//				DDMFormValues fvt=new DDMFormValues(fm);
+//				System.out.println("Fields:"+fvt.getDDMForm().getDDMFormFields().get(0).getName());
+//				System.out.println("Fileds Type:"+fvt.getDDMForm().getDDMFormFields().get(0).getDataType());
+//				Map<String,DDMFormValues> fie=new  HashMap<String, DDMFormValues>();
+//				fie.put(ddm.getStructureKey(), fvt);
+//				InputStream is =fileItem.getInputStream();
+//				ServiceContext serviceContext=new ServiceContext();
+////				DLFileEntry dlFileEntry=null;
+////		        try {
+////				      dlFileEntry = DLFileEntryLocalServiceUtil.addFileEntry(themeDisplay.getUserId(), themeDisplay.getScopeGroupId(),
+////						themeDisplay.getScopeGroupId(), folder.getFolderId(),title, mimeType, title, StringPool.BLANK, StringPool.BLANK, 
+////						dlFolder.getDefaultFileEntryTypeId(),fie, file, null, file.length(), serviceContext);
+////					} catch (Exception e) {
+////						System.out.println(e.getMessage());
+////						e.printStackTrace();
+////					}
+////				
+////				  DLFileEntryLocalServiceUtil.updateFileEntry(folder.getUserId(), dlFileEntry.getFileEntryId(), file.getName(), mimeType,
+////				  title, description, "Draft to save",true,dlFileEntry.getFileEntryTypeId() , fie, file, is, 
+////				  file.getTotalSpace(), serviceContext);
+//			
+//				Map<Locale, String> nameMap = new HashMap<>();
+//				nameMap.put(LocaleUtil.getDefault(), "SITRA");
+//				Map<Locale, String> descriptionMap = new HashMap<>();
+//				InputStream is =fileItem.getInputStream();
+//				ServiceContext serviceContext = new ServiceContext();
+//
+//				serviceContext.setAddGuestPermissions(true);
+//				serviceContext.setAddGroupPermissions(true);
+//				serviceContext.setScopeGroupId(themeDisplay.getScopeGroupId());
+//				serviceContext.setUserId(themeDisplay.getUserId());
+//						DLFileEntryType sp=DLFileEntryTypeLocalServiceUtil.addFileEntryType(
+//						themeDisplay.getUserId(), themeDisplay.getScopeGroupId(),
+//						"SITRA", nameMap, descriptionMap,
+//						new long[] {ddm.getStructureId()}, serviceContext);
+						
+//				List<DLFileEntryType> dlFileEntryTypes=DLFileEntryTypeLocalServiceUtil.getFileEntryTypes(
+//						ddm.getStructureId());
+//				System.out.println(dlFileEntryTypes.get(0).getFileEntryTypeId());
+//					DLFileEntry dlFileEntry=null;
+//			        try {
+//					      dlFileEntry = DLFileEntryLocalServiceUtil.addFileEntry(themeDisplay.getUserId(), themeDisplay.getScopeGroupId(),
+//							themeDisplay.getScopeGroupId(), folder.getFolderId(),title, mimeType, title, StringPool.BLANK, StringPool.BLANK, 
+//							sp.getFileEntryTypeId(),null, file, null, file.length(), serviceContext);
+//						} catch (Exception e) {
+//							System.out.println(e.getMessage());
+//							e.printStackTrace();
+//						}
+//					
+//					  DLFileEntryLocalServiceUtil.updateFileEntry(folder.getUserId(), dlFileEntry.getFileEntryId(), file.getName(), mimeType,
+//					  title, description, "Draft to save",true,dlFileEntry.getFileEntryTypeId() , null, file, is, 
+//					  file.getTotalSpace(), serviceContext);
 			
-					} 
-				catch (Exception e) 
-				{
-					System.out.println(e.getMessage()); e.printStackTrace(); 
-				}
+			
 				
-				
-		}
-		
+
+					DLFileEntryType sp=null;
+					try{
+					List<DLFileEntryType> dlFileEntryTypes =DLFileEntryTypeLocalServiceUtil.getFileEntryTypes(ddm.getStructureId());
+					if(!dlFileEntryTypes.isEmpty()){
+						sp=dlFileEntryTypes.get(0);
+					}
+					else{
+						System.out.println("Null");
+					}
+					}catch(Exception ex){
+						
+					}
+					if(sp==null){
+						Map<Locale, String> nameMap = new HashMap<>();
+						nameMap.put(LocaleUtil.getDefault(), "SITRA");
+						Map<Locale, String> descriptionMap = new HashMap<>();			
+						ServiceContext serviceContext = new ServiceContext();
+						serviceContext.setAddGuestPermissions(true);
+						serviceContext.setAddGroupPermissions(true);
+						serviceContext.setScopeGroupId(themeDisplay.getScopeGroupId());
+						serviceContext.setUserId(themeDisplay.getDefaultUserId());
+
+						sp= DLFileEntryTypeLocalServiceUtil.addFileEntryType(
+							themeDisplay.getDefaultUserId(), themeDisplay.getScopeGroupId(),
+							"SITRA", nameMap, descriptionMap,
+							new long[] {ddm.getStructureId()}, serviceContext);
+						System.out.println("This-"+sp.getFileEntryTypeId());
+					}
+					InputStream is =fileItem.getInputStream();
+					//Old COde
+					ServiceContext serviceContext = new ServiceContext();
+					serviceContext.setAddGuestPermissions(true);
+					serviceContext.setAddGroupPermissions(true);
+					serviceContext.setScopeGroupId(themeDisplay.getScopeGroupId());
+					serviceContext.setUserId(themeDisplay.getDefaultUserId());
+					FileEntry fmt=DLAppLocalServiceUtil.addFileEntry(themeDisplay.getUserId(),repositoryId, folder.getFolderId(), title, mimeType, 
+							title, description, "", is, file.getTotalSpace(), serviceContext);
+					
+					DLFileEntry dlfile=DLFileEntryLocalServiceUtil.getDLFileEntry(fmt.getFileEntryId());
+					DLFileVersion _dlFileVersion=dlfile.getFileVersion();
+					try {
+						DLFileEntry dlFileEntry = _dlFileVersion.getFileEntry();
+						
+						DLFileEntryMetadata	_dlFileEntryMetadata =DLFileEntryMetadataLocalServiceUtil.createDLFileEntryMetadata(CounterLocalServiceUtil.increment());
+
+						long ddmStructureId = ddm.getStructureId();
+
+						
+						
+						DDMFormValues ddmFormValues = toDDMFormValues(fields,ddm.getStructureId());
+
+						long ddmStorageId = StorageEngineManagerUtil.create(
+							_dlFileVersion.getCompanyId(), ddmStructureId, ddmFormValues,
+							serviceContext);
+
+						_dlFileEntryMetadata.setDDMStorageId(ddmStorageId);
+
+						_dlFileEntryMetadata.setDDMStructureId(ddmStructureId);
+						_dlFileEntryMetadata.setFileEntryId(dlFileEntry.getFileEntryId());
+						_dlFileEntryMetadata.setFileVersionId(
+							_dlFileVersion.getFileVersionId());
+
+						_dlFileEntryMetadata =
+								DLFileEntryMetadataLocalServiceUtil.addDLFileEntryMetadata(
+								_dlFileEntryMetadata);
+					}
+					catch (PortalException pe) {
+						throw new SystemException(
+							"Unable to add DDM fields for file version " +
+								_dlFileVersion.getFileVersionId(),
+							pe);
+					}
+			
+			
+			
+			}	
 				/*Hello Adding*/
 			
 	}	
 	return true;
 }
+
+protected DDMFormValues toDDMFormValues(Fields fields,long structure_id)
+		throws PortalException {
+		FieldsToDDMFormValuesConverter _fieldsToDDMFormValuesConverter= DDM	
+	 _fieldsToDDMFormValuesConverter.convert(
+			DDMStructureLocalServiceUtil.getDDMStructure(structure_id),fields);
+	}
+
 }
