@@ -3,8 +3,6 @@ package com.daffo.DataMigrationUtility.portlet;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -12,65 +10,26 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 import java.util.regex.Pattern;
-
 import javax.portlet.ActionRequest;
-
-import org.omg.CORBA.portable.ValueFactory;
-
-import com.daffo.DataMigrationUtility.helper.FieldsToDDMFormValuesConverterImpl;
-import com.liferay.counter.kernel.service.CounterLocalServiceUtil;
-import com.liferay.document.library.kernel.model.DLFileEntry;
-import com.liferay.document.library.kernel.model.DLFileEntryMetadata;
 import com.liferay.document.library.kernel.model.DLFileEntryType;
-import com.liferay.document.library.kernel.model.DLFileVersion;
 import com.liferay.document.library.kernel.model.DLFolder;
-import com.liferay.document.library.kernel.service.DLAppLocalService;
 import com.liferay.document.library.kernel.service.DLAppLocalServiceUtil;
-import com.liferay.document.library.kernel.service.DLAppService;
 import com.liferay.document.library.kernel.service.DLAppServiceUtil;
-import com.liferay.document.library.kernel.service.DLFileEntryLocalServiceUtil;
-import com.liferay.document.library.kernel.service.DLFileEntryMetadataLocalService;
-import com.liferay.document.library.kernel.service.DLFileEntryMetadataLocalServiceUtil;
-import com.liferay.document.library.kernel.service.DLFileEntryTypeLocalService;
 import com.liferay.document.library.kernel.service.DLFileEntryTypeLocalServiceUtil;
 import com.liferay.document.library.kernel.service.DLFolderLocalServiceUtil;
-import com.liferay.document.library.kernel.service.persistence.DLFileEntryFinderUtil;
-import com.liferay.document.library.kernel.service.persistence.DLFileEntryMetadataUtil;
-import com.liferay.dynamic.data.mapping.kernel.DDMForm;
-import com.liferay.dynamic.data.mapping.kernel.DDMFormFieldValue;
-import com.liferay.dynamic.data.mapping.kernel.DDMFormValues;
-import com.liferay.dynamic.data.mapping.kernel.DDMStructureManagerUtil;
-import com.liferay.dynamic.data.mapping.kernel.LocalizedValue;
-import com.liferay.dynamic.data.mapping.kernel.StorageEngineManagerUtil;
-import com.liferay.dynamic.data.mapping.kernel.UnlocalizedValue;
-import com.liferay.dynamic.data.mapping.kernel.Value;
-import com.liferay.dynamic.data.mapping.kernel.DDMFormField;
 import com.liferay.dynamic.data.mapping.model.DDMStructure;
-import com.liferay.dynamic.data.mapping.service.DDMStorageLinkLocalServiceUtil;
 import com.liferay.dynamic.data.mapping.service.DDMStructureLocalServiceUtil;
 import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
-import com.liferay.portal.kernel.upgrade.util.ValueMapperUtil;
 import com.liferay.portal.kernel.upload.FileItem;
 import com.liferay.portal.kernel.upload.UploadPortletRequest;
 import com.liferay.portal.kernel.util.LocaleUtil;
-import com.liferay.portal.kernel.util.MimeTypesUtil;
-import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.dynamic.data.mapping.storage.Field;
 import com.liferay.dynamic.data.mapping.storage.Fields;
-import com.liferay.dynamic.data.mapping.util.DDMFormFactory;
-import com.liferay.dynamic.data.mapping.util.DDMUtil;
-import com.liferay.dynamic.data.mapping.util.FieldsToDDMFormValuesConverter;
-import com.liferay.portal.kernel.repository.model.FileEntry;
-import com.liferay.portal.kernel.repository.model.FileVersion;
 import com.liferay.portal.kernel.repository.model.Folder;
-import com.liferay.portal.kernel.service.ClassNameLocalService;
 import com.liferay.portal.kernel.service.ServiceContext;
-import com.liferay.portal.kernel.service.ServiceContextFactory;
 
 public class FileUploadOnDocType {
 private final Log logger=LogFactoryUtil.getLog("FileUploadOnDocumentType");
@@ -211,10 +170,4 @@ public boolean uploadInfo(ThemeDisplay themeDisplay, String folderId,String fold
 	return true;
 }
 
-protected DDMFormValues toDDMFormValues(Fields fields,long structureId)
-		throws PortalException {
-	FieldsToDDMFormValuesConverterImpl fm=new FieldsToDDMFormValuesConverterImpl();
-		return fm.convert(DDMStructureManagerUtil.getStructure(structureId),
-			fields);
-	}
 }
