@@ -101,67 +101,57 @@ public boolean uploadInfo(ThemeDisplay themeDisplay, String folderId,String fold
 				DLFolder dlFolder = DLFolderLocalServiceUtil.getFolder(new Long(folderId).longValue());
 		        long fileEntryTypeId = dlFolder.getDefaultFileEntryTypeId();
 		        System.out.println("fileEntryTypeId:-"+fileEntryTypeId);
-		        long userId = themeDisplay.getUserId();
-				long groupId = themeDisplay.getScopeGroupId();
+//		        long userId = themeDisplay.getUserId();
+//				long groupId = themeDisplay.getScopeGroupId();
 				long repositoryId = themeDisplay.getScopeGroupId();				
 				String title = fileItem.getFileName();
 				String description = title +" is added via programatically";
 				String mimeType = fileItem.getContentType();	
 				File file = fileItem.getStoreLocation();
+				System.out.println(file.getName());
+				System.out.println(file.length());
 				String changeLog = "This is By Prgram";
 					DLFileEntryType sp=null;
 					try{
 					List<DLFileEntryType> dlFileEntryTypes =DLFileEntryTypeLocalServiceUtil.getFileEntryTypes(ddm.getStructureId());
-					
 					if(!dlFileEntryTypes.isEmpty()){
-					 System.out.println("Not Null");
 						sp=dlFileEntryTypes.get(0);
 					}
-					else{
-						System.out.println("Null");
-					}
 					}catch(Exception ex){
-						
+						System.out.println("No structure Is here please Recreate your type if exists because It is not valid Document Type");
+						return false;
 					}
-					if(sp==null){
-						System.out.println("I am Null");
-						Map<Locale, String> nameMap = new HashMap<>();
-						nameMap.put(LocaleUtil.getDefault(), "SITRA");
-						Map<Locale, String> descriptionMap = new HashMap<>();			
-						ServiceContext serviceContext = new ServiceContext();
-						serviceContext.setAddGuestPermissions(true);
-						serviceContext.setAddGroupPermissions(true);
-						serviceContext.setScopeGroupId(themeDisplay.getScopeGroupId());
-						serviceContext.setUserId(themeDisplay.getDefaultUserId());
-
-						sp= DLFileEntryTypeLocalServiceUtil.addFileEntryType(
-							themeDisplay.getDefaultUserId(), themeDisplay.getScopeGroupId(),
-							"SITRA", nameMap, descriptionMap,
-							new long[] {ddm.getStructureId()}, serviceContext);
-						System.out.println("This-"+sp.getFileEntryTypeId());
-					}
+//					if(sp==null){
+//						System.out.println("Not file Entry type Exits means not valid document type ");
+//						Map<Locale, String> nameMap = new HashMap<>();
+//						nameMap.put(LocaleUtil.getDefault(), "SITRA");
+//						Map<Locale, String> descriptionMap = new HashMap<>();			
+//						ServiceContext serviceContext = new ServiceContext();
+//						serviceContext.setAddGuestPermissions(true);
+//						serviceContext.setAddGroupPermissions(true);
+//						serviceContext.setScopeGroupId(themeDisplay.getScopeGroupId());
+//						serviceContext.setUserId(themeDisplay.getDefaultUserId());
+//
+//						sp= DLFileEntryTypeLocalServiceUtil.addFileEntryType(
+//							themeDisplay.getDefaultUserId(), themeDisplay.getScopeGroupId(),
+//							"SITRA", nameMap, descriptionMap,
+//							new long[] {ddm.getStructureId()}, serviceContext);
+//						System.out.println("Now created valid and -"+sp.getFileEntryTypeId());
+//					}
 					InputStream is =fileItem.getInputStream();
-					//Old COde
+					System.out.println(is.available());
 					ServiceContext serviceContext = new ServiceContext();
 					serviceContext.setAddGuestPermissions(true);
 					serviceContext.setAddGroupPermissions(true);
 					serviceContext.setScopeGroupId(themeDisplay.getScopeGroupId());
 					serviceContext.setUserId(themeDisplay.getDefaultUserId());
 					serviceContext.setAttribute("fileEntryTypeId", sp.getFileEntryTypeId());
-//					System.out.println(fields.getDDMStructureId());
-//					System.out.println(fields.get("COD").getValue(themeDisplay.getLocale()));
-//					System.out.println(fields.get("Titolo").getValue(themeDisplay.getLocale()));
-//					System.out.println(fields.get("REV").getValue(themeDisplay.getLocale()));
-//					System.out.println(fields.get("Lingua").getValue(themeDisplay.getLocale()));
 					serviceContext.setAttribute(ddm.getStructureId()+"COD", fields.get("COD").getValue(themeDisplay.getLocale()));
 					serviceContext.setAttribute(ddm.getStructureId()+"Titolo", fields.get("Titolo").getValue(themeDisplay.getLocale()));
 					serviceContext.setAttribute(ddm.getStructureId()+"REV", fields.get("REV").getValue(themeDisplay.getLocale()));
 					serviceContext.setAttribute(ddm.getStructureId()+"Lingua", fields.get("Lingua").getValue(themeDisplay.getLocale()));
-					
 				    DLAppLocalServiceUtil.addFileEntry(themeDisplay.getUserId(),repositoryId, folder.getFolderId(), title, mimeType, 
-							title, description, "", is, file.getTotalSpace(), serviceContext);
-					
-
+							title, description, changeLog, is, file.getTotalSpace(), serviceContext);	    
 			
 			}	
 				/*Hello Adding*/
