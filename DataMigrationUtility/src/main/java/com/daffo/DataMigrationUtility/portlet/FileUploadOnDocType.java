@@ -3,6 +3,7 @@ package com.daffo.DataMigrationUtility.portlet;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -16,12 +17,14 @@ import javax.portlet.ActionRequest;
 
 import org.omg.CORBA.portable.ValueFactory;
 
+import com.daffo.DataMigrationUtility.helper.FieldsToDDMFormValuesConverterImpl;
 import com.liferay.counter.kernel.service.CounterLocalServiceUtil;
 import com.liferay.document.library.kernel.model.DLFileEntry;
 import com.liferay.document.library.kernel.model.DLFileEntryMetadata;
 import com.liferay.document.library.kernel.model.DLFileEntryType;
 import com.liferay.document.library.kernel.model.DLFileVersion;
 import com.liferay.document.library.kernel.model.DLFolder;
+import com.liferay.document.library.kernel.service.DLAppLocalService;
 import com.liferay.document.library.kernel.service.DLAppLocalServiceUtil;
 import com.liferay.document.library.kernel.service.DLAppService;
 import com.liferay.document.library.kernel.service.DLAppServiceUtil;
@@ -56,8 +59,7 @@ import com.liferay.portal.kernel.upload.UploadPortletRequest;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.MimeTypesUtil;
 import com.liferay.portal.kernel.util.StringPool;
-
-
+import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.dynamic.data.mapping.storage.Field;
 import com.liferay.dynamic.data.mapping.storage.Fields;
 import com.liferay.dynamic.data.mapping.util.DDMFormFactory;
@@ -123,7 +125,7 @@ public boolean uploadInfo(ThemeDisplay themeDisplay, String folderId,String fold
 					else if(sname.equalsIgnoreCase("Applicativo")){}
 					else if(sname.equalsIgnoreCase("Anno")){}
 					else if(sname.equalsIgnoreCase("Sede")){}
-					else if(sname.equalsIgnoreCase("Unità Organizzativa")){}
+					else if(sname.equalsIgnoreCase("Unit� Organizzativa")){}
 					else if(sname.equalsIgnoreCase("Dipartimento")){}
 					else if(sname.equalsIgnoreCase("Numero")){}
 					else if(sname.equalsIgnoreCase("Modulo")){}
@@ -139,7 +141,7 @@ public boolean uploadInfo(ThemeDisplay themeDisplay, String folderId,String fold
 				
 				DLFolder dlFolder = DLFolderLocalServiceUtil.getFolder(new Long(folderId).longValue());
 		        long fileEntryTypeId = dlFolder.getDefaultFileEntryTypeId();
-		       System.out.println("fileEntryTypeId:-"+fileEntryTypeId);
+		        System.out.println("fileEntryTypeId:-"+fileEntryTypeId);
 		        long userId = themeDisplay.getUserId();
 				long groupId = themeDisplay.getScopeGroupId();
 				long repositoryId = themeDisplay.getScopeGroupId();				
@@ -148,106 +150,12 @@ public boolean uploadInfo(ThemeDisplay themeDisplay, String folderId,String fold
 				String mimeType = fileItem.getContentType();	
 				File file = fileItem.getStoreLocation();
 				String changeLog = "This is By Prgram";
-				
-//		//Again R&D start
-//				DDMForm fm=new DDMForm();
-//				for(String s:fieldsName){
-//					DDMFormField ft=new DDMFormField(s,"");
-//					ft.setDataType(ddm.getFieldDataType(s));
-//					fm.addDDMFormField(ft);
-//				}
-//				for(DDMFormField d:fm.getDDMFormFields()){
-//					System.out.println(d.getName()+" "+d.getDataType());
-//				}
-//				
-				
-//				DDF
-//				fv.setName("COD");
-//				Value v= (Value) new UnlocalizedValue("109");
-//				fv.setValue(v);
-//				
-//				DDMFormFieldValue fv1=new DDMFormFieldValue();
-//				fv1.setName("Titolo");
-//				Value v1= (Value) new UnlocalizedValue("Hello");
-//				fv1.setValue(v1);
-//				System.out.println(fv1.getDDMFormField());
-//				DDMFormFieldValue fv2=new DDMFormFieldValue();
-//				fv2.setName("REV");
-//				Value v2= (Value) new UnlocalizedValue("Go");
-//				fv2.setValue(v2);
-//				System.out.println(fv2.getDDMFormField());
-//				DDMFormFieldValue fv3=new DDMFormFieldValue();
-//				fv3.setName("Lingua");
-//				Value v3= (Value) new UnlocalizedValue("IT");
-//				fv3.setValue(v3);
-//				System.out.println(fv3.getDDMFormField());
-//				
-//				DDMFormValues fvt=new DDMFormValues(fm);
-//				fvt.addDDMFormFieldValue(fv);
-//				fvt.addDDMFormFieldValue(fv1);
-//				fvt.addDDMFormFieldValue(fv2);
-//				fvt.addDDMFormFieldValue(fv3);
-//				
-//				DDMFormValues fvt=new DDMFormValues(fm);
-//				System.out.println("Fields:"+fvt.getDDMForm().getDDMFormFields().get(0).getName());
-//				System.out.println("Fileds Type:"+fvt.getDDMForm().getDDMFormFields().get(0).getDataType());
-//				Map<String,DDMFormValues> fie=new  HashMap<String, DDMFormValues>();
-//				fie.put(ddm.getStructureKey(), fvt);
-//				InputStream is =fileItem.getInputStream();
-//				ServiceContext serviceContext=new ServiceContext();
-////				DLFileEntry dlFileEntry=null;
-////		        try {
-////				      dlFileEntry = DLFileEntryLocalServiceUtil.addFileEntry(themeDisplay.getUserId(), themeDisplay.getScopeGroupId(),
-////						themeDisplay.getScopeGroupId(), folder.getFolderId(),title, mimeType, title, StringPool.BLANK, StringPool.BLANK, 
-////						dlFolder.getDefaultFileEntryTypeId(),fie, file, null, file.length(), serviceContext);
-////					} catch (Exception e) {
-////						System.out.println(e.getMessage());
-////						e.printStackTrace();
-////					}
-////				
-////				  DLFileEntryLocalServiceUtil.updateFileEntry(folder.getUserId(), dlFileEntry.getFileEntryId(), file.getName(), mimeType,
-////				  title, description, "Draft to save",true,dlFileEntry.getFileEntryTypeId() , fie, file, is, 
-////				  file.getTotalSpace(), serviceContext);
-//			
-//				Map<Locale, String> nameMap = new HashMap<>();
-//				nameMap.put(LocaleUtil.getDefault(), "SITRA");
-//				Map<Locale, String> descriptionMap = new HashMap<>();
-//				InputStream is =fileItem.getInputStream();
-//				ServiceContext serviceContext = new ServiceContext();
-//
-//				serviceContext.setAddGuestPermissions(true);
-//				serviceContext.setAddGroupPermissions(true);
-//				serviceContext.setScopeGroupId(themeDisplay.getScopeGroupId());
-//				serviceContext.setUserId(themeDisplay.getUserId());
-//						DLFileEntryType sp=DLFileEntryTypeLocalServiceUtil.addFileEntryType(
-//						themeDisplay.getUserId(), themeDisplay.getScopeGroupId(),
-//						"SITRA", nameMap, descriptionMap,
-//						new long[] {ddm.getStructureId()}, serviceContext);
-						
-//				List<DLFileEntryType> dlFileEntryTypes=DLFileEntryTypeLocalServiceUtil.getFileEntryTypes(
-//						ddm.getStructureId());
-//				System.out.println(dlFileEntryTypes.get(0).getFileEntryTypeId());
-//					DLFileEntry dlFileEntry=null;
-//			        try {
-//					      dlFileEntry = DLFileEntryLocalServiceUtil.addFileEntry(themeDisplay.getUserId(), themeDisplay.getScopeGroupId(),
-//							themeDisplay.getScopeGroupId(), folder.getFolderId(),title, mimeType, title, StringPool.BLANK, StringPool.BLANK, 
-//							sp.getFileEntryTypeId(),null, file, null, file.length(), serviceContext);
-//						} catch (Exception e) {
-//							System.out.println(e.getMessage());
-//							e.printStackTrace();
-//						}
-//					
-//					  DLFileEntryLocalServiceUtil.updateFileEntry(folder.getUserId(), dlFileEntry.getFileEntryId(), file.getName(), mimeType,
-//					  title, description, "Draft to save",true,dlFileEntry.getFileEntryTypeId() , null, file, is, 
-//					  file.getTotalSpace(), serviceContext);
-			
-			
-				
-
 					DLFileEntryType sp=null;
 					try{
 					List<DLFileEntryType> dlFileEntryTypes =DLFileEntryTypeLocalServiceUtil.getFileEntryTypes(ddm.getStructureId());
+					
 					if(!dlFileEntryTypes.isEmpty()){
+					 System.out.println("Not Null");
 						sp=dlFileEntryTypes.get(0);
 					}
 					else{
@@ -257,6 +165,7 @@ public boolean uploadInfo(ThemeDisplay themeDisplay, String folderId,String fold
 						
 					}
 					if(sp==null){
+						System.out.println("I am Null");
 						Map<Locale, String> nameMap = new HashMap<>();
 						nameMap.put(LocaleUtil.getDefault(), "SITRA");
 						Map<Locale, String> descriptionMap = new HashMap<>();			
@@ -279,45 +188,21 @@ public boolean uploadInfo(ThemeDisplay themeDisplay, String folderId,String fold
 					serviceContext.setAddGroupPermissions(true);
 					serviceContext.setScopeGroupId(themeDisplay.getScopeGroupId());
 					serviceContext.setUserId(themeDisplay.getDefaultUserId());
-					FileEntry fmt=DLAppLocalServiceUtil.addFileEntry(themeDisplay.getUserId(),repositoryId, folder.getFolderId(), title, mimeType, 
+					serviceContext.setAttribute("fileEntryTypeId", sp.getFileEntryTypeId());
+//					System.out.println(fields.getDDMStructureId());
+//					System.out.println(fields.get("COD").getValue(themeDisplay.getLocale()));
+//					System.out.println(fields.get("Titolo").getValue(themeDisplay.getLocale()));
+//					System.out.println(fields.get("REV").getValue(themeDisplay.getLocale()));
+//					System.out.println(fields.get("Lingua").getValue(themeDisplay.getLocale()));
+					serviceContext.setAttribute(ddm.getStructureId()+"COD", fields.get("COD").getValue(themeDisplay.getLocale()));
+					serviceContext.setAttribute(ddm.getStructureId()+"Titolo", fields.get("Titolo").getValue(themeDisplay.getLocale()));
+					serviceContext.setAttribute(ddm.getStructureId()+"REV", fields.get("REV").getValue(themeDisplay.getLocale()));
+					serviceContext.setAttribute(ddm.getStructureId()+"Lingua", fields.get("Lingua").getValue(themeDisplay.getLocale()));
+					
+				    DLAppLocalServiceUtil.addFileEntry(themeDisplay.getUserId(),repositoryId, folder.getFolderId(), title, mimeType, 
 							title, description, "", is, file.getTotalSpace(), serviceContext);
 					
-					DLFileEntry dlfile=DLFileEntryLocalServiceUtil.getDLFileEntry(fmt.getFileEntryId());
-					DLFileVersion _dlFileVersion=dlfile.getFileVersion();
-					try {
-						DLFileEntry dlFileEntry = _dlFileVersion.getFileEntry();
-						
-						DLFileEntryMetadata	_dlFileEntryMetadata =DLFileEntryMetadataLocalServiceUtil.createDLFileEntryMetadata(CounterLocalServiceUtil.increment());
 
-						long ddmStructureId = ddm.getStructureId();
-
-						
-						
-						DDMFormValues ddmFormValues = toDDMFormValues(fields,ddm.getStructureId());
-
-						long ddmStorageId = StorageEngineManagerUtil.create(
-							_dlFileVersion.getCompanyId(), ddmStructureId, ddmFormValues,
-							serviceContext);
-
-						_dlFileEntryMetadata.setDDMStorageId(ddmStorageId);
-
-						_dlFileEntryMetadata.setDDMStructureId(ddmStructureId);
-						_dlFileEntryMetadata.setFileEntryId(dlFileEntry.getFileEntryId());
-						_dlFileEntryMetadata.setFileVersionId(
-							_dlFileVersion.getFileVersionId());
-
-						_dlFileEntryMetadata =
-								DLFileEntryMetadataLocalServiceUtil.addDLFileEntryMetadata(
-								_dlFileEntryMetadata);
-					}
-					catch (PortalException pe) {
-						throw new SystemException(
-							"Unable to add DDM fields for file version " +
-								_dlFileVersion.getFileVersionId(),
-							pe);
-					}
-			
-			
 			
 			}	
 				/*Hello Adding*/
@@ -328,10 +213,8 @@ public boolean uploadInfo(ThemeDisplay themeDisplay, String folderId,String fold
 
 protected DDMFormValues toDDMFormValues(Fields fields,long structureId)
 		throws PortalException {
-
-		return _fieldsToDDMFormValuesConverter.convert(
-			DDMStructureLocalServiceUtil.getDDMStructure(
-				structureId),
+	FieldsToDDMFormValuesConverterImpl fm=new FieldsToDDMFormValuesConverterImpl();
+		return fm.convert(DDMStructureManagerUtil.getStructure(structureId),
 			fields);
 	}
 }

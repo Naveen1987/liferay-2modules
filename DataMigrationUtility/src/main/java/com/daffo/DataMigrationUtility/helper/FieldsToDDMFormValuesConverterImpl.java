@@ -1,18 +1,4 @@
 package com.daffo.DataMigrationUtility.helper;
-import com.liferay.dynamic.data.mapping.model.DDMForm;
-import com.liferay.dynamic.data.mapping.model.DDMFormField;
-import com.liferay.dynamic.data.mapping.model.DDMStructure;
-import com.liferay.dynamic.data.mapping.model.LocalizedValue;
-import com.liferay.dynamic.data.mapping.model.UnlocalizedValue;
-import com.liferay.dynamic.data.mapping.model.Value;
-import com.liferay.dynamic.data.mapping.storage.DDMFormFieldValue;
-import com.liferay.dynamic.data.mapping.storage.DDMFormValues;
-import com.liferay.dynamic.data.mapping.storage.Field;
-import com.liferay.dynamic.data.mapping.storage.Fields;
-import com.liferay.dynamic.data.mapping.util.FieldsToDDMFormValuesConverter;
-import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.util.StringUtil;
-
 import java.io.Serializable;
 
 import java.util.ArrayList;
@@ -23,14 +9,28 @@ import java.util.Set;
 
 import org.osgi.service.component.annotations.Component;
 
+import com.liferay.document.library.kernel.service.persistence.DLFileEntryFinderUtil;
+import com.liferay.dynamic.data.mapping.kernel.DDMForm;
+import com.liferay.dynamic.data.mapping.kernel.DDMFormField;
+import com.liferay.dynamic.data.mapping.kernel.DDMFormFieldValue;
+import com.liferay.dynamic.data.mapping.kernel.DDMFormValues;
+import com.liferay.dynamic.data.mapping.kernel.DDMStructure;
+import com.liferay.dynamic.data.mapping.kernel.LocalizedValue;
+import com.liferay.dynamic.data.mapping.kernel.UnlocalizedValue;
+import com.liferay.dynamic.data.mapping.kernel.Value;
+import com.liferay.dynamic.data.mapping.storage.Field;
+import com.liferay.dynamic.data.mapping.storage.Fields;
+import com.liferay.dynamic.data.mapping.util.FieldsToDDMFormValuesConverter;
+import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.util.StringUtil;
+
 /**
  * @author Marcellus Tavares
  */
-@Component(immediate = true)
-public class FieldsToDDMFormValuesConverterImpl
-	implements FieldsToDDMFormValuesConverter {
 
-	@Override
+public class FieldsToDDMFormValuesConverterImpl
+{
+
 	public DDMFormValues convert(DDMStructure ddmStructure, Fields fields)
 		throws PortalException {
 
@@ -64,7 +64,7 @@ public class FieldsToDDMFormValuesConverterImpl
 		throws PortalException {
 
 		Field ddmFieldsDisplayField = ddmFields.get(
-			DDMImpl.FIELDS_DISPLAY_NAME);
+			"_fieldsDisplay");
 
 		if (ddmFieldsDisplayField == null) {
 			if (ddmFields.contains(fieldName)) {
@@ -125,13 +125,13 @@ public class FieldsToDDMFormValuesConverterImpl
 		Fields ddmFields, String fieldName, int index) {
 
 		Field ddmFieldsDisplayField = ddmFields.get(
-			DDMImpl.FIELDS_DISPLAY_NAME);
+			"_fieldsDisplay");
 
 		if (ddmFieldsDisplayField == null) {
 			return StringUtil.randomString();
 		}
 
-		String prefix = fieldName.concat(DDMImpl.INSTANCE_SEPARATOR);
+		String prefix = fieldName.concat("_INSTANCE_");
 
 		String[] ddmFieldsDisplayValues = StringUtil.split(
 			(String)ddmFieldsDisplayField.getValue());
@@ -142,7 +142,7 @@ public class FieldsToDDMFormValuesConverterImpl
 
 				if (index < 0) {
 					return StringUtil.extractLast(
-						ddmFieldsDisplayValue, DDMImpl.INSTANCE_SEPARATOR);
+						ddmFieldsDisplayValue, "_INSTANCE_");
 				}
 			}
 		}
@@ -154,17 +154,17 @@ public class FieldsToDDMFormValuesConverterImpl
 		throws PortalException {
 
 		try {
-			DDMStructure ddmStructure = ddmFieldsDisplayField.getDDMStructure();
-
+			//com.liferay.dynamic.data.mapping.model.DDMStructure ddmture = ddmFieldsDisplayField.getDDMStructure().getS;
+			//DDMStructure ddmStructure=
 			List<String> fieldsDisplayValues = new ArrayList<>();
 
 			String[] values = splitFieldsDisplayValue(ddmFieldsDisplayField);
 
 			for (String value : values) {
 				String fieldName = StringUtil.extractFirst(
-					value, DDMImpl.INSTANCE_SEPARATOR);
+					value, "_INSTANCE_");
 
-				if (ddmStructure.hasField(fieldName)) {
+				if (ddmFieldsDisplayField.getDDMStructure().hasField(fieldName)) {
 					fieldsDisplayValues.add(fieldName);
 				}
 			}
